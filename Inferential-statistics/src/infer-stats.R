@@ -1,6 +1,9 @@
-library(tidyverse)
-
 # Inferential Statistics ---------------------------------------------------------------------------
+#
+# @author Tyler B. Garner tbgarner5023@gmail.com
+# @author Jennifer Valcin jpv5319@psu.edu
+
+library(tidyverse)
 
 adm_df <- read_csv("data/raw/adm_data.csv")
 
@@ -11,6 +14,7 @@ adm_df$Admit <- factor(adm_df$Admit)
 
 head(adm_df)
 
+
 # Chi-square Test -----
 
 # Does undergraduate research experience influence grad school admittance?
@@ -18,23 +22,12 @@ head(adm_df)
 
 chisq.test(adm_df$Research, adm_df$Admit)
 
+
 # T-test ------
 
 # Is the mean CGPA different between students who did and did not do undergraduate research?
 
 t.test(CGPA ~ Research, data = adm_df)
 
-# Kruskal-Wallis -----
 
-# Advanced
 
-# Are the GRE scores for admitted students different among the 5 disciplines?
-
-kruskal.test(GRE ~ Discipline, data = adm_df[adm_df$Admit == 'Accepted', ])
-
-# Alternatively with tidyverse and rstatix:
-library(rstatix)
-
-adm_df %>%
-  filter(Admit == 'Accepted') %>%
-  kruskal_test(GRE ~ Discipline)

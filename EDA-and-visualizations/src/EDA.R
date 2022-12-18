@@ -1,11 +1,13 @@
-library(tidyverse)
-
 # Exploratory Data Analysis ------------------------------------------------------------------------
+#
+# @author Tyler B. Garner tbgarner5023@gmail.com
+# @author Jennifer Valcin jpv5319@psu.edu
+
+library(tidyverse)
 
 ### modified from https://www.kaggle.com/datasets/akshaydattatraykhare/data-for-admission-in-the-university
 
 adm_df <- read_csv("data/raw/adm_data.csv")
-
 
 
 # * Descriptive Statistics -----

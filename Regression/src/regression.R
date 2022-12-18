@@ -1,3 +1,8 @@
+# Regression Methods -------------------------------------------------------------------------------
+#
+# @author Tyler B. Garner tbgarner5023@gmail.com
+# @author Jennifer Valcin jpv5319@psu.edu
+
 library(tidyverse)
 
 adm_df <- read_csv("data/raw/adm_data.csv")
@@ -79,7 +84,7 @@ adm_df <- adm_df %>%
 #' 
 #' * `glm()` fits a generalized linear model (GLM) and requires two arguments, a model `formula`
 #'   (1st) and `data` (2nd). The `family` argument can be used to change the type of GLM model, in
-#'   this case to a binomial logistic model.
+#'   this case to a binomial (binary) logistic model.
 #' * `summary()` can also be used to print summary results from a GLM model.
 
 adm_fit <- glm(Admit_bin ~ . - Admit - UniqueID, data = adm_df, family = 'binomial')

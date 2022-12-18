@@ -1,6 +1,7 @@
 # Basics of R and RStudio --------------------------------------------------------------------------
-# @author Tyler B. Garner
-# @author Jennifer Valcin
+#
+# @author Tyler B. Garner tbgarner5023@gmail.com
+# @author Jennifer Valcin jpv5319@psu.edu
 
 # Basics -----
 
@@ -14,8 +15,8 @@
 4 / 2
 
 
-#' Use `%/%` integer division (without the remainder) and `%%` to return the remainder from the
-#' division of two numbers.
+#' Use `%/%` integer division (result without the remainder) and `%%` to return the remainder from
+#' the division of two numbers.
 
 5 %/% 2
 5 %% 2
@@ -29,7 +30,7 @@
 
 # * Strings -----
 #'
-#' Strings can be writtin in either single or double quotes.
+#' Strings can be written in either single or double quotes.
 
 'Hello'
 "Hello"
@@ -47,17 +48,23 @@ w <- "World"
 paste(h, w)
 
 
-# * Vectors and lists -----
+# * Vectors and lists
+#'
+#' We can combine multiple values of the same type into a vector using `c()`.  We could also
+#' combine values of any time into a list with `list()`.  Lists are recursive, meaning you can have
+#' lists within lists.
 
 c(1, 2, 3)
-list(1, 2, 3)
+list(1, 2, '3')
+list(1, 2, list('3', '4'))
 
 
 # * Logic Operators -----
 #'
-#' In R, logical statements can be defined as either `TRUE` or `FALSe`.
+#' In R, logical statements can be defined as either `TRUE` or `FALSE`.
 #'
-#' The `==` operator will return a logical result on whether two items are identical.
+#' The `==` operator will return a logical result on whether two items are identical. For example,
+#' we can check whether each item in two vectors are the same.
 
 v1 = c(1, 2, 3)
 v2 = c(0, 2, 3)
@@ -65,14 +72,21 @@ v2 = c(0, 2, 3)
 v1 == v2
 
 
-#' The `&` and `|` operators represent "and" and "or".
+#' If we wanted to know if the two vectors are identical we can add the `all()` function.
+
+all(v1 == v2)
+
+
+#' Multiple conditions can be assessed logically using the and (`&`) and or (`|`) operators.  
 
 TRUE & FALSE
 
 TRUE | FALSE
 
+TRUE & TRUE | FALSE
 
-# Install and load packages -----
+
+# * Install and load packages -----
 #'
 #' Libraries can be installed and loaded to add extra functionality in R.
 #' 
@@ -86,13 +100,27 @@ install.packages('tidyverse')
 library(tidyverse)
 
 
-# Load a file ------
+# * Load a file ------
 #'
 #'
 
-df <- read_csv("data/raw/adm_data.csv")
+df <- read.csv("data/raw/adm_data.csv")
 
-# Piping -----
+# * Data Frames ------
+#' The fundamental data structure in most of R is the data frame, which is a two-dimensional
+#' structure where each column contains values of one variable and each row contains one set of
+#' values from each column.  Data frames are referenced first by their row, then their column.
+#' Typically, we will load in data frames from existing data, but if we wanted to write our own
+#' data frame we can use the `data.frame()` function.
+#' 
+#' For example, the `df` object we loaded in above is already a data frame by default. With the
+#' `dim()` and `str()` functions we can return the dimensions and structure of the data frame.
+
+dim(df)
+str(df)
+
+
+# * Piping -----
 #'
 #' Tidyverse uses a pipe function, `%>%`, that "pipes" an object into the first argument of a
 #' function (the `data` argument is standard in tidy format).  This can be applied multiple times
@@ -106,7 +134,7 @@ head(df)
 df %>% head()
 
 
-# Select columns and rows -----
+# * Select columns and rows -----
 #'
 #' In base R, the `$` operator can be used to select a column.  Alternatively, you can call a column
 #' or columns by their index or name in brackets `[]`.
@@ -115,11 +143,13 @@ df$Admit
 
 df %>% select(Admit)
 
+
 #' To select rows, you can index the rows you want to select before a comma within brackets.  We can
 #' use a colon to select everything within the range of two numbers.  For example, to select the 5th
 #' to 10th rows:
 
 df[5:10, ]
+
 
 #' Rows can also be selected on conditions.  In base R, this can be done within brackets.  With the
 #' tidyverse, this can be done with the `filter()` function.
@@ -129,7 +159,7 @@ df[df$Admit == "Accepted", ]
 df %>% filter(Admit == "Accepted")
 
 
-# Long vs Wide format -----
+# * Long vs Wide format -----
 #'
 #' In short, wide format is more human-friendly, in that it is easier for humans to input and
 #' understand data in this format.  Long format, however, is more computer-friendly and is

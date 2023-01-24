@@ -95,9 +95,9 @@ TRUE & TRUE | FALSE
 #' * `library()` loads an already-installed library into the current R environment. Note that you
 #'   will need to load the library any time your re-load or start a new R environment.
 
-install.packages('tidyverse')
+install.packages('dplyr')
 
-library(tidyverse)
+library(dplyr)
 
 
 # * Load a file ------

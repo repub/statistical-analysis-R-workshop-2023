@@ -3,17 +3,20 @@
 # @author Tyler B. Garner tbgarner5023@gmail.com
 # @author Jennifer Valcin jpv5319@psu.edu
 
-library(tidyverse)
+library(dplyr)
 
-adm_df <- read_csv("data/raw/adm_data.csv")
+# adm_df <- read_csv("data/raw/adm_data.csv")
+# 
+# # Re-code variables as factors
+# adm_df$Research <- factor(adm_df$Research)
+# adm_df$Discipline <- factor(adm_df$Discipline)
+# adm_df$Admit <- factor(adm_df$Admit)
+# 
+# head(adm_df)
 
-# Re-code variables as factors
-adm_df$Research <- factor(adm_df$Research)
-adm_df$Discipline <- factor(adm_df$Discipline)
-adm_df$Admit <- factor(adm_df$Admit)
+adm_df <- readRDS('EDA-and-visualizations/data/interim/adm_df')
 
-head(adm_df)
-
+# Regression vs ANOVA vs ANCOVA ---------
 
 # Linear Regression ------
 #'
@@ -42,6 +45,13 @@ summary(adm_fit2)
 adm_fit3 <- lm(GRE ~ CGPA + TOEFL + Discipline, data = adm_df)
 summary(adm_fit3)
 
+# Diagnosing the model --------------------
+plot(adm_fit3)
+
+# ANCOVA
+anova(adm_fit3)
+
+
 
 # Create dummy variables
 #
@@ -49,6 +59,8 @@ summary(adm_fit3)
 
 adm_df$Dummies <- 1
 
+
+# Contrasts? ------
 
 # Use the pivot_wider() function to create the dummy variables for Discipline using the Dummies
 # column we made above.

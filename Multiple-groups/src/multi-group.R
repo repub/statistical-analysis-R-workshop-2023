@@ -63,3 +63,11 @@ adm_df %>%
   kruskal_test(GRE ~ Discipline)
 
 # For Higher-order models use logistic regression.
+
+# * * Dunn's post-hoc -------------
+
+# MANOVA -----
+
+# one-way
+
+# two-way as a exercise

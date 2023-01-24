@@ -3,12 +3,13 @@
 # @author Tyler B. Garner tbgarner5023@gmail.com
 # @author Jennifer Valcin jpv5319@psu.edu
 
-library(tidyverse)
+library(dplyr)
 
 ### modified from https://www.kaggle.com/datasets/akshaydattatraykhare/data-for-admission-in-the-university
 
 adm_df <- read_csv("data/raw/adm_data.csv")
 
+# Check for NA and duplicates -----
 
 # * Descriptive Statistics -----
 
@@ -149,3 +150,11 @@ adm_df %>%
   select(GRE, TOEFL, SOP, LOR, CGPA) %>%
   mshapiro_test()
 
+
+# Feature engineering/transformation ? ------
+
+
+# Box-Cox transformations ? ----------
+# Pros vs Cons - potentially a better model fit and prediction accuracy - loss of interpretability
+
+saveRDS(adm_df, 'EDA-and-visualizations/data/interim/adm_df')

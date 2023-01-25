@@ -1,10 +1,15 @@
 #' ---
-#' title: "Basics of R and RStudio"
+#' title: "Inferential Statistics"
 #' author:
 #'   - Tyler B. Garner, tbg5023@psu.edu
 #'   - Jennifer Valcin, jpv5319@psu.edu
-#' date: "May 3rd, 2014"
-#' output: html_document
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#'     collapsed: false
+#'     theme: united
+#'     highlight: tango
 #' ---
 
 #+ setup, include = FALSE

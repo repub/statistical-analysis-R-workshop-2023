@@ -1,15 +1,16 @@
 #' ---
 #' title: "Basics of R and RStudio"
-#' author: "Tyler B. Garner tbgarner5023@gmail.com\nJennifer Valcin jpv5319@psu.edu"
+#' author:
+#'   - Tyler B. Garner, tbg5023@psu.edu
+#'   - Jennifer Valcin, jpv5319@psu.edu
 #' date: "May 3rd, 2014"
 #' output: html_document
 #' ---
 
+#+ setup, include = FALSE
+knitr::opts_knit$set(root.dir = '../')
 
-
-# Basics -----
-
-# * Math Functions -----
+#' ## Math Functions 
 #'
 #' Use `+` and `-` for addition and subtraction, `*` and `/` for multiplication and division.
 
@@ -17,7 +18,6 @@
 3 - 1
 1 * 2
 4 / 2
-
 
 #' Use `%/%` integer division (result without the remainder) and `%%` to return the remainder from
 #' the division of two numbers.
@@ -32,7 +32,7 @@
 2**3
 
 
-# * Strings -----
+#' ## Strings 
 #'
 #' Strings can be written in either single or double quotes.
 
@@ -40,7 +40,7 @@
 "Hello"
 
 
-# * Objects -----
+#' ## Objects
 #' We can assign values to "objects" simply by using the `<-` operator.  While `=` can also be used,
 #' in R it is best practice to use `<-` for assigning objects.  We can then use functions on those
 #' objects.  For example, we can assign the strings "Hello" and "World" to `h` and `w`, then use
@@ -52,7 +52,7 @@ w <- "World"
 paste(h, w)
 
 
-# * Vectors and lists
+#' ## Vectors and lists
 #'
 #' We can combine multiple values of the same type into a vector using `c()`.  We could also
 #' combine values of any time into a list with `list()`.  Lists are recursive, meaning you can have
@@ -63,7 +63,7 @@ list(1, 2, '3')
 list(1, 2, list('3', '4'))
 
 
-# * Logic Operators -----
+#' ## Logic Operators
 #'
 #' In R, logical statements can be defined as either `TRUE` or `FALSE`.
 #'
@@ -90,29 +90,29 @@ TRUE | FALSE
 TRUE & TRUE | FALSE
 
 
-# * Install and load packages -----
+#' ## Install and load packages
 #'
 #' Libraries can be installed and loaded to add extra functionality in R.
 #' 
-#' * `install.packages()` installs a package from CRAN given the package name as a string. Note
-#'   that you only need to install a package once.
-#' * `library()` loads an already-installed library into the current R environment. Note that you
-#'   will need to load the library any time your re-load or start a new R environment.
+#' `install.packages()` installs a package from CRAN given the package name as a string. Note
+#' that you only need to install a package once.
 
 #+ eval = FALSE
-#' install.packages('dplyr')
+install.packages('dplyr')
 
-#' load dplyr
+#' `library()` loads an already-installed library into the current R environment. Note that you
+#' will need to load the library any time your re-load or start a new R environment.
+
 library(dplyr)
 
 
-# * Load a file ------
+#' ## Loading files
 #'
-#'
+#' 
 
 df <- read.csv("data/raw/adm_data.csv")
 
-# * Data Frames ------
+#' ## Data Frames
 #' The fundamental data structure in most of R is the data frame, which is a two-dimensional
 #' structure where each column contains values of one variable and each row contains one set of
 #' values from each column.  Data frames are referenced first by their row, then their column.
@@ -125,8 +125,7 @@ df <- read.csv("data/raw/adm_data.csv")
 dim(df)
 str(df)
 
-
-# * Piping -----
+#' ## Piping
 #'
 #' Tidyverse uses a pipe function, `%>%`, that "pipes" an object into the first argument of a
 #' function (the `data` argument is standard in tidy format).  This can be applied multiple times
@@ -140,7 +139,7 @@ head(df)
 df %>% head()
 
 
-# * Select columns and rows -----
+#' ## Select columns and rows
 #'
 #' In base R, the `$` operator can be used to select a column.  Alternatively, you can call a column
 #' or columns by their index or name in brackets `[]`.
@@ -165,7 +164,7 @@ df[df$Admit == "Accepted", ]
 df %>% filter(Admit == "Accepted")
 
 
-# * Long vs Wide format -----
+#' ## Long vs Wide format
 #'
 #' In short, wide format is more human-friendly, in that it is easier for humans to input and
 #' understand data in this format.  Long format, however, is more computer-friendly and is
@@ -174,6 +173,8 @@ df %>% filter(Admit == "Accepted")
 #' Currently, the data set is in wide format, where each row represents a single observation.  In
 #' long format, each row represents some subset of an observation.  For example, we can lengthen the
 #' Research, Admit, and Discipline columns using `pivot_longer()` from Tidyverse.
+
+library(tidyr)
 
 df %>%
   pivot_longer(c(Research, Admit, Discipline))

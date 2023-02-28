@@ -1,5 +1,5 @@
 #' ---
-#' title: "Inferential Statistics"
+#' title: "`R` Basics"
 #' author:
 #'   - Tyler B. Garner, tbg5023@psu.edu
 #'   - Jennifer Valcin, jpv5319@psu.edu
@@ -15,23 +15,27 @@
 #+ setup, include = FALSE
 knitr::opts_knit$set(root.dir = '../')
 
-#' ## Math Functions 
+#' ## Introduction
+#' 
+#' `R` is a popular programming language and environment for statistical computing and data analysis. It provides a powerful set of tools for working with data, including data manipulation, visualization, and statistical modeling. `R` is widely used in academia, industry, and government, and is an essential skill for many data science and analytics roles. This tutorial will provide an introduction to the basics of `R`, including basic operations, data types, variables, functions, control structures, and packages. Whether you're new to `R` or looking to refresh your skills, this tutorial will help you get started with the fundamentals of this powerful language.
+
+
+#' ## Mathematical operations 
 #'
-#' Use `+` and `-` for addition and subtraction, `*` and `/` for multiplication and division.
+#' `R` provides many built-in functions for performing basic mathematical operations. For example, we can use `+` and `-` for addition and subtraction, `*` and `/` for multiplication and division.
 
 1 + 1
 3 - 1
 1 * 2
 4 / 2
 
-#' Use `%/%` integer division (result without the remainder) and `%%` to return the remainder from
-#' the division of two numbers.
+#' The `%/%` operator can be used for integer division (result without the remainder) while `%%` to returns the remainder from the division of two numbers.
 
 5 %/% 2
 5 %% 2
 
 
-#' Exponentials can be calculated with `^` or `**`.
+#' Exponentials can be calculated with either `^` or `**`.
 
 2^3
 2**3
@@ -39,149 +43,210 @@ knitr::opts_knit$set(root.dir = '../')
 
 #' ## Strings 
 #'
-#' Strings can be written in either single or double quotes.
+#' In `R`, a string is a sequence of characters enclosed in single or double quotes. Strings are commonly used to represent text data in `R`, such as names, addresses, or other text-based information.
 
 'Hello'
-"Hello"
+"World"
 
 
-#' ## Objects
-#' We can assign values to "objects" simply by using the `<-` operator.  While `=` can also be used,
-#' in R it is best practice to use `<-` for assigning objects.  We can then use functions on those
-#' objects.  For example, we can assign the strings "Hello" and "World" to `h` and `w`, then use
-#' the `paste()` function to paste the strings together, with a space between them as default.
+#' ## Logic operators
+#' 
+#' Logical operators in R are used to evaluate logical expressions, which are expressions that return either `TRUE` or `FALSE`.  Common logic operators are:
+#' 
+#' - `==` - tests whether two values are equal.
+#' - `!=` - tests whether two values are not equal.
+#' - `<` and `>` - tests whether one value is less than or greater than the other.
+#' - `<=` and `>=` - the same as above but includes equal values.
+#' 
+#' For example, we can test if `2` is equal to `1` with the `==` operator:
 
-h <- "Hello"
-w <- "World"
+2 == 1
 
-paste(h, w)
+#' In addition to these main operators, there are also compound logical operators that allow you to combine logical expressions. The main compound logical operators in `R` are:
+#' 
+#' - `&` - tests whether two logical expressions are both true.
+#' - `|` - tests whether at least one of two logical expressions is true.
+#' - `!` - negates a logical expression.
+#' 
+#' These logical operators are commonly used in control structures and data manipulation in R, allowing you to make decisions based on logical conditions or to filter data based on logical expressions.
+#' 
+#' For example, we can test if `2` is equal to `1` or if `2` is equal to `2` with the `==` and `|` operators:
+
+2 == 1 | 2 == 2
 
 
-#' ## Vectors and lists
+#' ## Variables
+#' 
+#' Variables in `R` are used to store values that you can use later in your code. To create a variable, you can use the `<-` or `=` operators, which assigns a value to a name. For example, `x <- 5` assigns the value 5 to the variable x.
+
+x <- 5
+
+x
+
+#' Once you create a variable, you can use it in your code by referring to its name. For example, if you created a variable x with the value 5, you could use it in a calculation like `y <- x + 3`, which would assign the value 8 to the variable y.
+
+y <- x + 3
+
+y
+
+#' Variables in `R` can store different types of data, such as numbers, characters, logical values, and more. Some common data types in `R` include:
+#' 
+#' - **Numeric** - numbers with or without decimal places, such as 1, 2.5, or -3.14.
+#' - **Character** - sequences of characters, such as "Hello, world!" or "R is fun".
+#' - **Logical**- values that represent truth or falsehood, such as TRUE or FALSE.
+#' - **Integer**- whole numbers, such as 1, 2, or -3.
+#' - **Complex**- numbers with real and imaginary components, such as 1 + 2i.
+#' 
+#' In `R`, variable names can contain letters, numbers, periods, and underscores, but cannot begin with a number. Variable names are case sensitive, which means that `x`, `X`, and `x1` are all different variables.
+ 
+
+#' ## Data structures
+#' 
+#' ### Vectors and lists
 #'
-#' We can combine multiple values of the same type into a vector using `c()`.  We could also
-#' combine values of any time into a list with `list()`.  Lists are recursive, meaning you can have
-#' lists within lists.
+#' We can combine multiple values of the same type into a vector using `c()`.  We could also combine values of any time into a list with `list()`.  Lists are recursive, meaning you can have lists within lists.
 
 c(1, 2, 3)
 list(1, 2, '3')
 list(1, 2, list('3', '4'))
 
-
-#' ## Logic Operators
-#'
-#' In R, logical statements can be defined as either `TRUE` or `FALSE`.
-#'
-#' The `==` operator will return a logical result on whether two items are identical. For example,
-#' we can check whether each item in two vectors are the same.
-
-v1 = c(1, 2, 3)
-v2 = c(0, 2, 3)
-
-v1 == v2
-
-
-#' If we wanted to know if the two vectors are identical we can add the `all()` function.
-
-all(v1 == v2)
-
-
-#' Multiple conditions can be assessed logically using the and (`&`) and or (`|`) operators.  
-
-TRUE & FALSE
-
-TRUE | FALSE
-
-TRUE & TRUE | FALSE
-
-
-#' ## Install and load packages
-#'
-#' Libraries can be installed and loaded to add extra functionality in R.
+#' ### Matrices
 #' 
-#' `install.packages()` installs a package from CRAN given the package name as a string. Note
-#' that you only need to install a package once.
+#' A matrix in `R` is a two-dimensional array that contains elements of the same data type. You can create a matrix using the `matrix()` function, which takes a vector of values as input and arranges them into a specified number of rows and columns. For example, `m <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3)` creates a 2-by-3 matrix with the values 1, 2, 3, 4, 5, and 6.
 
-#+ eval = FALSE
-install.packages('dplyr')
+m <- matrix(c(1, 2, 3, 4, 5, 6),
+            nrow = 2,
+            ncol = 3)
 
-#' `library()` loads an already-installed library into the current R environment. Note that you
-#' will need to load the library any time your re-load or start a new R environment.
+m
 
+#' ### Arrays
+#' 
+#' An array in `R` is a multi-dimensional extension of a matrix that can have any number of dimensions. You can create an array using the `array()` function, which takes a vector of values and a vector of dimension sizes as input. For example, `a <- array(c(1, 2, 3, 4, 5, 6), dim = c(2, 3, 2))` creates a 2-by-3-by-2 array with the values 1, 2, 3, 4, 5, and 6.
+
+a <- array(c(1, 2, 3, 4, 5, 6),
+           dim = c(2, 3, 2))
+
+a
+
+#' ### Data frames
+#' 
+#' A data frame in `R` is a tabular data structure that is similar to a spreadsheet. It is a list of equal-length vectors, where each vector represents a column in the data frame. You can create a data frame using the `data.frame()` function, which takes vectors or variables as input. For example, `df <- data.frame(name=c("Alice", "Bob", "Charlie"), age=c(25, 30, 35), weight=c(60, 70, 80))` creates a data frame with three columns: "name", "age", and "weight".
+
+df <- data.frame(name = c("Alice", "Bob", "Charlie"),
+           age = c(25, 30, 35),
+           weight = c(60, 70, 80))
+
+df
+
+#' Data frames are commonly used for data analysis and manipulation in `R`, as they allow you to perform operations on entire columns of data. You can access specific columns using the `$` operator, for example `df$age` will return the age column of the data frame df. You can also subset a data frame using logical operators or indexing. For example, `df[df$age > 30, ]` will return all rows of `df` where the age column is greater than 30.
+
+df$age
+
+df[df$age > 30, ]
+
+
+#' ## Functions
+#' 
+#' A function in `R` is a block of code that performs a specific task. Functions take input values, called arguments, and return output values.  `R` provides a large number of built-in functions for performing operations on data. For example, the `mean()` function computes the mean of a vector, and the `sum()` function computes the sum of a vector. To use a function, you simply call it by name and pass in the required arguments.
+
+v <- c(1, 2, 3, 4, 5)
+
+mean(v)
+
+sum(v)
+
+#' You can also create your own functions using the `function()` keyword. In the example below, we write a function that takes an argument `x` and returns the sum of the squared values in `x`.
+
+squared_sums <- function(x) {
+  ss <- sum(x ** 2)
+  return(ss)
+}
+
+squared_sums(v)
+
+#' ## Control structures
+#' 
+#' Control structures are statements that allow you to control the flow of your code. They allow you to perform different actions depending on whether a condition is true or false, or to repeat a block of code multiple times. The main control structures in R are:
+#' 
+#' #### `if` statements
+#' 
+#' If statements allow you to execute a block of code if a certain condition is true. For example, the following code checks if a variable x is greater than 10, and prints a message if it is.
+
+x <- 12
+
+if (x > 10) {
+  print("x is greater than 10")
+}
+
+#' #### `if`-`else` statements
+#' 
+#' If-else statements allow you to execute one block of code if a condition is true, and a different block of code if it is false. For example, the following code checks if a variable x is greater than 10, and prints a message if it is, or a different message if it is not.
+
+x <- 12
+
+if (x > 10) {
+  print("x is greater than 10")
+} else {
+  print("x is not greater than 10")
+}
+
+#' #### `for` loops
+#' 
+#' For loops allow you to repeat a block of code a specific number of times.  For example, the following code uses a for loop to print the numbers 1 to 5.
+
+for (i in 1:5) {
+  print(i)
+}
+
+#' #### `while` loops
+#' 
+#' While loops allow you to repeat a block of code as long as a certain condition is true. For example, the following code uses a while loop to print the numbers 1 to 5.
+
+i <- 1
+
+while (i <= 5) {
+  print(i)
+  
+  i <- i + 1
+}
+
+
+#' ## Packages
+#' 
+#' A package in `R` is a collection of functions, data sets, and documentation that extend the capabilities of base `R`. Packages are typically created by other users and developers in the `R` community, and can be installed and loaded into your `R` session to provide additional functionality for specific tasks. 
+#' 
+#' R packages can be installed from a variety of sources, including the Comprehensive R Archive Network (CRAN), Bioconductor, GitHub, and others. The most common way to install a package is using the `install.packages()` function, which takes the name of the package (as a string) as an argument.  Once a package is installed, you can load it into your `R` session using the `library()` function.
+#' 
+#' For example, `dplyr` is a package for data manipulation and cleaning, which we will install and load in the following code.
+
+install.packages("dplyr")
 library(dplyr)
 
+#' With the `dplyr` package loaded we can use its functions.  For example, the `filter()` function is used to select a subset of rows from a data frame based on one or more logical conditions, similarly to how we used the `$` operator previously.  We can use the `filter()` function to return all rows of the `df` object we created above where the age column is greater than 30 by:
 
-#' ## Loading files
+filter(df, age > 30)
+
+#' ## File management
+#' 
+#' ### Loading files
 #'
+#' You can load various types of files into your `R` session, including data files, image files, and code files. To load a data file, such as a .csv file, into `R` you can use the `read.csv()` function. For example, we will use the `read.csv()` function below to read the dataset for this workshop which is in the .csv file format. We will then use the `head()` function to print the first few rows of that dataset.
+
+data <- read.csv("data/raw/adm_data.csv")
+
+head(data)
+
+#' ### Saving files
+#' 
+#' Just as we can load data into `R` we can save it externally into different file formats. To save a data frame as a CSV file in `R`, we can use the `write.csv()` function. This function takes two main arguments: the data frame you want to save and the name of the output file. For example, the following code will save the `df` object we created above into the "data/processed" directory.
+
+write.csv(df, "data/processed/basics-df.csv")
+
+#' Keep in mind that it's important to include the file extension in the name of the file when saving it. Additionally, it's generally considered a best practice to avoid overwriting the original raw data when saving your output files, so be sure to choose a new and descriptive name for your output file.
 #' 
 
-df <- read.csv("data/raw/adm_data.csv")
 
-#' ## Data Frames
-#' The fundamental data structure in most of R is the data frame, which is a two-dimensional
-#' structure where each column contains values of one variable and each row contains one set of
-#' values from each column.  Data frames are referenced first by their row, then their column.
-#' Typically, we will load in data frames from existing data, but if we wanted to write our own
-#' data frame we can use the `data.frame()` function.
+#' ## Closing remarks
 #' 
-#' For example, the `df` object we loaded in above is already a data frame by default. With the
-#' `dim()` and `str()` functions we can return the dimensions and structure of the data frame.
-
-dim(df)
-str(df)
-
-#' ## Piping
-#'
-#' Tidyverse uses a pipe function, `%>%`, that "pipes" an object into the first argument of a
-#' function (the `data` argument is standard in tidy format).  This can be applied multiple times
-#' to perform multiple tasks.
-#' 
-#' For example, we will use the `head()` function with and without piping to get the first few
-#' lines of the data set.
-
-head(df)
-
-df %>% head()
-
-
-#' ## Select columns and rows
-#'
-#' In base R, the `$` operator can be used to select a column.  Alternatively, you can call a column
-#' or columns by their index or name in brackets `[]`.
-
-df$Admit
-
-df %>% select(Admit)
-
-
-#' To select rows, you can index the rows you want to select before a comma within brackets.  We can
-#' use a colon to select everything within the range of two numbers.  For example, to select the 5th
-#' to 10th rows:
-
-df[5:10, ]
-
-
-#' Rows can also be selected on conditions.  In base R, this can be done within brackets.  With the
-#' tidyverse, this can be done with the `filter()` function.
-
-df[df$Admit == "Accepted", ]
-
-df %>% filter(Admit == "Accepted")
-
-
-#' ## Long vs Wide format
-#'
-#' In short, wide format is more human-friendly, in that it is easier for humans to input and
-#' understand data in this format.  Long format, however, is more computer-friendly and is
-#' therefore needed for some functions.
-#' 
-#' Currently, the data set is in wide format, where each row represents a single observation.  In
-#' long format, each row represents some subset of an observation.  For example, we can lengthen the
-#' Research, Admit, and Discipline columns using `pivot_longer()` from Tidyverse.
-
-library(tidyr)
-
-df %>%
-  pivot_longer(c(Research, Admit, Discipline))
-
-#' Now we see that there are two new columns with the variable names and their values.
+#' We hope this tutorial has been helpful in introducing you to the basics of `R`! `R` is a powerful language with a steep learning curve, but mastering its fundamentals is an essential first step toward becoming proficient in data analysis and statistical modeling. With practice and further study, you can gain a deeper understanding of `R`'s capabilities and begin to apply them to real-world problems. Whether you're a student, researcher, or data analyst, `R` is a valuable tool to have in your toolkit, and I encourage you to continue exploring its many features and possibilities.

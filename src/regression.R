@@ -72,11 +72,55 @@ par(mfrow = c(1, 1))
 adm_fit3 <- lm(GRE ~ CGPA + TOEFL + Discipline, data = adm_df)
 summary(adm_fit3)
 
-# Diagnosing the model --------------------
 plot(adm_fit3)
 
 # ANCOVA
 anova(adm_fit3)
+
+
+#' ## Generalized linear models
+#' 
+#' Generalized linear models (GLMs) are a flexible class of models that extend the linear regression framework to a wide range of response variables, including categorical, count, and continuous data. They allow for the modeling of complex relationships between variables by using a link function to transform the response variable into a linear combination of the predictors. Generalized linear models are commonly used in various fields, including biology, economics, and psychology, to analyze data that does not meet the assumptions of traditional linear regression.
+#' 
+#' 
+#' ## Logistic regression
+#' 
+#' Logistic regression is a type of GLM used to model the relationship between a categorical dependent variable and one or more independent variables. Generally, there are three types of logistic regression models:
+#' 
+#' - **binary** - models the probability of a binary outcome, such as yes/no or success/failure.
+#' - **multinomial** - models the relationship between an unordered (nominal) categorical dependent variable.
+#' - **ordinal** - models the relationship between an ordered categorical dependent variable.
+#' 
+#' Here, we will fit a binary logistic GLM that predicts *Admit* from all available variables. To fit a binary logistic regression model we can use the `glm()` function, which can fit a series of GLMs. Like other modeling functions in `R`, we first define a model formula and provide our dataset to the `data` argument. For the `glm()` function in particular, we also provide a string to the `family` argument to indicate the type of GLM we wish to fit. You can find the list of options for the `family` argument by typing `?family` in the `R` console.
+#' 
+#' While the `glm()` function will accept a binary factor variable as the response, it is good habit to manually define the response variable. What we mean by that is to select which of the outcomes will be coded as `1` and `0`. This is important when assessing coefficients from logistic models, where the direction of the effect is as important or more important than the magnitude of that coefficient. Here, we will assign *Accepted* to `1` and *Rejected* to `0`.
+
+#+ logit
+adm_df$Admit_logit <- ifelse(adm_df$Admit == "Accepted", 1, 0)
+
+adm_logit <- glm(Admit_logit ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Discipline, family = 'binomial', data = adm_df)
+
+summary(adm_logit)
+
+#+ logit-diag
+logit_null <- glm(Admit ~ 1, family = "binomial", data = adm_df)
+
+logLik(adm_logit) - logLik(logit_null)
+
+
+#' ## Mixed-effect linear models
+#' 
+#' Mixed effect models, also known as multilevel models or hierarchical models, are a type of regression model used to analyze data that has a nested structure or repeated measures. They account for both fixed and random effects in the data and allow for the estimation of parameters at both the individual and group levels. Mixed effect models are commonly used when observations are not independent or where individual variability needs to be taken into account.
+
+library(lme4)
+
+
+
+
+
+
+
+
 
 
 

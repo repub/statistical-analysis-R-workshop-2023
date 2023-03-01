@@ -117,6 +117,7 @@ adm_man <- manova(cbind(GRE, TOEFL, CGPA) ~ Discipline, data = adm_df)
 
 anova(adm_man)
 
+
 #' #### ANOVA as a post-hoc test
 #' 
 #' To determine which dependent variables are contributing to the overall significant effect, multiple ANOVAs can be conducted on each dependent variable separately. This approach is useful when there are many dependent variables and it is not clear which variables are driving the overall effect. By analyzing each variable separately, it is possible to identify the specific variables that are contributing to the overall effect.

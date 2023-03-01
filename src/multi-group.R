@@ -1,7 +1,16 @@
-# Multiple Group Comparison Tests ------------------------------------------------------------------
-#
-# @author Tyler B. Garner tbgarner5023@gmail.com
-# @author Jennifer Valcin jpv5319@psu.edu
+#' ---
+#' title: "Multiple Group Comparison Tests"
+#' author:
+#'   - Tyler B. Garner, tbg5023@psu.edu
+#'   - Jennifer Valcin, jpv5319@psu.edu
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#'     collapsed: false
+#'     theme: united
+#'     highlight: tango
+#' ---
 
 #' ## Introduction
 #' 

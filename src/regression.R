@@ -1,46 +1,73 @@
-# Regression Methods -------------------------------------------------------------------------------
-#
-# @author Tyler B. Garner tbgarner5023@gmail.com
-# @author Jennifer Valcin jpv5319@psu.edu
+#' ---
+#' title: "Regression"
+#' author:
+#'   - Tyler B. Garner, tbg5023@psu.edu
+#'   - Jennifer Valcin, jpv5319@psu.edu
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#'     collapsed: false
+#'     theme: united
+#'     highlight: tango
+#' ---
 
-library(dplyr)
+#' ## Introduction
+#' 
+#' Regression analysis is one of the most fundamental and widely used statistical methods for modeling the relationship between variables. It involves identifying patterns and strengths of the relationship between one or more independent variables and a dependent variable. Regression models are extensively used in various fields, including finance, economics, social sciences, and engineering, to name a few. In this tutorial, we will start by introducing the basic concepts of regression analysis and gradually move on to more advanced techniques, such as multiple regression and logistic regression. By the end of this tutorial, you will have a solid understanding of the various regression methods in `R` and how to apply them to real-world problems.
 
-# adm_df <- read_csv("data/raw/adm_data.csv")
-# 
-# # Re-code variables as factors
-# adm_df$Research <- factor(adm_df$Research)
-# adm_df$Discipline <- factor(adm_df$Discipline)
-# adm_df$Admit <- factor(adm_df$Admit)
-# 
-# head(adm_df)
 
-adm_df <- readRDS('EDA-and-visualizations/data/interim/adm_df')
+#+ load-data
+adm_df <- readRDS("data/interim/adm_df.RDS")
+
+head(adm_df)
 
 # Regression vs ANOVA vs ANCOVA ---------
 
-# Linear Regression ------
-#'
-#' Fit a linear regression model predicting GRE scores from cumulative GPA.
+#' ## Linear regression
 #' 
-#' * `lm()` fits a linear model and needs two arguments, a model `formula` (1st) and `data` (2nd).
-#' * `summary()` prints summary statistics from a fitted model.
+#' Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables with the goal of identifying a linear relationship that best describes the data. Linear regression makes several assumptions, including linearity, independence, normality, and equal variance of residuals. Its advantages include simplicity, interpretability, and its ability to model the relationship between variables. However, linear regression has some disadvantages, such as its inability to model nonlinear relationships and the risk of overfitting if the model is too complex or has too many predictors.
+#' 
+#' ### Simple linear regression
+#' 
+#' Simple linear regression is a type of linear regression where there is only one independent variable that is used to predict the value of the dependent variable. It is a commonly used technique in statistical analysis and can be used to model and predict the relationship between variables in a simple and interpretable way.
+#' 
+#' Here, we will fit a simple linear regression model predicting GRE scores from cumulative GPA. We will supply the `lm()` function with two arguments, first a model formula and second our dataset.
 
+#+ simple
 adm_fit <- lm(GRE ~ CGPA, adm_df)
+
 summary(adm_fit)
 
+#' #### Model diagnostics
 
-# * Two Continuous Variables -----
+#+ simple-diag
+par(mfrow = c(2, 2))
+plot(adm_fit)
+par(mfrow = c(1, 1))
+
+#' ### Multiple linear regression
 #'
-#' Fit a linear regression model predicting GRE scores from cumulative GPA and TOEFL scores.
+#' Multiple linear regression is a type of linear regression where there are two or more independent variables that are used to predict the value of the dependent variable. As multiple linear regression can be used to model the relationship between multiple predictors and the dependent variable, enabling more accurate predictions and more comprehensive analysis of the data, including potential interactions between variables.
+#'
+#' Here, we will fit a linear regression model predicting GRE scores from cumulative GPA and TOEFL scores using the same functions and similar format as simple linear regression above.
 
+#+ multiple
 adm_fit2 <- lm(GRE ~ CGPA + TOEFL, data = adm_df)
+
 summary(adm_fit2)
 
+#' #### Model diagnostics
 
-# * Adding a Factor -----
-#'
-#' Fit a linear regression model predicting GRE scores from cumulative GPA, TOEFL scores, and
-#' field of discipline.
+#+ multiple-diag
+par(mfrow = c(2, 2))
+plot(adm_fit2)
+par(mfrow = c(1, 1))
+
+
+#' #### Multiple regression with categorical predictors
+#' 
+#' Linear regression with all categorical variables is equivalent to ANOVA models, while regression with a mix of categorical and continuous variables is equivalent to ANCOVA models.
 
 adm_fit3 <- lm(GRE ~ CGPA + TOEFL + Discipline, data = adm_df)
 summary(adm_fit3)

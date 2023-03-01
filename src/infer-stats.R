@@ -29,7 +29,7 @@ knitr::opts_knit$set(root.dir = '../')
 #' 
 #' 
 
-#+ load-dplyr
+#+ load-data
 adm_df <- readRDS("data/interim/adm_df.RDS")
 
 head(adm_df)

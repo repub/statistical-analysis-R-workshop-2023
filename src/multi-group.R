@@ -4,6 +4,10 @@
 # @author Jennifer Valcin jpv5319@psu.edu
 
 #' ## Introduction
+#' 
+#' Multiple group comparison tests are statistical tests used to analyze the differences between three or more groups on a continuous or categorical dependent variable. These tests are essential in experimental and observational studies, as they can provide insights into the relationships between multiple factors and an outcome variable. There are several tests available for multiple group comparison, including parametric tests such as ANOVA and MANOVA, non-parametric tests such as Kruskal-Wallis, and post-hoc tests that allow for pairwise comparisons between groups. Understanding the assumptions, advantages, and limitations of each test is crucial for choosing the appropriate test for a specific analysis.
+#' 
+#' This section will provide a comprehensive overview of multiple group comparison tests, including their types, assumptions, and procedures, and will guide you in choosing the best test for your data analysis.
 
 #+ load-data
 adm_df <- readRDS("data/interim/adm_df.RDS")
@@ -23,33 +27,32 @@ head(adm_df)
 #' 
 #' #### one-way ANOVA
 #'
-#' The simplest form of the ANOVA is the one-way ANOVA, where we have one predictor variable.
-#' Fit an one-way ANOVA model to assess differences in CGPA scores by discipline.
-#' 
-#' * `aov()` fits an ANOVA model and needs two arguments, a model `formula` (1st) and `data` (2nd).
-#' * `summary()` prints summary statistics from a fitted model.
+#' The simplest form of the ANOVA is the one-way ANOVA (ANOVA^1^), where we have one predictor variable. Here, we will fit an ANOVA^1^ model to assess differences in CGPA scores by discipline. The `aov()` fits an ANOVA model and needs two arguments, a model `formula` (1st) and `data` (2nd). We then will use `summary()` to print summary statistics from the fitted model.
 
 #+ anova1
 adm_aov <- aov(CGPA ~ Discipline, data = adm_df)
 
 summary(adm_aov)
 
-#' From the results, we know there is a statistically significant difference in the means of at
-#' least one of the disciplines.  However, an ANOVA does not provide information on which of those
-#' means are different, which must be determined using a post-hoc pairwise comparisons test.  A 
-#' commonly used post-hoc test for ANOVA models is the Tukey Honest Significant Difference test.
+#' From the results, we know there is a statistically significant difference in the means of at least one of the disciplines.  However, an ANOVA does not provide information on which of those means are different, which must be determined using a post-hoc pairwise comparisons test. Commonly used post-hoc tests for ANOVA models are Tukey Honest Significant Difference (HSD) test and pairwise t-tests.
 #' 
-#' #### Tukey post-hoc test
+#' #### Tukey HSD post-hoc test
+#' 
+#' Tukey's HSD test is a post-hoc test used to determine which specific pairs of groups differ significantly from each other after a significant effect has been found using ANOVA. It is a conservative test that controls the family-wise error rate and compares the difference between the means of each pair of groups to a critical value based on the number of groups and the total number of observations. Tukey's HSD is widely used in scientific research and is considered a reliable method for post-hoc testing.
 #'
-#' We can wrap our ANOVA model in the `TukeyHSD()` function to run the Tukey pairwise comparisons.
+#' We can wrap our ANOVA^1^ model in the `TukeyHSD()` function to run the Tukey pairwise comparisons.
 
 #+ tukey1
 TukeyHSD(adm_aov)
 
+#' From the results of the Tukey HSD pairwise comparisons, we can conclude that the mean **CGPA** of each of the *Discipline* groups is statistically different from one another, specifically with **Science & Eng** having the highest mean **CGPA** and **Humanities and Soc Science** having the lowest mean **CGPA**.
+
 
 #' #### two-way ANOVA
 #' 
+#' A two-way ANOVA (ANOVA^2^) is an extension of the one-way ANOVA used to analyze the effects of two independent variables on a continuous dependent variable. The ANOVA^2^ is commonly used in experimental and observational studies to examine the effects of two factors on an outcome variable, and it can provide valuable insights into the relationships between these factors and the outcome.
 #' 
+#' With two-way and higher order ANOVA models we can include interaction terms which represent the combined effect of two or more independent variables on the dependent variable that cannot be explained by the individual effects of each variable alone. In other words, the effect of one variable on the dependent variable depends on the level of the other variable(s).
 
 #+ anova2
 adm_aov2 <- aov(CGPA ~ Research * Discipline, data = adm_df)
@@ -77,10 +80,9 @@ Anova(adm_aov2, type = "3")
 #' Which in this case will be (2 \* 3)((2 \* 3) - 1) / 2 = 15 comparisons. 
 
 
-
 #' #### Tukey post-hoc test
 #' 
-#' 
+#' By default, the `TukeyHSD()` function performs pairwise comparisons for every term in the ANOVA model. Since we had a significant interaction term, we will only print out the pairwise comparisons of that interaction.
 
 #+ tukey2
 adm_aov2_Tukey <- TukeyHSD(adm_aov2)
@@ -163,3 +165,8 @@ dunnTest(GRE ~ Discipline, data = adm_df[adm_df$Admit == 'Accepted', ])
 #' ### Non-parametric tests for 2 or more variables.
 #' 
 #' If we have 2 or more variables that we want to employ in one non-parametric test there are a few options available, however we are likely going to want to use some form of logistic regression. 
+#' 
+#' 
+#' ## Concluding remarks
+#' 
+#' Multiple group tests are important in analyzing differences between three or more independent groups. In this section, we have covered parametric tests including ANOVA, ANCOVA, and MANOVA, the non-parametric Kruskal-Wallis test, and post-hoc tests. Understanding the assumptions, advantages, and limitations of each test is crucial for choosing the appropriate test for the specific analysis. By using these tests and post-hoc methods effectively, you can gain valuable insights into the differences between multiple groups in your data.

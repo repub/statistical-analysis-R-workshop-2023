@@ -1915,6 +1915,14 @@ and cleaning, which we will install and load in the following code.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <pre><code>## Error in install.packages : Updating loaded packages</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <p>With the <code>dplyr</code> package loaded we can use its functions.
 For example, the <code>filter()</code> function is used to select a
 subset of rows from a data frame based on one or more logical
@@ -1922,12 +1930,33 @@ conditions, similarly to how we used the <code>$</code> operator
 previously. We can use the <code>filter()</code> function to return all
 rows of the <code>df</code> object we created above where the age column
 is greater than 30 by:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>##      name age weight
 ## 1 Charlie  35     80</code></pre>
 </div>
-<div id="file-management" class="section level2">
-<h2>File management</h2>
+<div id="piping" class="section level2">
+<h2>Piping</h2>
+<p>Piping is a concept in <code>R</code> (and many other programming
+languages) that allows you to chain together a series of functions,
+passing the output of one function as the input to the next. This can
+help make your code more concise and easier to read, especially when
+working with complex data manipulation tasks.</p>
+<p>In <code>R</code>, piping is typically done using the
+<code>%&gt;%</code> operator, originally provided in the
+<code>magrittr</code> package that is also within <code>dplyr</code>. We
+can use piping with the example above to “pipe” the <code>df</code>
+dataset into the <code>filter()</code> function, then pass the
+expression to filter on as follows:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>##      name age weight
+## 1 Charlie  35     80</code></pre>
+<p>By using piping, we are able to perform data manipulation tasks in a
+more concise and readable way, without having to nest multiple function
+calls or create intermediate variables. Piping can be a powerful tool
+for working with complex data manipulation tasks in <code>R</code>, and
+is commonly used in conjunction with other packages like
+<code>tidyr</code> and <code>ggplot2</code>. ## File management</p>
 <div id="loading-files" class="section level3">
 <h3>Loading files</h3>
 <p>You can load various types of files into your <code>R</code> session,
@@ -1938,9 +1967,9 @@ such as a .csv file, into <code>R</code> you can use the
 workshop which is in the .csv file format. We will then use the
 <code>head()</code> function to print the first few rows of that
 dataset.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/raw/adm_data.csv&quot;</span>)</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/raw/adm_data.csv&quot;</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   UniqueID GRE TOEFL SOP LOR  CGPA Research                 Discipline    Admit
 ## 1        1 337   118 4.5 4.5 3.892      yes              Science &amp; Eng Accepted
 ## 2        2 324   107 4.0 4.5 3.580      yes              Science &amp; Eng Accepted
@@ -1958,7 +1987,7 @@ function. This function takes two main arguments: the data frame you
 want to save and the name of the output file. For example, the following
 code will save the <code>df</code> object we created above into the
 “data/processed” directory.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">&quot;data/processed/basics-df.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">&quot;data/processed/basics-df.csv&quot;</span>)</span></code></pre></div>
 <p>Keep in mind that it’s important to include the file extension in the
 name of the file when saving it. Additionally, it’s generally considered
 a best practice to avoid overwriting the original raw data when saving

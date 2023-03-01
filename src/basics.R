@@ -227,6 +227,17 @@ library(dplyr)
 
 filter(df, age > 30)
 
+#' ## Piping
+#' Piping is a concept in `R` (and many other programming languages) that allows you to chain together a series of functions, passing the output of one function as the input to the next. This can help make your code more concise and easier to read, especially when working with complex data manipulation tasks.
+#' 
+#' In `R`, piping is typically done using the `%>%` operator, originally provided in the `magrittr` package that is also within `dplyr`. We can use piping with the example above to "pipe" the `df` dataset into the `filter()` function, then pass the expression to filter on as follows:
+
+df %>%
+  filter(age > 30)
+
+#' By using piping, we are able to perform data manipulation tasks in a more concise and readable way, without having to nest multiple function calls or create intermediate variables. Piping can be a powerful tool for working with complex data manipulation tasks in `R`, and is commonly used in conjunction with other packages like `tidyr` and `ggplot2`.
+
+
 #' ## File management
 #' 
 #' ### Loading files

@@ -93,6 +93,7 @@ y
 #' 
 #' - **Numeric** - numbers with or without decimal places, such as 1, 2.5, or -3.14.
 #' - **Character** - sequences of characters, such as "Hello, world!" or "R is fun".
+#' - **Factor** - categorical data.
 #' - **Logical**- values that represent truth or falsehood, such as TRUE or FALSE.
 #' - **Integer**- whole numbers, such as 1, 2, or -3.
 #' - **Complex**- numbers with real and imaginary components, such as 1 + 2i.
@@ -254,6 +255,9 @@ get_libs(libs)
 
 
 #' ## File management
+#' 
+#' File management is an essential skill for any data analyst or programmer working with large datasets. This includes organizing files in a logical and consistent manner, documenting your files and file structures, and maintaining backups to ensure data integrity and availability. Effective file management can help you work more efficiently and reduce the risk of errors or data loss.
+#' 
 #' 
 #' ### Loading files
 #'

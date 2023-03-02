@@ -24,14 +24,14 @@ knitr::opts_knit$set(root.dir = '../')
 #' There are several steps and techniques that are commonly used in performing Exploratory Data Analysis (EDA):
 #'
 #' 1. **Importing and cleaning the data** - This involves loading the data into a software environment and checking for missing values, duplicated values, and other inconsistencies.
+#'
+#' 2. **Identifying patterns and outliers** - This involves identifying patterns, trends, and  outliers in the data by examining the visualizations and summary statistics from the previous steps.
+#'
+#' 3. **Univariate analysis** - This involves analyzing each variable independently by calculating summary statistics (such as mean, median, and standard deviation) and creating visualizations (such as histograms and box plots) to understand the distribution of each variable.
 #' 
-#' 2. **Univariate analysis** - This involves analyzing each variable independently by calculating summary statistics (such as mean, median, and standard deviation) and creating visualizations (such as histograms and box plots) to understand the distribution of each variable.
+#' 4. **Bivariate analysis** - This involves analyzing the relationship between two variables by  creating visualizations (such as scatter plots and correlation matrix) and calculating  correlation coefficients (such as Pearson’s  *r*) to understand the strength and direction of the relationship.
 #' 
-#' 3. **Bivariate analysis** - This involves analyzing the relationship between two variables by  creating visualizations (such as scatter plots and correlation matrix) and calculating  correlation coefficients (such as Pearson’s  *r*) to understand the strength and direction of the relationship.
-#' 
-#' 4. **Multivariate analysis** - This involves analyzing the relationship between more than two variables by creating visualizations (such as scatter plot matrix and parallel coordinates plot) and using techniques such as principal component analysis (PCA) to understand the structure of  the data.
-#' 
-#' 5. **Identifying patterns and outliers** - This involves identifying patterns, trends, and  outliers in the data by examining the visualizations and summary statistics from the previous steps.
+#' 5. **Multivariate analysis** - This involves analyzing the relationship between more than two variables by creating visualizations (such as scatter plot matrix and parallel coordinates plot) and using techniques such as principal component analysis (PCA) to understand the structure of  the data.
 #' 
 #' Note that EDA is an iterative process and not all techniques will be applied depending on the data set and question(s).  Additionally, you may need to go back and repeat steps or apply different techniques as you gain a deeper understanding of the data.
 
@@ -52,6 +52,16 @@ head(adm_df)
 str(adm_df)
 
 #' We can see that there are 400 total observations across 9 variables. Three of the variables were read in as `int`, meaning *integer*, which is specific numeric data type that does not allow decimal points. Other variables are coded as either `num` for *numeric*, which can include decimal points, and `chr` for *character* which is the same as *string*.
+#' 
+#' For our analysis we will want to re-code this variables as factors, which we can easily do with the `factor()` function. After assigning the variables to factors we can use the `summary()` function again to see how those variables are distributed.
+
+#' code-factors
+adm_df$Research <- factor(adm_df$Research)
+adm_df$Discipline <- factor(adm_df$Discipline)
+adm_df$Admit <- factor(adm_df$Admit)
+
+summary(adm_df)
+
 
 #' ### Check for missing values
 #' 
@@ -82,7 +92,31 @@ sum(duplicated(adm_df))
 #' This dataset also lacks any duplicated observations. If you were to have duplicates that would be problematic for your analysis, you can use the `unique()` function, which returns a data frame or matrix with only the unique rows.
 #' 
 #' Alternatively, if you decide to keep the duplicate rows, it is important to be aware that they may introduce bias, noise, and variability in the data, so it is essential to validate the results and check the assumptions of the model. If the duplicates represent a small proportion of the data and not having them would affect the analysis, it is a good practice to keep them and note their presence in the analysis.
+#' 
+#' 
+#' ### Check for patterns
+#' 
+#' Checking for patterns in exploratory data analysis is important because it allows us to identify relationships, trends, and outliers in the data, which can help inform our modeling choices and ensure that we are not making erroneous conclusions.
+#' 
+#' One type of pattern that can quickly be problematic is whether the variables have any trends with their location in the dataset. This could be the result of non-random sampling and/or non-independent observations, which would violate the assumptions of many analysis methods, or could be the result of prior sorting, which would not be a problem. Alternatively, if we are dealing with time-series data we would likely expect to see some kind of trend that we would want to model.
+#' 
+#' To check whether there are any trends among the variables by their location, we can plot each variable against their row number. First, we will create a vector of numbers ranging from 1 to the total number of rows. That vector will then be used for the x-axis in the `plot()` function, while we plot our variables on the y-axis.
 
+#+ pattern
+ints <- 1:nrow(adm_df)
+
+plot(ints, adm_df$GRE, type = 'l')
+
+#' Plotting each variable will be quite tedious, so instead we can use a loop function to quickly generate each plot. We will give these plots titles so that when we view them we are sure which variable we are observing.
+
+#+ pattern-loop
+for (ii in 1:ncol(adm_df)) {
+  print(ii)
+  plot(ints, adm_df[, ii], type = 'l')
+  title(colnames(adm_df)[ii])
+}
+
+#' Except for *UniqueID*, where a trend would be expected, we do not notice any obvious trends in the variables.
 
 #' ## Univariate analysis
 #' 
@@ -99,15 +133,8 @@ sum(duplicated(adm_df))
 summary(adm_df)
 
 #' In the output we can see the values on the centrality and distribution of the numeric variables, while for the *Research*, *Discipline*, and *Admit* variables we are told that they are of the character type.
-#' 
-#' For our analysis we will want to re-code this variables as factors, which we can easily do with the `factor()` function. After assigning the variables to factors we can use the `summary()` function again to see how those variables are distributed.
+#' ___________FIX__________
 
-#' code-factors
-adm_df$Research <- factor(adm_df$Research)
-adm_df$Discipline <- factor(adm_df$Discipline)
-adm_df$Admit <- factor(adm_df$Admit)
-
-summary(adm_df)
 
 #' The output now gives us the total number of instances for category in the factor variables. Notably, the *Discipline* variable has a nearly balanced split between the three disciplines while in the *Admit* variable most of the students are *Accepted*.
 #' 

@@ -12,6 +12,9 @@
 #'     highlight: tango
 #' ---
 
+#+ setup, include = FALSE
+knitr::opts_knit$set(root.dir = '../')
+
 #' ## Introduction
 #' 
 #' Multiple group comparison tests are statistical tests used to analyze the differences between three or more groups on a continuous or categorical dependent variable. These tests are essential in experimental and observational studies, as they can provide insights into the relationships between multiple factors and an outcome variable. There are several tests available for multiple group comparison, including parametric tests such as ANOVA and MANOVA, non-parametric tests such as Kruskal-Wallis, and post-hoc tests that allow for pairwise comparisons between groups. Understanding the assumptions, advantages, and limitations of each test is crucial for choosing the appropriate test for a specific analysis.

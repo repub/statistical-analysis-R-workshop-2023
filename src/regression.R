@@ -12,6 +12,9 @@
 #'     highlight: tango
 #' ---
 
+#+ setup, include = FALSE
+knitr::opts_knit$set(root.dir = '../')
+
 #' ## Introduction
 #' 
 #' Regression analysis is one of the most fundamental and widely used statistical methods for modeling the relationship between variables. It involves identifying patterns and strengths of the relationship between one or more independent variables and a dependent variable. Regression models are extensively used in various fields, including finance, economics, social sciences, and engineering, to name a few. In this tutorial, we will start by introducing the basic concepts of regression analysis and gradually move on to more advanced techniques, such as multiple regression and logistic regression. By the end of this tutorial, you will have a solid understanding of the various regression methods in `R` and how to apply them to real-world problems.
@@ -39,6 +42,7 @@ head(adm_df)
 adm_fit <- lm(GRE ~ CGPA, adm_df)
 
 summary(adm_fit)
+
 
 #' #### Model diagnostics
 
@@ -87,8 +91,12 @@ summary(adm_fit3)
 
 plot(adm_fit3)
 
-# ANCOVA
+#'  ANCOVA
+
+#+ ancova
 anova(adm_fit3)
+
+#' Contrasts
 
 
 #' ## Generalized linear models
@@ -125,41 +133,10 @@ logLik(adm_logit) - logLik(logit_null)
 #' 
 #' Mixed effect models, also known as multilevel models or hierarchical models, are a type of regression model used to analyze data that has a nested structure or repeated measures. They account for both fixed and random effects in the data and allow for the estimation of parameters at both the individual and group levels. Mixed effect models are commonly used when observations are not independent or where individual variability needs to be taken into account.
 
+#+ lmer
 library(lme4)
 library(lmerTest)
 
 adm_lmer <- lmer(GRE ~ TOEFL + (1 | Discipline), data = adm_df)
 
 summary(adm_lmer)
-
-
-
-
-
-
-
-
-# Create dummy variables
-#
-# Fist make a column with the value of '1' for every observation.
-
-adm_df$Dummies <- 1
-
-
-# Contrasts? ------
-
-# Use the pivot_wider() function to create the dummy variables for Discipline using the Dummies
-# column we made above.
-
-adm_df <- adm_df %>%
-  pivot_wider(names_from = Discipline,
-              values_from = Dummies,
-              values_fill = 0) %>%
-  select(!c(`Humanities`))
-
-
-adm_fit4 <- lm(GRE ~ CGPA + TOEFL + `Natural Science` + `Social Science` +
-                 `Formal Science` + `Applied Science`, data = adm_df)
-
-summary(adm_fit4)
-

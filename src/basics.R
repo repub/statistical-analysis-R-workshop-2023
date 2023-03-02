@@ -49,7 +49,7 @@ knitr::opts_knit$set(root.dir = '../')
 "World"
 
 
-#' ## Logic operators
+#' ## Logic operations
 #' 
 #' Logical operators in R are used to evaluate logical expressions, which are expressions that return either `TRUE` or `FALSE`.  Common logic operators are:
 #' 
@@ -238,6 +238,21 @@ df %>%
 #' By using piping, we are able to perform data manipulation tasks in a more concise and readable way, without having to nest multiple function calls or create intermediate variables. Piping can be a powerful tool for working with complex data manipulation tasks in `R`, and is commonly used in conjunction with other packages like `tidyr` and `ggplot2`.
 
 
+#' ## Scripts
+#' 
+#' In `R`, a script is a file containing a sequence of `R` commands that can be executed together. Scripts are used to automate repetitive tasks, document procedures, and allow others to reproduce the analysis. For example, we can write a script which defines functions that we can then use across different projects without having to recode those functions for each project.
+#' 
+#' As an example, we have provided an `R` script called "get_libs.R" that has a function of the same name which takes a vector of strings with the names of libraries. The function first checks if the packages are already installed, and if they are not they will install the missing packages. Then, the function will load all of the listed packages into the environment.
+#' 
+#' In the next code block, we will use the `source()` function to read the script. Then, we will define a vector of libraries and give them to the `get_libs()` function to install and load them.
+
+source("src/scripts/get_libs.R")
+
+libs <- c("dplyr", "tidyr", "ggplot2")
+
+get_libs(libs)
+
+
 #' ## File management
 #' 
 #' ### Loading files
@@ -247,6 +262,7 @@ df %>%
 data <- read.csv("data/raw/adm_data.csv")
 
 head(data)
+
 
 #' ### Saving files
 #' 

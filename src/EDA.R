@@ -34,8 +34,8 @@ knitr::opts_knit$set(root.dir = '../')
 #' 5. **Multivariate analysis** - This involves analyzing the relationship between more than two variables by creating visualizations (such as scatter plot matrix and parallel coordinates plot) and using techniques such as principal component analysis (PCA) to understand the structure of  the data.
 #' 
 #' Note that EDA is an iterative process and not all techniques will be applied depending on the data set and question(s).  Additionally, you may need to go back and repeat steps or apply different techniques as you gain a deeper understanding of the data.
-
-
+#' 
+#' 
 #' ## Data import and cleaning
 #'
 #' First we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
@@ -49,13 +49,14 @@ head(adm_df)
 #' 
 #' Before diving into analyses it is good to know how the dataset is structured. With the `str()` function we can print the dimensions of the dataset in rows (observations) by columns (variables), in addition to listing the variables, their types, and their first few values. 
 
+#+ str
 str(adm_df)
 
 #' We can see that there are 400 total observations across 9 variables. Three of the variables were read in as `int`, meaning *integer*, which is specific numeric data type that does not allow decimal points. Other variables are coded as either `num` for *numeric*, which can include decimal points, and `chr` for *character* which is the same as *string*.
 #' 
 #' For our analysis we will want to re-code this variables as factors, which we can easily do with the `factor()` function. After assigning the variables to factors we can use the `summary()` function again to see how those variables are distributed.
 
-#' code-factors
+#+ code-factors
 adm_df$Research <- factor(adm_df$Research)
 adm_df$Discipline <- factor(adm_df$Discipline)
 adm_df$Admit <- factor(adm_df$Admit)
@@ -78,8 +79,8 @@ sum(is.na(adm_df))
 #' 4. **Imputation** - This involves replacing the missing values with estimates. Simple imputation methods replace missing values using the mean, median, or mode of the non-missing values. Some methods include using a predictive model, such as regression or k-nearest neighbors to estimate the missing values based on the other variables in the data set. There are also advanced imputation methods like hot-deck imputation or multiple imputation.
 #' 
 #' It's important to consider the specific characteristics of your data and the goals of your analysis when deciding which strategy to use. It is also important to note that imputation methods can introduce bias and variability in the data, so it's essential to validate the results and check the assumptions of the model if imputation method is chosen.
-
-
+#' 
+#' 
 #' ### Check for duplicated values
 #' 
 #' Whether to keep or remove duplicate rows depends on the specific characteristics of your data and the goals of your analysis. If the duplicates represent meaningful observations, such as multiple measurements taken at different times, then it may be appropriate to keep the duplicate rows. However, if the duplicates are the result of errors or inaccuracies in the data collection process, it may be appropriate to remove them.
@@ -117,14 +118,15 @@ for (ii in 1:ncol(adm_df)) {
 }
 
 #' Except for *UniqueID*, where a trend would be expected, we do not notice any obvious trends in the variables.
-
+#' 
+#' 
 #' ## Univariate analysis
 #' 
 #' Univariate analysis is a statistical technique that is used to analyze and summarize a single variable. The goal of univariate analysis is to understand the distribution and properties of a single variable, without considering any relationships with other variables.
 #' 
 #' Univariate analysis typically involves calculating summary statistics such as the mean, median, and standard deviation, and creating visualizations such as histograms, box plots, and frequency tables to understand the distribution of the variable.
-
-
+#' 
+#' 
 #' ### Summary statistics
 #' 
 #' To get some basic descriptive statistics on the variables we can call the `summary()` function on our data set.
@@ -134,9 +136,9 @@ summary(adm_df)
 
 #' In the output we can see the values on the centrality and distribution of the numeric variables, while for the *Research*, *Discipline*, and *Admit* variables we are told that they are of the character type.
 #' ___________FIX__________
-
-
+#' 
 #' The output now gives us the total number of instances for category in the factor variables. Notably, the *Discipline* variable has a nearly balanced split between the three disciplines while in the *Admit* variable most of the students are *Accepted*.
+#' 
 #' 
 #' #### Printing specific summary statistics
 #' 
@@ -145,6 +147,7 @@ summary(adm_df)
 #' * `group_by()` groups each unique level in the Admit column (Accepted or Rejected).
 #' * `summarize()` creates two new columns that will will name mean_GRE and sd_GRE with the means   and standard deviations of GRE scores as given by the `mean()` and `sd()` functions.
 
+#+ dplyr-summ
 library(dplyr)
 
 adm_df %>%
@@ -172,12 +175,14 @@ adm_df %>%
 #' 
 #' We can plot a basic histogram by supplying a continuous variable (as a vector) to the `hist()` function.
 
+#+ hist
 hist(adm_df$GRE)
 
 #' With `ggplot()`, part of the `ggplot2` package, we can easily make more advanced plots. For example, we can plot multiple histograms for a continuous variable, each representing some factor.
 #' 
 #' Here, we will plot the histograms of *GRE* for each level of *Research*. The first argument in `ggplot()` takes our dataset, then we will out the `aes()` (aesthetics) argument, where we define which variables to plot on the axis, to use for coloring, etc. Next, we add `geom_histogram()` following a `+` to tell `ggplot()` to use a histogram geometry for plotting. Finally, we add `facet_wrap()` to define how we want to wrap a set of panels, which we do with `~ Research` to indicate wrapping by the values of the *Research* variable.
 
+#+ gg-hist
 library(ggplot2)
 
 ggplot(adm_df,
@@ -190,6 +195,7 @@ ggplot(adm_df,
 #' 
 #' Here, we will simultaneously plot histograms for *CGPA*, *GRE*, and *TOEFL* with each separated by *Research*. We will first pipe the dataset into the `pivot_longer()` function, which creates two new variables based on a list of other variables, one with the *name* of the variables and the second with their *value*. We will then pipe the modified dataset into `ggplot()`.
 
+#+ gg-hist-facet
 library(dplyr)
 library(tidyr)
 
@@ -211,20 +217,22 @@ adm_df %>%
 #' 
 #' 
 
+#+ gg-density
 ggplot(adm_df,
        aes(x = GRE,
            fill = Research)) +
   geom_density(alpha = 0.5)
 
 #' While density plots can be better than histograms to compare the distributions of multiple groups, like if there are too few bins in a histogram if there is too much smoothing in a density plot it can hide important features of the distribution.
-
-
+#' 
+#' 
 #' #### Boxplots
 #' 
 #' Boxplots are a type of graph used to visualize the distribution of a variable. They display the five-number summary (minimum, maximum, median, and first and third quartiles) of the variable, as well as any outliers. Boxplots are useful for comparing the distribution of one or more variables across different groups or categories.
 #' 
 #' Here, we will plot the distributions of *SOP* for the three disciplines. While we can do so with the `boxplot()` function in base `R`, `ggplot()` makes it much easier for us.
 
+#+ gg-boxpl
 ggplot(adm_df,
        aes(x = Discipline,
            y = SOP)) +
@@ -233,14 +241,15 @@ ggplot(adm_df,
 #' From the plots, it appears that students in *Science & Eng* have higher scores on *SOP* while those in *Humanities and Soc Science* score the lowest overall.
 #' 
 #' Because boxplots summarize the data into quantiles it is very useful for non-normal data, in addition to normalized data. Just note that if using a statistical test based on the assumption of normality, boxplots may not be the most appropriate type of plot to visualize your results. Instead, pointranges, lineranges, and errorbars around the means may be more appropriate.
-
-
+#' 
+#' 
 #' #### Scatterplots
 #' 
 #' Scatterplots are a type of graph used to display the relationship between two continuous variables. They plot the values of one variable on the x-axis and the values of the other variable on the y-axis. Each point on the plot represents a single observation, and the pattern of the points can provide insights into the strength and direction of the relationship between the variables. Scatterplots are commonly used in exploratory data analysis and can be helpful in identifying patterns, trends, and outliers in the data.
 #' 
 #' 
 
+#+ gg-point
 ggplot(adm_df,
        aes(x = GRE,
            y = CGPA)) +
@@ -249,8 +258,11 @@ ggplot(adm_df,
 
 #' ### Statistical methods to assess distributions
 #' 
+#' _----------------------------
+#' 
 #' #### Shapiro-wilk's normality test
 
+#+ shapiro
 shapiro.test(adm_df$CGPA)
 shapiro.test(adm_df$GRE)
 
@@ -260,6 +272,7 @@ shapiro.test(adm_df$GRE)
 
 #' First mutate all of the variables into the numeric type, then use the cor() function to get the Spearman-rank correlations between each variable.
 
+#+ cor
 adm_cor <- adm_df %>%
   mutate(across(everything(), as.numeric)) %>%
   cor(method = 'spearman')
@@ -273,8 +286,10 @@ corrplot(adm_cor, method = 'square')
 #' the Admit variable to numeric it was recoded so that Accepted is 1 and Rejected is 2.
 
 
+#+ pairs
+pairs(adm_df)
 
-
+#+ gg-pairs
 library(GGally)
 
 adm_df %>%
@@ -286,4 +301,5 @@ adm_df %>%
 
 #' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
 
+#+ save
 saveRDS(adm_df, 'data/interim/adm_df.RDS')

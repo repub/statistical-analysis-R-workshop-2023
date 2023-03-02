@@ -48,7 +48,17 @@ shapiro.test(adm_df$TOEFL)
 shapiro.test(adm_df$CGPA)
 
 #' The p-values for the *GRE* and *TOEFL* variables suggest that both variables are not approximately normally distributed. However, a non-significant result for *CGPA*  suggests that it is approximately normally distributed.
+#' 
+#' When we are performing analyses with continuous and categorical variables, such as with t-tests and ANOVA analyses, we would also want to see if the continuous variables are approximately normal within each subgroup.  For example, if we were to compare if there are differences in *GRE* scores between *Accepted* and *Rejected* applicants we should see if the distribution of those scores is approximately normal in both cases.
+#' 
+#' To do so we can employ an apply function, `tapply()`, to gather each level in the *Admit* variable and perform a Shipero-Wilk test using the `shapiro.test()` function on the subsets of *GRE* scores.
 
+#+ tapply
+tapply(adm_df$GRE, adm_df$Admit, shapiro.test)
+
+#' From the results we could conclude that the *GRE* scores for both *Accepted* and *Rejected* applicants are not normally distributed.
+#' 
+#' 
 #' ### Levene's test
 #' 
 #' Levene's test can be used to determine if there is a significant difference in variances between two or more groups. It is a robust test, meaning it is not affected by outliers or non-normality of the data. The null hypothesis of the test is that the variances are equal across all groups, and the alternative hypothesis is that at least one group has a different variance. A significant p-value from the test would indicate that the variances are not equal and you should not use a t-test that assumes equal variances.
@@ -96,7 +106,7 @@ fisher.test(adm_df$Research, adm_df$Admit)
 #' 
 #' For example, we may want to know wither the *CGPA* of the *Applied Science* students is less than 3.5. We can answer this question using a one-sample t-test by filtering the *Discipline* variable for only *Applied Science* students, and passing the vector of their *CGPA* scores to the `t.test()` function. We also set the `mu` argument to `3.5` and `alternative` to `'less'` to test whether the mean *CGPA* scores are less than 3.5.
 
-# ttest1
+#+ ttest1
 t.test(adm_df[adm_df$Discipline == "Applied Science", "CGPA"],
        mu = 3.5,
        alternative = 'less')
@@ -109,6 +119,7 @@ t.test(adm_df[adm_df$Discipline == "Applied Science", "CGPA"],
 #' An unpaired two-sample t-test is a statistical significance test used to compare the means of two independent groups of data. It is commonly used to test whether there is a significant difference between the means of two groups, such as a treatment group and a control group. This test assumes that the two groups have equal variances and are normally distributed.
 #' 
 
+#+ ttest2
 t.test(CGPA ~ Research, data = adm_df)
 
 #' The `t.test()` function is set by default to assume unequal variances.

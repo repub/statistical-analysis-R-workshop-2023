@@ -1,5 +1,5 @@
 #' ---
-#' title: "Inferential Statistics"
+#' title: "Basic Inferential Statistics"
 #' author:
 #'   - Tyler B. Garner, tbg5023@psu.edu
 #'   - Jennifer Valcin, jpv5319@psu.edu
@@ -27,7 +27,7 @@ knitr::opts_knit$set(root.dir = '../')
 
 #' ## Introduction
 #' 
-#' 
+#' When analyzing data, it is important to ensure that the data meets certain assumptions before applying statistical tests. Failure to do so can lead to incorrect conclusions and misleading results. In this section, we will provide an overview of tests for assumptions, such as normality and homogeneity of variance, and how to assess whether these assumptions have been met. We will then cover the use of t-tests for comparing means, as well as non-parametric tests for situations where the assumptions of t-tests are not met. By the end of this section, you will have a solid understanding of these important concepts and be able to apply them to your own data analysis tasks.
 
 #+ load-data
 adm_df <- readRDS("data/interim/adm_df.RDS")
@@ -86,13 +86,13 @@ fisher.test(adm_df$Research, adm_df$Admit)
 
 #' ## Comparing distributions
 #' 
-#' ## T-tests
+#' ## Parametric tests
 #' 
 #' T-tests are a family of statistical significance tests used to compare the means of one or two groups of data. There are two main types of t-tests: the independent samples t-test, which compares the means of one or two independent groups of data, and the paired samples t-test, which compares the means of two related groups of data. The t-test calculates a t-value and corresponding p-value, which can be used to determine whether the difference between the means is statistically significant.
 #' 
 #' ### One-sample t-test
 #' 
-#' A one-sample t-test is a statistical significance test used to determine whether the mean of a single sample is significantly different from a known or hypothesized value. It is commonly used to test whether a sample is drawn from a population with a specific mean. The test calculates a t-value and corresponding p-value, which can be used to determine whether the difference between the sample mean and the hypothesized mean is statistically significant.
+#' A one-sample t-test is a statistical significance test used to determine whether the mean of a single sample is significantly different from a known or hypothesized value. It is commonly used to test whether a sample is drawn from a population with a specific mean.
 #' 
 #' For example, we may want to know wither the *CGPA* of the *Applied Science* students is less than 3.5. We can answer this question using a one-sample t-test by filtering the *Discipline* variable for only *Applied Science* students, and passing the vector of their *CGPA* scores to the `t.test()` function. We also set the `mu` argument to `3.5` and `alternative` to `'less'` to test whether the mean *CGPA* scores are less than 3.5.
 
@@ -102,26 +102,83 @@ t.test(adm_df[adm_df$Discipline == "Applied Science", "CGPA"],
        alternative = 'less')
 
 #' From the results of the t-test, we can conclude with statistical evidence that the mean *CGPA* is less than 3.5.
-
-
-# * Unpaired two-sample t-test
-
-# Assumption for t-test = equal variances
-
-# Is the mean CGPA different between students who did and did not do undergraduate research?
+#' 
+#' 
+#' ### Unpaired, two-sample t-test
+#' 
+#' An unpaired two-sample t-test is a statistical significance test used to compare the means of two independent groups of data. It is commonly used to test whether there is a significant difference between the means of two groups, such as a treatment group and a control group. This test assumes that the two groups have equal variances and are normally distributed.
+#' 
 
 t.test(CGPA ~ Research, data = adm_df)
 
-# * Paired
+#' The `t.test()` function is set by default to assume unequal variances.
 
 
 
-# Non-parametric test
-
-# * Wilcox-test
-
-
-# * Mann-Whitney U-test
+#' ### Paired t-test
+#' 
+#' A paired t-test is a statistical significance test used to compare the means of two related groups of data. It is commonly used to test whether there is a significant difference between the means of two measurements taken on the same individuals or objects, such as before and after a treatment. This test assumes that the differences between the pairs are normally distributed.
 
 
-# ?
+
+#' ## Non-parametric tests
+#'
+#'Non-parametric tests are statistical significance tests that do not make assumptions about the distribution of the data being tested. They are often used when the data is not normally distributed or when the assumptions of parametric tests, such as t-tests, are not met. Non-parametric tests for one or two groups of data include the Wilcoxon test and the Mann-Whitney U test. These tests are based on ranks or other non-parametric measures of the data, and are often less powerful than their parametric counterparts, but they are more robust and can provide reliable results in a wider range of data scenarios.
+#'
+#'
+#' ### Wilcoxon tests
+#' 
+#' The Wilcoxon test is a non-parametric statistical significance test used to compare two independent samples of data. It is commonly used when the assumptions of the t-test cannot be met, such as when the data is not normally distributed or the sample size is small. The test compares the median values of the two groups and calculates a p-value, which can be used to determine whether the difference between the medians is statistically significant.
+
+wilcox.test(adm_df[adm_df$Discipline == "Science & Eng", "LOR"],
+            alternative = "greater",
+            mu = 4)
+
+
+wilcox.test(SOP ~ Admit,
+            data = adm_df)
+
+
+#' ### Mann-Whitney U test
+#' 
+#' The Mann-Whitney U test is a non-parametric statistical significance test used to compare the medians of two independent groups of data. It is commonly used when the assumptions of the t-test cannot be met, such as when the data is not normally distributed or the sample size is small. The test ranks the values in the two groups and calculates a U-value, which can be used to determine whether the difference between the medians is statistically significant. The Mann-Whitney U test is often used as an alternative to the t-test when the data does not meet the assumptions of parametric tests.
+
+
+#' ## Comparing two non-categorical variables
+#' 
+#' Simple linear regression and correlations are statistical methods used to describe the relationship between two variables. Simple linear regression is used when one variable is used to predict another, and is characterized by a linear equation that represents the relationship between the variables. Correlation, on the other hand, measures the strength and direction of the relationship between two variables without making any assumptions about causality. Pearson's correlation is used when both variables are continuous and normally distributed, while Kendall and Spearman correlations are non-parametric measures used when the variables are ordinal or not normally distributed. Each measure provides a correlation coefficient, which ranges from -1 to 1 and indicates the strength and direction of the relationship between the variables.
+#' 
+#' 
+#' ### Simple linear regression
+#' 
+#' Simple linear regression is a type of linear regression where there is only one independent variable that is used to predict the value of the dependent variable. It is a commonly used technique in statistical analysis and can be used to model and predict the relationship between variables in a simple and interpretable way.
+#' 
+#' Here, we will fit a simple linear regression model predicting GRE scores from cumulative GPA. We will supply the `lm()` function with two arguments, first a model formula and second our dataset.
+
+#+ simple
+adm_fit <- lm(GRE ~ CGPA, adm_df)
+
+summary(adm_fit)
+
+
+#' ### Pearson's correlation
+#' 
+#' Pearson correlation is a measure of the strength and direction of the linear relationship between two continuous variables. It calculates the correlation coefficient, which ranges from -1 to 1, and indicates the strength and direction of the relationship between the two variables. Pearson correlation assumes that the data is normally distributed and that there is a linear relationship between the two variables.
+
+cor(adm_df$GRE, adm_df$CGPA)
+
+
+#' ### Spearman and Kendall correlations
+#' 
+#' Kendall and Spearman correlations are non-parametric measures of correlation used to describe the relationship between two variables. Unlike Pearson correlation, which assumes that the variables are continuous and normally distributed, Kendall and Spearman correlations do not make any assumptions about the distribution of the data. Kendall correlation measures the strength and direction of the relationship between two variables that are ordinal or ranked, while Spearman correlation measures the strength and direction of the relationship between two variables that are measured on an interval or ratio scale. 
+
+cor(adm_df$SOP,
+    adm_df$LOR,
+    method = "kendall")
+
+
+#' ## Concluding remarks
+#' 
+#' Understanding and testing assumptions is a critical step in any data analysis task. By checking for normality, homogeneity of variance, and other assumptions, you can ensure that your statistical tests are valid and reliable. Additionally, having a strong grasp of t-tests and non-parametric tests allows you to choose the appropriate statistical tests for your data and draw accurate conclusions. By mastering these fundamental concepts, you will be better equipped to analyze and interpret data, and make informed decisions based on evidence.
+#' 
+#' The next sections will build upon these tools, where instead of one and two groups we will learn to use tools to to assess multiple groups in a single test.

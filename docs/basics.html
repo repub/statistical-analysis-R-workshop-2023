@@ -12,7 +12,7 @@
 <meta name="author" content="Tyler B. Garner, tbg5023@psu.edu" />
 <meta name="author" content="Jennifer Valcin, jpv5319@psu.edu" />
 
-<meta name="date" content="2023-03-02" />
+<meta name="date" content="2023-03-03" />
 
 <title>R Basics</title>
 
@@ -1566,7 +1566,7 @@ border-radius: 0px;
 <h1 class="title toc-ignore"><code>R</code> Basics</h1>
 <h4 class="author">Tyler B. Garner, <a href="mailto:tbg5023@psu.edu" class="email">tbg5023@psu.edu</a></h4>
 <h4 class="author">Jennifer Valcin, <a href="mailto:jpv5319@psu.edu" class="email">jpv5319@psu.edu</a></h4>
-<h4 class="date">2023-03-02</h4>
+<h4 class="date">2023-03-03</h4>
 
 </div>
 
@@ -1939,7 +1939,10 @@ some function to it.</p>
 <p>Other common apply functions are <code>apply()</code>,
 <code>sapply()</code>, <code>tapply()</code>, and
 <code>mapply()</code>.</p>
-<p>#’ ## Packages</p>
+</div>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
 <p>A package in <code>R</code> is a collection of functions, data sets,
 and documentation that extend the capabilities of base <code>R</code>.
 Packages are typically created by other users and developers in the
@@ -1958,6 +1961,14 @@ and cleaning, which we will install and load in the following code.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <pre><code>## Error in install.packages : Updating loaded packages</code></pre>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <p>With the <code>dplyr</code> package loaded we can use its functions.
 For example, the <code>filter()</code> function is used to select a
 subset of rows from a data frame based on one or more logical
@@ -1965,10 +1976,9 @@ conditions, similarly to how we used the <code>$</code> operator
 previously. We can use the <code>filter()</code> function to return all
 rows of the <code>df</code> object we created above where the age column
 is greater than 30 by:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>##      name age weight
 ## 1 Charlie  35     80</code></pre>
-</div>
 </div>
 <div id="piping" class="section level2">
 <h2>Piping</h2>
@@ -1983,8 +1993,8 @@ working with complex data manipulation tasks.</p>
 can use piping with the example above to “pipe” the <code>df</code>
 dataset into the <code>filter()</code> function, then pass the
 expression to filter on as follows:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>##      name age weight
 ## 1 Charlie  35     80</code></pre>
 <p>By using piping, we are able to perform data manipulation tasks in a
@@ -2012,11 +2022,18 @@ packages into the environment.</p>
 function to read the script. Then, we will define a vector of libraries
 and give them to the <code>get_libs()</code> function to install and
 load them.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/scripts/get_libs.R&quot;</span>)</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>libs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">get_libs</span>(libs)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/scripts/get_libs.R&quot;</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>libs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">get_libs</span>(libs)</span></code></pre></div>
+<pre><code>## Loading required package: tidyr</code></pre>
+<pre><code>## 
+## Attaching package: &#39;tidyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:Matrix&#39;:
+## 
+##     expand, pack, unpack</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
 <pre><code>##   dplyr   tidyr ggplot2 
 ##    TRUE    TRUE    TRUE</code></pre>
 </div>
@@ -2038,9 +2055,9 @@ such as a .csv file, into <code>R</code> you can use the
 workshop which is in the .csv file format. We will then use the
 <code>head()</code> function to print the first few rows of that
 dataset.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/raw/adm_data.csv&quot;</span>)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/raw/adm_data.csv&quot;</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   UniqueID GRE TOEFL SOP LOR  CGPA Research                 Discipline    Admit
 ## 1        1 337   118 4.5 4.5 3.892      yes              Science &amp; Eng Accepted
 ## 2        2 324   107 4.0 4.5 3.580      yes              Science &amp; Eng Accepted
@@ -2058,7 +2075,7 @@ function. This function takes two main arguments: the data frame you
 want to save and the name of the output file. For example, the following
 code will save the <code>df</code> object we created above into the
 “data/processed” directory.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">&quot;data/processed/basics-df.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">&quot;data/processed/basics-df.csv&quot;</span>)</span></code></pre></div>
 <p>Keep in mind that it’s important to include the file extension in the
 name of the file when saving it. Additionally, it’s generally considered
 a best practice to avoid overwriting the original raw data when saving

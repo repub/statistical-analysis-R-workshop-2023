@@ -71,6 +71,12 @@ summary(adm_df)
 #+ any-na
 sum(is.na(adm_df))
 
+sapply(adm_df, function(x) sum(is.na(x)))
+
+head(adm_df[is.na(adm_df$GPA1), ])
+
+summary(adm_df[is.na(adm_df$GPA1), ])
+
 #' We see that there are no missing values in our dataset. However, if we were to find missing values we have a few options available to handle them:
 #'
 #' 1. **Remove observations** - This involves removing any observations that have missing values. This can be a viable option if the missing values are relatively few and scattered throughout the dataset. However, if a large proportion of the dataset is missing, this approach may result in losing important information.

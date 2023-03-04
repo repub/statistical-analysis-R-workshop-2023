@@ -134,6 +134,10 @@ logLik(adm_logit) - logLik(logit_null)
 #' ## Mixed-effect linear models
 #' 
 #' Mixed effect models, also known as multilevel models or hierarchical models, are a type of regression model used to analyze data that has a nested structure or repeated measures. They account for both fixed and random effects in the data and allow for the estimation of parameters at both the individual and group levels. Mixed effect models are commonly used when observations are not independent or where individual variability needs to be taken into account.
+#' 
+#' There are a few packages that can fit mixed effect models, with `lme4` being one of the more commonly used. An additional package, `lmerTest` expands the toolset and improves some of the output of the `lme4` package.
+#' 
+#' Mixed effect models have the model formula format of "response ~ fixed_variables + (random_effects)". The random effect term will depend on the data, but will typically follow the formula "(intercept | grouping_factor)".
 
 #+ lmer
 library(lme4)

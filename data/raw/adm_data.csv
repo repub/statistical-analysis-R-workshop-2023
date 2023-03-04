@@ -1,401 +1,401 @@
-UniqueID,GRE,TOEFL,SOP,LOR,CGPA,Research,Discipline,Admit
-1,337,118,4.5,4.5,3.892,yes,Science & Eng,Accepted
-2,324,107,4,4.5,3.5799999999999996,yes,Science & Eng,Accepted
-3,316,104,3,3.5,3.232,yes,Applied Science,Accepted
-4,322,110,3.5,2.5,3.5,yes,Applied Science,Accepted
-5,314,103,2,3,3.3160000000000003,no,Humanities and Soc Science,Accepted
-6,330,115,4.5,3,3.768,yes,Science & Eng,Accepted
-7,321,109,3,4,3.312,yes,Applied Science,Accepted
-8,308,101,3,4,3.192,no,Humanities and Soc Science,Accepted
-9,302,102,2,1.5,3.232,no,Humanities and Soc Science,Rejected
-10,323,108,3.5,3,3.472,no,Applied Science,Rejected
-11,325,106,3.5,4,3.3920000000000003,yes,Applied Science,Rejected
-12,327,111,4,4.5,3.632,yes,Science & Eng,Accepted
-13,328,112,4,4.5,3.672,yes,Science & Eng,Accepted
-14,307,109,4,3,3.232,yes,Applied Science,Rejected
-15,311,104,3.5,2,3.312,yes,Applied Science,Rejected
-16,314,105,3.5,2.5,3.3520000000000003,no,Applied Science,Rejected
-17,317,107,4,3,3.5119999999999996,no,Applied Science,Accepted
-18,319,106,4,3,3.232,yes,Applied Science,Accepted
-19,318,110,4,3,3.5520000000000005,no,Applied Science,Rejected
-20,303,102,3.5,3,3.432,no,Applied Science,Rejected
-21,312,107,3,2,3.192,yes,Applied Science,Rejected
-22,325,114,3,2,3.3920000000000003,no,Science & Eng,Accepted
-23,328,116,5,5,3.832,yes,Science & Eng,Accepted
-24,334,119,5,4.5,3.912,yes,Science & Eng,Accepted
-25,336,119,4,3.5,3.952,yes,Science & Eng,Accepted
-26,340,120,4.5,4.5,3.872,yes,Science & Eng,Accepted
-27,322,109,4.5,3.5,3.5520000000000005,no,Science & Eng,Accepted
-28,298,98,1.5,2.5,3.032,yes,Humanities and Soc Science,Rejected
-29,295,93,2,2,2.912,no,Humanities and Soc Science,Rejected
-30,310,99,1.5,2,2.952,no,Humanities and Soc Science,Rejected
-31,300,97,3,3,3.272,yes,Humanities and Soc Science,Accepted
-32,327,103,4,4,3.3520000000000003,yes,Applied Science,Accepted
-33,338,118,3,4.5,3.792,yes,Science & Eng,Accepted
-34,340,114,4,4,3.872,yes,Science & Eng,Accepted
-35,331,112,4,5,3.952,yes,Science & Eng,Accepted
-36,320,110,5,5,3.712,yes,Science & Eng,Accepted
-37,299,106,4,4,3.3920000000000003,no,Humanities and Soc Science,Rejected
-38,300,105,1,2,3.152,no,Humanities and Soc Science,Rejected
-39,304,105,3,1.5,3.032,no,Humanities and Soc Science,Rejected
-40,307,108,4,3.5,3.112,no,Humanities and Soc Science,Rejected
-41,308,110,3.5,3,3.232,yes,Applied Science,Rejected
-42,316,105,2.5,2.5,3.312,yes,Humanities and Soc Science,Rejected
-43,313,107,2.5,2,3.432,yes,Humanities and Soc Science,Rejected
-44,332,117,4.5,4,3.672,no,Science & Eng,Accepted
-45,326,113,4.5,4,3.792,yes,Science & Eng,Accepted
-46,322,110,5,4,3.672,yes,Science & Eng,Accepted
-47,329,114,4,5,3.752,yes,Science & Eng,Accepted
-48,339,119,4.5,4,3.912,no,Science & Eng,Accepted
-49,321,110,3.5,5,3.572,yes,Applied Science,Accepted
-50,327,111,3,4,3.3920000000000003,yes,Science & Eng,Accepted
-51,313,98,2.5,4.5,3.3520000000000003,yes,Applied Science,Accepted
-52,312,100,1.5,3.5,3.192,yes,Humanities and Soc Science,Rejected
-53,334,116,4,3,3.232,yes,Science & Eng,Accepted
-54,324,112,4,2.5,3.272,yes,Science & Eng,Accepted
-55,322,110,3,3.5,3.232,no,Applied Science,Accepted
-56,320,103,3,3,3.112,no,Applied Science,Rejected
-57,316,102,2,3,2.992,no,Applied Science,Rejected
-58,298,99,4,2,3.072,no,Humanities and Soc Science,Rejected
-59,300,99,3,2,2.752,yes,Humanities and Soc Science,Rejected
-60,311,104,2,2,3.3520000000000003,no,Humanities and Soc Science,Rejected
-61,309,100,3,3,3.272,no,Humanities and Soc Science,Rejected
-62,307,101,4,3,3.312,no,Applied Science,Rejected
-63,304,105,3,3,3.312,yes,Humanities and Soc Science,Rejected
-64,315,107,4,3,3.432,yes,Humanities and Soc Science,Rejected
-65,325,111,3,3.5,3.5119999999999996,no,Applied Science,Rejected
-66,325,112,3.5,3.5,3.6,no,Science & Eng,Rejected
-67,327,114,3,3,3.64,no,Applied Science,Rejected
-68,316,107,3.5,3.5,3.4880000000000004,yes,Humanities and Soc Science,Rejected
-69,318,109,3.5,4,3.72,yes,Applied Science,Accepted
-70,328,115,4.5,4,3.696,yes,Science & Eng,Accepted
-71,332,118,5,5,3.888,yes,Science & Eng,Accepted
-72,336,112,5,5,3.936,yes,Science & Eng,Accepted
-73,321,111,5,5,3.812,yes,Science & Eng,Accepted
-74,314,108,4.5,4,3.648,yes,Science & Eng,Accepted
-75,314,106,3,5,3.592,no,Applied Science,Accepted
-76,329,114,2,4,3.4560000000000004,yes,Humanities and Soc Science,Accepted
-77,327,112,3,3,3.5200000000000005,yes,Applied Science,Accepted
-78,301,99,3,2,3.3200000000000003,no,Humanities and Soc Science,Rejected
-79,296,95,3,2,3.048,yes,Humanities and Soc Science,Rejected
-80,294,93,1.5,2,2.976,no,Humanities and Soc Science,Rejected
-81,312,105,2,3,3.24,yes,Applied Science,Rejected
-82,340,120,5,5,3.832,yes,Science & Eng,Accepted
-83,320,110,5,4.5,3.72,yes,Science & Eng,Accepted
-84,322,115,4,4.5,3.776,yes,Science & Eng,Accepted
-85,340,115,4.5,4.5,3.812,yes,Science & Eng,Accepted
-86,319,103,4.5,3.5,3.496,no,Science & Eng,Accepted
-87,315,106,4.5,3.5,3.4,no,Applied Science,Accepted
-88,317,107,3.5,3,3.344,no,Humanities and Soc Science,Accepted
-89,314,108,4.5,3.5,3.2880000000000003,no,Applied Science,Rejected
-90,316,109,4.5,3.5,3.536,yes,Science & Eng,Accepted
-91,318,106,4,4,3.2,yes,Humanities and Soc Science,Rejected
-92,299,97,5,3.5,3.096,no,Applied Science,Rejected
-93,298,98,4,3,3.244,no,Humanities and Soc Science,Rejected
-94,301,97,3,3,3.184,yes,Humanities and Soc Science,Rejected
-95,303,99,2,2.5,3.096,no,Applied Science,Rejected
-96,304,100,1.5,2.5,3.168,no,Science & Eng,Rejected
-97,306,100,3,3,3.232,no,Humanities and Soc Science,Rejected
-98,331,120,4,4,3.616000000000001,yes,Applied Science,Accepted
-99,332,119,5,4.5,3.728,yes,Science & Eng,Accepted
-100,323,113,4,4,3.5840000000000005,yes,Applied Science,Accepted
-101,322,107,3.5,3.5,3.4160000000000004,yes,Applied Science,Accepted
-102,312,105,2.5,3,3.28,no,Humanities and Soc Science,Rejected
-103,314,106,4,3.5,3.332,no,Humanities and Soc Science,Rejected
-104,317,104,4.5,4,3.4200000000000004,no,Humanities and Soc Science,Rejected
-105,326,112,3.5,3,3.652,yes,Applied Science,Accepted
-106,316,110,4,4.5,3.5439999999999996,yes,Applied Science,Accepted
-107,329,111,4.5,4.5,3.704,yes,Science & Eng,Accepted
-108,338,117,3.5,4.5,3.816,yes,Science & Eng,Accepted
-109,331,116,5,5,3.784,yes,Science & Eng,Accepted
-110,304,103,5,4,3.4880000000000004,no,Science & Eng,Accepted
-111,305,108,3,3,3.4240000000000004,no,Science & Eng,Rejected
-112,321,109,4,4,3.504,yes,Science & Eng,Accepted
-113,301,107,3.5,3.5,3.368,yes,Applied Science,Rejected
-114,320,110,4,3.5,3.4560000000000004,no,Humanities and Soc Science,Accepted
-115,311,105,3.5,3,3.412,yes,Applied Science,Rejected
-116,310,106,4.5,4.5,3.648,yes,Science & Eng,Accepted
-117,299,102,4,3.5,3.4799999999999995,no,Applied Science,Rejected
-118,290,104,2,2.5,3.016,no,Science & Eng,Rejected
-119,296,99,3,3.5,2.944,no,Humanities and Soc Science,Rejected
-120,327,104,3,3.5,3.568,yes,Science & Eng,Accepted
-121,335,117,5,5,3.856,yes,Science & Eng,Accepted
-122,334,119,4.5,4.5,3.824,yes,Science & Eng,Accepted
-123,310,106,1.5,2.5,3.376,no,Science & Eng,Rejected
-124,308,108,3.5,3.5,3.3200000000000003,no,Applied Science,Rejected
-125,301,106,2.5,3,3.4200000000000004,no,Science & Eng,Rejected
-126,300,100,2,3,3.496,yes,Applied Science,Rejected
-127,323,113,4,3,3.76,yes,Applied Science,Accepted
-128,319,112,2.5,2,3.5160000000000005,yes,Applied Science,Accepted
-129,326,112,3.5,3,3.672,yes,Applied Science,Accepted
-130,333,118,5,5,3.772,yes,Science & Eng,Accepted
-131,339,114,4,4.5,3.936,yes,Science & Eng,Accepted
-132,303,105,5,4.5,3.492,no,Science & Eng,Accepted
-133,309,105,3.5,3.5,3.4560000000000004,no,Science & Eng,Accepted
-134,323,112,4,4.5,3.5439999999999996,no,Science & Eng,Accepted
-135,333,113,4,4,3.744,yes,Science & Eng,Accepted
-136,314,109,3.5,4,3.54,yes,Science & Eng,Accepted
-137,312,103,5,4,3.412,no,Applied Science,Accepted
-138,316,100,1.5,3,3.2960000000000003,yes,Humanities and Soc Science,Accepted
-139,326,116,4.5,3,3.664,yes,Humanities and Soc Science,Accepted
-140,318,109,3.5,3.5,3.68,no,Humanities and Soc Science,Accepted
-141,329,110,4,3,3.692,yes,Humanities and Soc Science,Accepted
-142,332,118,4.5,3.5,3.776,yes,Humanities and Soc Science,Accepted
-143,331,115,4,3.5,3.808,yes,Science & Eng,Accepted
-144,340,120,4.5,4,4,yes,Science & Eng,Accepted
-145,325,112,3,3.5,3.616000000000001,yes,Humanities and Soc Science,Accepted
-146,320,113,2,2.5,3.4880000000000004,yes,Humanities and Soc Science,Accepted
-147,315,105,2,2.5,3.4240000000000004,no,Applied Science,Accepted
-148,326,114,3,3,3.676,yes,Applied Science,Accepted
-149,339,116,4,3.5,3.952,yes,Science & Eng,Accepted
-150,311,106,3.5,3,3.336,yes,Humanities and Soc Science,Accepted
-151,334,114,4,4,3.804,yes,Science & Eng,Accepted
-152,332,116,5,5,3.744,yes,Science & Eng,Accepted
-153,321,112,5,5,3.656,yes,Science & Eng,Accepted
-154,324,105,3,4,3.532,no,Applied Science,Accepted
-155,326,108,3,3.5,3.588,no,Applied Science,Accepted
-156,312,109,3,3,3.508,no,Applied Science,Accepted
-157,315,105,2,2.5,3.368,no,Applied Science,Accepted
-158,309,104,2,2.5,3.336,no,Humanities and Soc Science,Accepted
-159,306,106,2,2.5,3.2880000000000003,no,Humanities and Soc Science,Rejected
-160,297,100,1.5,2,3.192,no,Humanities and Soc Science,Rejected
-161,315,103,1.5,2,3.176,no,Humanities and Soc Science,Rejected
-162,298,99,1.5,3,3.016,no,Humanities and Soc Science,Rejected
-163,318,109,3,3,3.432,no,Applied Science,Accepted
-164,317,105,3.5,3,3.4560000000000004,no,Applied Science,Accepted
-165,329,111,4.5,4,3.636,yes,Science & Eng,Accepted
-166,322,110,4.5,4,3.62,no,Science & Eng,Accepted
-167,302,102,3.5,5,3.364,no,Applied Science,Accepted
-168,313,102,2,3,3.34,no,Applied Science,Rejected
-169,293,97,2,4,3.152,yes,Humanities and Soc Science,Rejected
-170,311,99,2.5,3,3.224,no,Humanities and Soc Science,Accepted
-171,312,101,2.5,3.5,3.248,yes,Humanities and Soc Science,Accepted
-172,334,117,4,4.5,3.66,yes,Science & Eng,Accepted
-173,322,110,4,5,3.684,yes,Science & Eng,Accepted
-174,323,113,4,4.5,3.724,yes,Science & Eng,Accepted
-175,321,111,4,4,3.62,yes,Science & Eng,Accepted
-176,320,111,4.5,3.5,3.5799999999999996,yes,Science & Eng,Accepted
-177,329,119,4.5,4.5,3.696,yes,Science & Eng,Accepted
-178,319,110,3.5,3.5,3.648,no,Applied Science,Accepted
-179,309,108,2.5,3,3.28,no,Applied Science,Accepted
-180,307,102,3,3,3.34,no,Applied Science,Accepted
-181,300,104,3.5,3,3.2960000000000003,no,Applied Science,Accepted
-182,305,107,2.5,2.5,3.4,no,Humanities and Soc Science,Accepted
-183,299,100,3,3.5,3.184,no,Humanities and Soc Science,Accepted
-184,314,110,4,4,3.5520000000000005,no,Applied Science,Accepted
-185,316,106,2.5,4,3.3600000000000003,no,Humanities and Soc Science,Accepted
-186,327,113,4.5,4.5,3.676,yes,Science & Eng,Accepted
-187,317,107,3.5,3,3.504,yes,Applied Science,Accepted
-188,335,118,4.5,3.5,3.808,yes,Science & Eng,Accepted
-189,331,115,4.5,3.5,3.776,yes,Science & Eng,Accepted
-190,324,112,5,5,3.664,yes,Science & Eng,Accepted
-191,324,111,4.5,4,3.696,yes,Science & Eng,Accepted
-192,323,110,4,5,3.624,yes,Science & Eng,Accepted
-193,322,114,4.5,4,3.608,yes,Science & Eng,Accepted
-194,336,118,4.5,5,3.844,yes,Science & Eng,Accepted
-195,316,109,3.5,3,3.536,no,Applied Science,Accepted
-196,307,107,3,3.5,3.44,yes,Humanities and Soc Science,Accepted
-197,306,105,3,2.5,3.336,no,Humanities and Soc Science,Accepted
-198,310,106,3.5,2.5,3.364,no,Humanities and Soc Science,Accepted
-199,311,104,4.5,4.5,3.404,no,Applied Science,Accepted
-200,313,107,4,4.5,3.508,no,Applied Science,Accepted
-201,317,103,2.5,3,3.4479999999999995,yes,Applied Science,Accepted
-202,315,110,3.5,3,3.4160000000000004,yes,Humanities and Soc Science,Accepted
-203,340,120,4.5,4.5,3.996,yes,Science & Eng,Accepted
-204,334,120,4,5,3.979999999999999,yes,Science & Eng,Accepted
-205,298,105,3.5,4,3.4479999999999995,no,Applied Science,Accepted
-206,295,99,2.5,3,3.092,no,Humanities and Soc Science,Rejected
-207,315,99,3.5,3,3.1879999999999997,no,Humanities and Soc Science,Rejected
-208,310,102,3.5,4,3.24,yes,Applied Science,Accepted
-209,305,106,3,3,3.2960000000000003,no,Humanities and Soc Science,Rejected
-210,301,104,3.5,4,3.28,yes,Applied Science,Accepted
-211,325,108,4.5,4,3.656,yes,Science & Eng,Accepted
-212,328,110,5,4,3.688,yes,Science & Eng,Accepted
-213,338,120,5,5,3.896,yes,Science & Eng,Accepted
-214,333,119,5,4.5,3.944,yes,Science & Eng,Accepted
-215,331,117,4.5,5,3.8,yes,Science & Eng,Accepted
-216,330,116,5,4.5,3.776,yes,Science & Eng,Accepted
-217,322,112,4.5,4.5,3.736,yes,Science & Eng,Accepted
-218,321,109,4,4,3.684,yes,Science & Eng,Accepted
-219,324,110,3,3.5,3.62,yes,Science & Eng,Accepted
-220,312,104,3.5,3.5,3.4,no,Applied Science,Accepted
-221,313,103,4,4,3.532,no,Applied Science,Accepted
-222,316,110,3.5,4,3.4560000000000004,no,Applied Science,Accepted
-223,324,113,4.5,4,3.5479999999999996,no,Science & Eng,Accepted
-224,308,109,3,4,3.412,no,Humanities and Soc Science,Accepted
-225,305,105,3,2,3.3240000000000003,no,Humanities and Soc Science,Accepted
-226,296,99,2.5,2.5,3.244,no,Humanities and Soc Science,Rejected
-227,306,110,3.5,4,3.412,no,Humanities and Soc Science,Rejected
-228,312,110,3.5,3,3.444,no,Humanities and Soc Science,Rejected
-229,318,112,4,3.5,3.5,no,Applied Science,Accepted
-230,324,111,3,3,3.636,yes,Science & Eng,Accepted
-231,313,104,4,4.5,3.492,no,Applied Science,Accepted
-232,319,106,3.5,2.5,3.364,yes,Applied Science,Accepted
-233,312,107,2.5,3.5,3.34,no,Humanities and Soc Science,Accepted
-234,304,100,2.5,3.5,3.26,no,Humanities and Soc Science,Rejected
-235,330,113,5,4,3.756,yes,Science & Eng,Accepted
-236,326,111,4.5,4,3.724,yes,Science & Eng,Accepted
-237,325,112,4,4.5,3.7,yes,Science & Eng,Accepted
-238,329,114,4.5,5,3.708,yes,Science & Eng,Accepted
-239,310,104,2,3.5,3.38,no,Applied Science,Accepted
-240,299,100,1.5,2,3.1879999999999997,no,Humanities and Soc Science,Rejected
-241,296,101,2.5,3,3.104,no,Humanities and Soc Science,Rejected
-242,317,103,2.5,2,3.2920000000000003,no,Humanities and Soc Science,Accepted
-243,324,115,3.5,3,3.536,yes,Applied Science,Accepted
-244,325,114,3.5,3,3.648,yes,Applied Science,Accepted
-245,314,107,2.5,4,3.4560000000000004,no,Humanities and Soc Science,Rejected
-246,328,110,4,2.5,3.64,yes,Science & Eng,Accepted
-247,316,105,3,3.5,3.524,no,Applied Science,Accepted
-248,311,104,2.5,3.5,3.4240000000000004,no,Humanities and Soc Science,Accepted
-249,324,110,3.5,4,3.5799999999999996,yes,Applied Science,Accepted
-250,321,111,3.5,4,3.564,yes,Applied Science,Accepted
-251,320,104,3,2.5,3.46,yes,Applied Science,Accepted
-252,316,99,2.5,3,3.632,no,Humanities and Soc Science,Accepted
-253,318,100,2.5,3.5,3.4479999999999995,yes,Humanities and Soc Science,Accepted
-254,335,115,4.5,4.5,3.904,yes,Science & Eng,Accepted
-255,321,114,4,5,3.68,no,Science & Eng,Accepted
-256,307,110,4,4.5,3.38,no,Science & Eng,Accepted
-257,309,99,4,4,3.4560000000000004,no,Applied Science,Accepted
-258,324,100,4,5,3.4880000000000004,yes,Applied Science,Accepted
-259,326,102,5,5,3.536,yes,Science & Eng,Accepted
-260,331,119,5,4.5,3.768,yes,Science & Eng,Accepted
-261,327,108,5,3.5,3.684,yes,Science & Eng,Accepted
-262,312,104,3.5,4,3.268,no,Applied Science,Accepted
-263,308,103,2.5,4,3.376,yes,Humanities and Soc Science,Accepted
-264,324,111,2.5,1.5,3.5479999999999996,yes,Applied Science,Accepted
-265,325,110,3,2.5,3.536,yes,Humanities and Soc Science,Accepted
-266,313,102,2.5,2.5,3.504,no,Applied Science,Accepted
-267,312,105,2,2.5,3.412,no,Humanities and Soc Science,Accepted
-268,314,107,3,3.5,3.3,yes,Applied Science,Accepted
-269,327,113,4.5,5,3.688,no,Science & Eng,Accepted
-270,308,108,4.5,5,3.368,no,Science & Eng,Accepted
-271,306,105,2.5,3,3.3200000000000003,yes,Humanities and Soc Science,Accepted
-272,299,96,1.5,2,3.176,no,Humanities and Soc Science,Rejected
-273,294,95,1.5,1.5,3.088,no,Humanities and Soc Science,Rejected
-274,312,99,1,1.5,3.236,yes,Humanities and Soc Science,Rejected
-275,315,100,2,2.5,3.2119999999999997,no,Humanities and Soc Science,Rejected
-276,322,110,3.5,3,3.616000000000001,yes,Applied Science,Accepted
-277,329,113,5,4.5,3.812,yes,Science & Eng,Accepted
-278,320,101,2.5,3,3.4799999999999995,no,Humanities and Soc Science,Accepted
-279,308,103,3,3.5,3.428,no,Humanities and Soc Science,Accepted
-280,304,102,3,4,3.524,no,Humanities and Soc Science,Accepted
-281,311,102,4.5,4,3.4880000000000004,yes,Applied Science,Accepted
-282,317,110,4,4.5,3.676,yes,Applied Science,Accepted
-283,312,106,4,3.5,3.5479999999999996,yes,Applied Science,Accepted
-284,321,111,2.5,3,3.592,yes,Applied Science,Accepted
-285,340,112,5,4.5,3.896,yes,Science & Eng,Accepted
-286,331,116,4,4,3.736,yes,Science & Eng,Accepted
-287,336,118,4.5,4,3.708,yes,Science & Eng,Accepted
-288,324,114,5,4.5,3.664,yes,Science & Eng,Accepted
-289,314,104,5,5,3.64,no,Science & Eng,Accepted
-290,313,109,4,3.5,3.632,no,Applied Science,Accepted
-291,307,105,2.5,3,3.092,no,Humanities and Soc Science,Rejected
-292,300,102,1.5,2,3.18,no,Humanities and Soc Science,Rejected
-293,302,99,1,2,3.22,no,Humanities and Soc Science,Rejected
-294,312,98,3.5,3,3.304,yes,Humanities and Soc Science,Rejected
-295,316,101,2.5,2,3.3600000000000003,yes,Humanities and Soc Science,Rejected
-296,317,100,3,2.5,3.46,no,Humanities and Soc Science,Accepted
-297,310,107,3.5,3.5,3.5,no,Applied Science,Accepted
-298,320,120,4,4.5,3.676,no,Applied Science,Accepted
-299,330,114,4.5,4.5,3.728,yes,Applied Science,Accepted
-300,305,112,3,3.5,3.492,no,Applied Science,Accepted
-301,309,106,2.5,2.5,3.232,no,Humanities and Soc Science,Rejected
-302,319,108,2.5,3,3.536,no,Humanities and Soc Science,Accepted
-303,322,105,3,3,3.412,yes,Humanities and Soc Science,Accepted
-304,323,107,3.5,3.5,3.4520000000000004,yes,Applied Science,Accepted
-305,313,106,2.5,2,3.404,no,Humanities and Soc Science,Rejected
-306,321,109,3.5,3.5,3.5520000000000005,yes,Applied Science,Accepted
-307,323,110,4,3.5,3.672,yes,Applied Science,Accepted
-308,325,112,4,4,3.632,yes,Science & Eng,Accepted
-309,312,108,3.5,3,3.444,no,Applied Science,Accepted
-310,308,110,3.5,3,3.472,no,Science & Eng,Accepted
-311,320,104,3,3.5,3.528,yes,Applied Science,Accepted
-312,328,108,4.5,4,3.704,yes,Science & Eng,Accepted
-313,311,107,4.5,4.5,3.632,yes,Science & Eng,Accepted
-314,301,100,3.5,3,3.248,no,Applied Science,Accepted
-315,305,105,3,4,3.2840000000000003,no,Humanities and Soc Science,Accepted
-316,308,104,2.5,3,3.26,no,Humanities and Soc Science,Accepted
-317,298,101,1.5,2,3.176,no,Humanities and Soc Science,Rejected
-318,300,99,1,2.5,3.236,no,Humanities and Soc Science,Rejected
-319,324,111,2.5,2,3.5520000000000005,yes,Applied Science,Accepted
-320,327,113,3.5,3,3.508,yes,Science & Eng,Accepted
-321,317,106,4,3.5,3.432,yes,Applied Science,Accepted
-322,323,104,4,4,3.408,yes,Applied Science,Accepted
-323,314,107,2.5,4,3.34,no,Humanities and Soc Science,Accepted
-324,305,102,2,2.5,3.304,no,Humanities and Soc Science,Rejected
-325,315,104,3,2.5,3.364,no,Applied Science,Accepted
-326,326,116,3.5,4,3.688,yes,Applied Science,Accepted
-327,299,100,2,2,3.24,no,Applied Science,Rejected
-328,295,101,2.5,2,3.176,no,Humanities and Soc Science,Accepted
-329,324,112,4,3.5,3.54,yes,Science & Eng,Accepted
-330,297,96,2.5,1.5,3.1879999999999997,no,Humanities and Soc Science,Rejected
-331,327,113,3.5,3,3.496,yes,Applied Science,Accepted
-332,311,105,3,2,3.28,yes,Humanities and Soc Science,Accepted
-333,308,106,3.5,2.5,3.3160000000000003,yes,Applied Science,Accepted
-334,319,108,3,3.5,3.4479999999999995,yes,Applied Science,Accepted
-335,312,107,4.5,4,3.492,yes,Science & Eng,Accepted
-336,325,111,4,4.5,3.676,yes,Science & Eng,Accepted
-337,319,110,3,2.5,3.5479999999999996,no,Applied Science,Accepted
-338,332,118,5,5,3.82,yes,Science & Eng,Accepted
-339,323,108,4,4,3.528,yes,Science & Eng,Accepted
-340,324,107,3.5,4,3.496,yes,Science & Eng,Accepted
-341,312,107,3,3,3.4160000000000004,yes,Applied Science,Accepted
-342,326,110,3.5,3.5,3.536,yes,Applied Science,Accepted
-343,308,106,3,3,3.3280000000000003,no,Applied Science,Rejected
-344,305,103,2.5,3.5,3.2840000000000003,no,Humanities and Soc Science,Rejected
-345,295,96,1.5,2,2.968,no,Humanities and Soc Science,Rejected
-346,316,98,1.5,2,3.004,no,Humanities and Soc Science,Rejected
-347,304,97,1.5,2,3.088,no,Humanities and Soc Science,Rejected
-348,299,94,1,1,2.968,no,Humanities and Soc Science,Rejected
-349,302,99,2,2,2.932,no,Humanities and Soc Science,Rejected
-350,313,101,2.5,3,3.248,no,Applied Science,Rejected
-351,318,107,3,3.5,3.34,yes,Applied Science,Accepted
-352,325,110,3.5,4,3.5,yes,Science & Eng,Accepted
-353,303,100,3,3.5,3.256,yes,Humanities and Soc Science,Rejected
-354,300,102,3.5,2.5,3.3,no,Applied Science,Rejected
-355,297,98,2.5,3,3.1,no,Humanities and Soc Science,Rejected
-356,317,106,2,3.5,3.28,no,Humanities and Soc Science,Accepted
-357,327,109,3.5,4,3.54,yes,Applied Science,Accepted
-358,301,104,3.5,3.5,3.1879999999999997,yes,Humanities and Soc Science,Accepted
-359,314,105,2.5,2,3.088,no,Humanities and Soc Science,Accepted
-360,321,107,2,1.5,3.408,no,Humanities and Soc Science,Accepted
-361,322,110,4,5,3.4880000000000004,yes,Applied Science,Accepted
-362,334,116,4,3.5,3.848,yes,Science & Eng,Accepted
-363,338,115,4.5,5,3.724,yes,Science & Eng,Accepted
-364,306,103,2.5,3,3.376,no,Humanities and Soc Science,Accepted
-365,313,102,3.5,4,3.592,yes,Applied Science,Accepted
-366,330,114,4.5,3,3.7,yes,Science & Eng,Accepted
-367,320,104,3.5,4.5,3.368,yes,Applied Science,Accepted
-368,311,98,1,2.5,3.016,no,Humanities and Soc Science,Rejected
-369,298,92,2,2,3.184,no,Humanities and Soc Science,Rejected
-370,301,98,2,3,3.244,yes,Humanities and Soc Science,Accepted
-371,310,103,2.5,2.5,3.3280000000000003,no,Humanities and Soc Science,Accepted
-372,324,110,3.5,3,3.72,yes,Applied Science,Accepted
-373,336,119,4.5,4,3.88,yes,Science & Eng,Accepted
-374,321,109,3,3,3.4479999999999995,yes,Applied Science,Accepted
-375,315,105,2,2.5,3.092,no,Humanities and Soc Science,Rejected
-376,304,101,2,2.5,3.096,no,Humanities and Soc Science,Rejected
-377,297,96,2.5,2,3.004,no,Humanities and Soc Science,Rejected
-378,290,100,1.5,2,3.056,no,Humanities and Soc Science,Rejected
-379,303,98,2,2.5,3.092,no,Humanities and Soc Science,Rejected
-380,311,99,2.5,3,3.404,yes,Humanities and Soc Science,Accepted
-381,322,104,3.5,4,3.568,yes,Applied Science,Accepted
-382,319,105,3,3.5,3.5,yes,Applied Science,Accepted
-383,324,110,4.5,4,3.692,yes,Science & Eng,Accepted
-384,300,100,3,3.5,3.336,no,Applied Science,Rejected
-385,340,113,5,5,3.928,yes,Science & Eng,Accepted
-386,335,117,5,5,3.96,yes,Science & Eng,Accepted
-387,302,101,2.5,3.5,3.2159999999999997,no,Humanities and Soc Science,Rejected
-388,307,105,2,3.5,3.272,no,Humanities and Soc Science,Rejected
-389,296,97,1.5,2,3.152,no,Humanities and Soc Science,Rejected
-390,320,108,3.5,4,3.408,yes,Applied Science,Accepted
-391,314,102,2,2.5,3.3280000000000003,no,Humanities and Soc Science,Rejected
-392,318,106,2,3,3.492,no,Applied Science,Accepted
-393,326,112,4,3.5,3.68,yes,Science & Eng,Accepted
-394,317,104,3,3,3.536,no,Humanities and Soc Science,Accepted
-395,329,111,4.5,4,3.724,yes,Science & Eng,Accepted
-396,324,110,3.5,3.5,3.648,yes,Applied Science,Accepted
-397,325,107,3,3.5,3.676,yes,Applied Science,Accepted
-398,330,116,5,4.5,3.812,yes,Science & Eng,Accepted
-399,312,103,3.5,4,3.5439999999999996,no,Applied Science,Accepted
-400,333,117,5,4,3.896,yes,Science & Eng,Accepted
+UniqueID,GRE,TOEFL,SOP,LOR,CGPA,Research,Discipline,Admit,GPA1
+1,337,118,4.5,4.5,3.892,yes,Science & Eng,Accepted,3.453
+2,324,107,4,4.5,3.5799999999999996,yes,Science & Eng,Accepted,3.303
+3,316,104,3,3.5,3.232,yes,Applied Science,Accepted,2.752
+4,322,110,3.5,2.5,3.5,yes,Applied Science,Accepted,3.506
+5,314,103,2,3,3.3160000000000003,no,Humanities and Soc Science,Accepted,3.069
+6,330,115,4.5,3,3.768,yes,Science & Eng,Accepted,3.291
+7,321,109,3,4,3.312,yes,Applied Science,Accepted,3.096
+8,308,101,3,4,3.192,no,Humanities and Soc Science,Accepted,3.026
+9,302,102,2,1.5,3.232,no,Humanities and Soc Science,Rejected,NA
+10,323,108,3.5,3,3.472,no,Applied Science,Rejected,NA
+11,325,106,3.5,4,3.3920000000000003,yes,Applied Science,Rejected,NA
+12,327,111,4,4.5,3.632,yes,Science & Eng,Accepted,3.397
+13,328,112,4,4.5,3.672,yes,Science & Eng,Accepted,3.234
+14,307,109,4,3,3.232,yes,Applied Science,Rejected,NA
+15,311,104,3.5,2,3.312,yes,Applied Science,Rejected,NA
+16,314,105,3.5,2.5,3.3520000000000003,no,Applied Science,Rejected,NA
+17,317,107,4,3,3.5119999999999996,no,Applied Science,Accepted,3.195
+18,319,106,4,3,3.232,yes,Applied Science,Accepted,3.107
+19,318,110,4,3,3.5520000000000005,no,Applied Science,Rejected,NA
+20,303,102,3.5,3,3.432,no,Applied Science,Rejected,NA
+21,312,107,3,2,3.192,yes,Applied Science,Rejected,NA
+22,325,114,3,2,3.3920000000000003,no,Science & Eng,Accepted,3.235
+23,328,116,5,5,3.832,yes,Science & Eng,Accepted,3.534
+24,334,119,5,4.5,3.912,yes,Science & Eng,Accepted,3.201
+25,336,119,4,3.5,3.952,yes,Science & Eng,Accepted,3.763
+26,340,120,4.5,4.5,3.872,yes,Science & Eng,Accepted,3.547
+27,322,109,4.5,3.5,3.5520000000000005,no,Science & Eng,Accepted,3.208
+28,298,98,1.5,2.5,3.032,yes,Humanities and Soc Science,Rejected,NA
+29,295,93,2,2,2.912,no,Humanities and Soc Science,Rejected,NA
+30,310,99,1.5,2,2.952,no,Humanities and Soc Science,Rejected,NA
+31,300,97,3,3,3.272,yes,Humanities and Soc Science,Accepted,3.23
+32,327,103,4,4,3.3520000000000003,yes,Applied Science,Accepted,3.018
+33,338,118,3,4.5,3.792,yes,Science & Eng,Accepted,3.556
+34,340,114,4,4,3.872,yes,Science & Eng,Accepted,3.548
+35,331,112,4,5,3.952,yes,Science & Eng,Accepted,3.363
+36,320,110,5,5,3.712,yes,Science & Eng,Accepted,3.316
+37,299,106,4,4,3.3920000000000003,no,Humanities and Soc Science,Rejected,NA
+38,300,105,1,2,3.152,no,Humanities and Soc Science,Rejected,NA
+39,304,105,3,1.5,3.032,no,Humanities and Soc Science,Rejected,NA
+40,307,108,4,3.5,3.112,no,Humanities and Soc Science,Rejected,NA
+41,308,110,3.5,3,3.232,yes,Applied Science,Rejected,NA
+42,316,105,2.5,2.5,3.312,yes,Humanities and Soc Science,Rejected,NA
+43,313,107,2.5,2,3.432,yes,Humanities and Soc Science,Rejected,NA
+44,332,117,4.5,4,3.672,no,Science & Eng,Accepted,3.47
+45,326,113,4.5,4,3.792,yes,Science & Eng,Accepted,3.341
+46,322,110,5,4,3.672,yes,Science & Eng,Accepted,3.217
+47,329,114,4,5,3.752,yes,Science & Eng,Accepted,3.512
+48,339,119,4.5,4,3.912,no,Science & Eng,Accepted,3.752
+49,321,110,3.5,5,3.572,yes,Applied Science,Accepted,3.236
+50,327,111,3,4,3.3920000000000003,yes,Science & Eng,Accepted,3.255
+51,313,98,2.5,4.5,3.3520000000000003,yes,Applied Science,Accepted,3.118
+52,312,100,1.5,3.5,3.192,yes,Humanities and Soc Science,Rejected,NA
+53,334,116,4,3,3.232,yes,Science & Eng,Accepted,2.987
+54,324,112,4,2.5,3.272,yes,Science & Eng,Accepted,2.733
+55,322,110,3,3.5,3.232,no,Applied Science,Accepted,3.205
+56,320,103,3,3,3.112,no,Applied Science,Rejected,NA
+57,316,102,2,3,2.992,no,Applied Science,Rejected,NA
+58,298,99,4,2,3.072,no,Humanities and Soc Science,Rejected,NA
+59,300,99,3,2,2.752,yes,Humanities and Soc Science,Rejected,NA
+60,311,104,2,2,3.3520000000000003,no,Humanities and Soc Science,Rejected,NA
+61,309,100,3,3,3.272,no,Humanities and Soc Science,Rejected,NA
+62,307,101,4,3,3.312,no,Applied Science,Rejected,NA
+63,304,105,3,3,3.312,yes,Humanities and Soc Science,Rejected,NA
+64,315,107,4,3,3.432,yes,Humanities and Soc Science,Rejected,NA
+65,325,111,3,3.5,3.5119999999999996,no,Applied Science,Rejected,NA
+66,325,112,3.5,3.5,3.6,no,Science & Eng,Rejected,NA
+67,327,114,3,3,3.64,no,Applied Science,Rejected,NA
+68,316,107,3.5,3.5,3.4880000000000004,yes,Humanities and Soc Science,Rejected,NA
+69,318,109,3.5,4,3.72,yes,Applied Science,Accepted,3.437
+70,328,115,4.5,4,3.696,yes,Science & Eng,Accepted,3.817
+71,332,118,5,5,3.888,yes,Science & Eng,Accepted,3.67
+72,336,112,5,5,3.936,yes,Science & Eng,Accepted,3.481
+73,321,111,5,5,3.812,yes,Science & Eng,Accepted,3.621
+74,314,108,4.5,4,3.648,yes,Science & Eng,Accepted,3.148
+75,314,106,3,5,3.592,no,Applied Science,Accepted,3.028
+76,329,114,2,4,3.4560000000000004,yes,Humanities and Soc Science,Accepted,3.201
+77,327,112,3,3,3.5200000000000005,yes,Applied Science,Accepted,3.118
+78,301,99,3,2,3.3200000000000003,no,Humanities and Soc Science,Rejected,NA
+79,296,95,3,2,3.048,yes,Humanities and Soc Science,Rejected,NA
+80,294,93,1.5,2,2.976,no,Humanities and Soc Science,Rejected,NA
+81,312,105,2,3,3.24,yes,Applied Science,Rejected,NA
+82,340,120,5,5,3.832,yes,Science & Eng,Accepted,3.492
+83,320,110,5,4.5,3.72,yes,Science & Eng,Accepted,3.642
+84,322,115,4,4.5,3.776,yes,Science & Eng,Accepted,3.158
+85,340,115,4.5,4.5,3.812,yes,Science & Eng,Accepted,3.617
+86,319,103,4.5,3.5,3.496,no,Science & Eng,Accepted,3.249
+87,315,106,4.5,3.5,3.4,no,Applied Science,Accepted,3.299
+88,317,107,3.5,3,3.344,no,Humanities and Soc Science,Accepted,2.97
+89,314,108,4.5,3.5,3.2880000000000003,no,Applied Science,Rejected,NA
+90,316,109,4.5,3.5,3.536,yes,Science & Eng,Accepted,3.276
+91,318,106,4,4,3.2,yes,Humanities and Soc Science,Rejected,NA
+92,299,97,5,3.5,3.096,no,Applied Science,Rejected,NA
+93,298,98,4,3,3.244,no,Humanities and Soc Science,Rejected,NA
+94,301,97,3,3,3.184,yes,Humanities and Soc Science,Rejected,NA
+95,303,99,2,2.5,3.096,no,Applied Science,Rejected,NA
+96,304,100,1.5,2.5,3.168,no,Science & Eng,Rejected,NA
+97,306,100,3,3,3.232,no,Humanities and Soc Science,Rejected,NA
+98,331,120,4,4,3.616000000000001,yes,Applied Science,Accepted,3.188
+99,332,119,5,4.5,3.728,yes,Science & Eng,Accepted,3.17
+100,323,113,4,4,3.5840000000000005,yes,Applied Science,Accepted,3.176
+101,322,107,3.5,3.5,3.4160000000000004,yes,Applied Science,Accepted,2.979
+102,312,105,2.5,3,3.28,no,Humanities and Soc Science,Rejected,NA
+103,314,106,4,3.5,3.332,no,Humanities and Soc Science,Rejected,NA
+104,317,104,4.5,4,3.4200000000000004,no,Humanities and Soc Science,Rejected,NA
+105,326,112,3.5,3,3.652,yes,Applied Science,Accepted,3.208
+106,316,110,4,4.5,3.5439999999999996,yes,Applied Science,Accepted,3.584
+107,329,111,4.5,4.5,3.704,yes,Science & Eng,Accepted,3.534
+108,338,117,3.5,4.5,3.816,yes,Science & Eng,Accepted,3.685
+109,331,116,5,5,3.784,yes,Science & Eng,Accepted,3.548
+110,304,103,5,4,3.4880000000000004,no,Science & Eng,Accepted,3.511
+111,305,108,3,3,3.4240000000000004,no,Science & Eng,Rejected,NA
+112,321,109,4,4,3.504,yes,Science & Eng,Accepted,3.098
+113,301,107,3.5,3.5,3.368,yes,Applied Science,Rejected,NA
+114,320,110,4,3.5,3.4560000000000004,no,Humanities and Soc Science,Accepted,3.013
+115,311,105,3.5,3,3.412,yes,Applied Science,Rejected,NA
+116,310,106,4.5,4.5,3.648,yes,Science & Eng,Accepted,3.256
+117,299,102,4,3.5,3.4799999999999995,no,Applied Science,Rejected,NA
+118,290,104,2,2.5,3.016,no,Science & Eng,Rejected,NA
+119,296,99,3,3.5,2.944,no,Humanities and Soc Science,Rejected,NA
+120,327,104,3,3.5,3.568,yes,Science & Eng,Accepted,3.219
+121,335,117,5,5,3.856,yes,Science & Eng,Accepted,3.441
+122,334,119,4.5,4.5,3.824,yes,Science & Eng,Accepted,3.779
+123,310,106,1.5,2.5,3.376,no,Science & Eng,Rejected,NA
+124,308,108,3.5,3.5,3.3200000000000003,no,Applied Science,Rejected,NA
+125,301,106,2.5,3,3.4200000000000004,no,Science & Eng,Rejected,NA
+126,300,100,2,3,3.496,yes,Applied Science,Rejected,NA
+127,323,113,4,3,3.76,yes,Applied Science,Accepted,3.432
+128,319,112,2.5,2,3.5160000000000005,yes,Applied Science,Accepted,3.195
+129,326,112,3.5,3,3.672,yes,Applied Science,Accepted,3.222
+130,333,118,5,5,3.772,yes,Science & Eng,Accepted,3.394
+131,339,114,4,4.5,3.936,yes,Science & Eng,Accepted,3.635
+132,303,105,5,4.5,3.492,no,Science & Eng,Accepted,3.061
+133,309,105,3.5,3.5,3.4560000000000004,no,Science & Eng,Accepted,3.249
+134,323,112,4,4.5,3.5439999999999996,no,Science & Eng,Accepted,2.927
+135,333,113,4,4,3.744,yes,Science & Eng,Accepted,3.492
+136,314,109,3.5,4,3.54,yes,Science & Eng,Accepted,2.919
+137,312,103,5,4,3.412,no,Applied Science,Accepted,3.038
+138,316,100,1.5,3,3.2960000000000003,yes,Humanities and Soc Science,Accepted,2.877
+139,326,116,4.5,3,3.664,yes,Humanities and Soc Science,Accepted,3.22
+140,318,109,3.5,3.5,3.68,no,Humanities and Soc Science,Accepted,3.355
+141,329,110,4,3,3.692,yes,Humanities and Soc Science,Accepted,2.996
+142,332,118,4.5,3.5,3.776,yes,Humanities and Soc Science,Accepted,3.698
+143,331,115,4,3.5,3.808,yes,Science & Eng,Accepted,3.162
+144,340,120,4.5,4,4,yes,Science & Eng,Accepted,3.594
+145,325,112,3,3.5,3.616000000000001,yes,Humanities and Soc Science,Accepted,3.079
+146,320,113,2,2.5,3.4880000000000004,yes,Humanities and Soc Science,Accepted,3.025
+147,315,105,2,2.5,3.4240000000000004,no,Applied Science,Accepted,3.528
+148,326,114,3,3,3.676,yes,Applied Science,Accepted,3.366
+149,339,116,4,3.5,3.952,yes,Science & Eng,Accepted,3.381
+150,311,106,3.5,3,3.336,yes,Humanities and Soc Science,Accepted,2.695
+151,334,114,4,4,3.804,yes,Science & Eng,Accepted,3.581
+152,332,116,5,5,3.744,yes,Science & Eng,Accepted,3.427
+153,321,112,5,5,3.656,yes,Science & Eng,Accepted,3.279
+154,324,105,3,4,3.532,no,Applied Science,Accepted,3.033
+155,326,108,3,3.5,3.588,no,Applied Science,Accepted,2.977
+156,312,109,3,3,3.508,no,Applied Science,Accepted,2.98
+157,315,105,2,2.5,3.368,no,Applied Science,Accepted,3.255
+158,309,104,2,2.5,3.336,no,Humanities and Soc Science,Accepted,2.898
+159,306,106,2,2.5,3.2880000000000003,no,Humanities and Soc Science,Rejected,NA
+160,297,100,1.5,2,3.192,no,Humanities and Soc Science,Rejected,NA
+161,315,103,1.5,2,3.176,no,Humanities and Soc Science,Rejected,NA
+162,298,99,1.5,3,3.016,no,Humanities and Soc Science,Rejected,NA
+163,318,109,3,3,3.432,no,Applied Science,Accepted,3.33
+164,317,105,3.5,3,3.4560000000000004,no,Applied Science,Accepted,3.32
+165,329,111,4.5,4,3.636,yes,Science & Eng,Accepted,3.199
+166,322,110,4.5,4,3.62,no,Science & Eng,Accepted,3.748
+167,302,102,3.5,5,3.364,no,Applied Science,Accepted,3
+168,313,102,2,3,3.34,no,Applied Science,Rejected,NA
+169,293,97,2,4,3.152,yes,Humanities and Soc Science,Rejected,NA
+170,311,99,2.5,3,3.224,no,Humanities and Soc Science,Accepted,2.952
+171,312,101,2.5,3.5,3.248,yes,Humanities and Soc Science,Accepted,3.396
+172,334,117,4,4.5,3.66,yes,Science & Eng,Accepted,3.368
+173,322,110,4,5,3.684,yes,Science & Eng,Accepted,3.462
+174,323,113,4,4.5,3.724,yes,Science & Eng,Accepted,3.395
+175,321,111,4,4,3.62,yes,Science & Eng,Accepted,3.24
+176,320,111,4.5,3.5,3.5799999999999996,yes,Science & Eng,Accepted,3.26
+177,329,119,4.5,4.5,3.696,yes,Science & Eng,Accepted,3.54
+178,319,110,3.5,3.5,3.648,no,Applied Science,Accepted,3.75
+179,309,108,2.5,3,3.28,no,Applied Science,Accepted,3.172
+180,307,102,3,3,3.34,no,Applied Science,Accepted,3.268
+181,300,104,3.5,3,3.2960000000000003,no,Applied Science,Accepted,2.736
+182,305,107,2.5,2.5,3.4,no,Humanities and Soc Science,Accepted,3.283
+183,299,100,3,3.5,3.184,no,Humanities and Soc Science,Accepted,2.915
+184,314,110,4,4,3.5520000000000005,no,Applied Science,Accepted,2.945
+185,316,106,2.5,4,3.3600000000000003,no,Humanities and Soc Science,Accepted,3.151
+186,327,113,4.5,4.5,3.676,yes,Science & Eng,Accepted,3.331
+187,317,107,3.5,3,3.504,yes,Applied Science,Accepted,3.484
+188,335,118,4.5,3.5,3.808,yes,Science & Eng,Accepted,3.341
+189,331,115,4.5,3.5,3.776,yes,Science & Eng,Accepted,3.377
+190,324,112,5,5,3.664,yes,Science & Eng,Accepted,3.165
+191,324,111,4.5,4,3.696,yes,Science & Eng,Accepted,3.347
+192,323,110,4,5,3.624,yes,Science & Eng,Accepted,3.391
+193,322,114,4.5,4,3.608,yes,Science & Eng,Accepted,3.148
+194,336,118,4.5,5,3.844,yes,Science & Eng,Accepted,3.697
+195,316,109,3.5,3,3.536,no,Applied Science,Accepted,2.981
+196,307,107,3,3.5,3.44,yes,Humanities and Soc Science,Accepted,2.917
+197,306,105,3,2.5,3.336,no,Humanities and Soc Science,Accepted,3.311
+198,310,106,3.5,2.5,3.364,no,Humanities and Soc Science,Accepted,2.848
+199,311,104,4.5,4.5,3.404,no,Applied Science,Accepted,3.173
+200,313,107,4,4.5,3.508,no,Applied Science,Accepted,3.118
+201,317,103,2.5,3,3.4479999999999995,yes,Applied Science,Accepted,3.217
+202,315,110,3.5,3,3.4160000000000004,yes,Humanities and Soc Science,Accepted,3.44
+203,340,120,4.5,4.5,3.996,yes,Science & Eng,Accepted,4
+204,334,120,4,5,3.979999999999999,yes,Science & Eng,Accepted,3.601
+205,298,105,3.5,4,3.4479999999999995,no,Applied Science,Accepted,2.678
+206,295,99,2.5,3,3.092,no,Humanities and Soc Science,Rejected,NA
+207,315,99,3.5,3,3.1879999999999997,no,Humanities and Soc Science,Rejected,NA
+208,310,102,3.5,4,3.24,yes,Applied Science,Accepted,3.035
+209,305,106,3,3,3.2960000000000003,no,Humanities and Soc Science,Rejected,NA
+210,301,104,3.5,4,3.28,yes,Applied Science,Accepted,3.069
+211,325,108,4.5,4,3.656,yes,Science & Eng,Accepted,3.31
+212,328,110,5,4,3.688,yes,Science & Eng,Accepted,3.459
+213,338,120,5,5,3.896,yes,Science & Eng,Accepted,3.503
+214,333,119,5,4.5,3.944,yes,Science & Eng,Accepted,3.357
+215,331,117,4.5,5,3.8,yes,Science & Eng,Accepted,3.684
+216,330,116,5,4.5,3.776,yes,Science & Eng,Accepted,3.767
+217,322,112,4.5,4.5,3.736,yes,Science & Eng,Accepted,3.361
+218,321,109,4,4,3.684,yes,Science & Eng,Accepted,3.12
+219,324,110,3,3.5,3.62,yes,Science & Eng,Accepted,3.435
+220,312,104,3.5,3.5,3.4,no,Applied Science,Accepted,3.078
+221,313,103,4,4,3.532,no,Applied Science,Accepted,2.872
+222,316,110,3.5,4,3.4560000000000004,no,Applied Science,Accepted,3.143
+223,324,113,4.5,4,3.5479999999999996,no,Science & Eng,Accepted,3.109
+224,308,109,3,4,3.412,no,Humanities and Soc Science,Accepted,3.03
+225,305,105,3,2,3.3240000000000003,no,Humanities and Soc Science,Accepted,2.779
+226,296,99,2.5,2.5,3.244,no,Humanities and Soc Science,Rejected,NA
+227,306,110,3.5,4,3.412,no,Humanities and Soc Science,Rejected,NA
+228,312,110,3.5,3,3.444,no,Humanities and Soc Science,Rejected,NA
+229,318,112,4,3.5,3.5,no,Applied Science,Accepted,3.226
+230,324,111,3,3,3.636,yes,Science & Eng,Accepted,3.375
+231,313,104,4,4.5,3.492,no,Applied Science,Accepted,2.982
+232,319,106,3.5,2.5,3.364,yes,Applied Science,Accepted,2.473
+233,312,107,2.5,3.5,3.34,no,Humanities and Soc Science,Accepted,2.899
+234,304,100,2.5,3.5,3.26,no,Humanities and Soc Science,Rejected,NA
+235,330,113,5,4,3.756,yes,Science & Eng,Accepted,3.431
+236,326,111,4.5,4,3.724,yes,Science & Eng,Accepted,3.391
+237,325,112,4,4.5,3.7,yes,Science & Eng,Accepted,3.499
+238,329,114,4.5,5,3.708,yes,Science & Eng,Accepted,3.157
+239,310,104,2,3.5,3.38,no,Applied Science,Accepted,3.286
+240,299,100,1.5,2,3.1879999999999997,no,Humanities and Soc Science,Rejected,NA
+241,296,101,2.5,3,3.104,no,Humanities and Soc Science,Rejected,NA
+242,317,103,2.5,2,3.2920000000000003,no,Humanities and Soc Science,Accepted,3.186
+243,324,115,3.5,3,3.536,yes,Applied Science,Accepted,3.267
+244,325,114,3.5,3,3.648,yes,Applied Science,Accepted,3.159
+245,314,107,2.5,4,3.4560000000000004,no,Humanities and Soc Science,Rejected,NA
+246,328,110,4,2.5,3.64,yes,Science & Eng,Accepted,2.927
+247,316,105,3,3.5,3.524,no,Applied Science,Accepted,3.102
+248,311,104,2.5,3.5,3.4240000000000004,no,Humanities and Soc Science,Accepted,3.06
+249,324,110,3.5,4,3.5799999999999996,yes,Applied Science,Accepted,3.233
+250,321,111,3.5,4,3.564,yes,Applied Science,Accepted,3.455
+251,320,104,3,2.5,3.46,yes,Applied Science,Accepted,3.174
+252,316,99,2.5,3,3.632,no,Humanities and Soc Science,Accepted,3.4
+253,318,100,2.5,3.5,3.4479999999999995,yes,Humanities and Soc Science,Accepted,3.121
+254,335,115,4.5,4.5,3.904,yes,Science & Eng,Accepted,3.541
+255,321,114,4,5,3.68,no,Science & Eng,Accepted,3.506
+256,307,110,4,4.5,3.38,no,Science & Eng,Accepted,3.296
+257,309,99,4,4,3.4560000000000004,no,Applied Science,Accepted,2.662
+258,324,100,4,5,3.4880000000000004,yes,Applied Science,Accepted,3.289
+259,326,102,5,5,3.536,yes,Science & Eng,Accepted,3.298
+260,331,119,5,4.5,3.768,yes,Science & Eng,Accepted,3.37
+261,327,108,5,3.5,3.684,yes,Science & Eng,Accepted,3.561
+262,312,104,3.5,4,3.268,no,Applied Science,Accepted,2.877
+263,308,103,2.5,4,3.376,yes,Humanities and Soc Science,Accepted,3.006
+264,324,111,2.5,1.5,3.5479999999999996,yes,Applied Science,Accepted,3.406
+265,325,110,3,2.5,3.536,yes,Humanities and Soc Science,Accepted,3.567
+266,313,102,2.5,2.5,3.504,no,Applied Science,Accepted,3.245
+267,312,105,2,2.5,3.412,no,Humanities and Soc Science,Accepted,3.014
+268,314,107,3,3.5,3.3,yes,Applied Science,Accepted,2.749
+269,327,113,4.5,5,3.688,no,Science & Eng,Accepted,3.308
+270,308,108,4.5,5,3.368,no,Science & Eng,Accepted,2.867
+271,306,105,2.5,3,3.3200000000000003,yes,Humanities and Soc Science,Accepted,2.955
+272,299,96,1.5,2,3.176,no,Humanities and Soc Science,Rejected,NA
+273,294,95,1.5,1.5,3.088,no,Humanities and Soc Science,Rejected,NA
+274,312,99,1,1.5,3.236,yes,Humanities and Soc Science,Rejected,NA
+275,315,100,2,2.5,3.2119999999999997,no,Humanities and Soc Science,Rejected,NA
+276,322,110,3.5,3,3.616000000000001,yes,Applied Science,Accepted,3.529
+277,329,113,5,4.5,3.812,yes,Science & Eng,Accepted,3.041
+278,320,101,2.5,3,3.4799999999999995,no,Humanities and Soc Science,Accepted,3.315
+279,308,103,3,3.5,3.428,no,Humanities and Soc Science,Accepted,2.851
+280,304,102,3,4,3.524,no,Humanities and Soc Science,Accepted,3.395
+281,311,102,4.5,4,3.4880000000000004,yes,Applied Science,Accepted,3.254
+282,317,110,4,4.5,3.676,yes,Applied Science,Accepted,3.281
+283,312,106,4,3.5,3.5479999999999996,yes,Applied Science,Accepted,3.5
+284,321,111,2.5,3,3.592,yes,Applied Science,Accepted,3.138
+285,340,112,5,4.5,3.896,yes,Science & Eng,Accepted,3.467
+286,331,116,4,4,3.736,yes,Science & Eng,Accepted,3.222
+287,336,118,4.5,4,3.708,yes,Science & Eng,Accepted,3.261
+288,324,114,5,4.5,3.664,yes,Science & Eng,Accepted,3.54
+289,314,104,5,5,3.64,no,Science & Eng,Accepted,3.413
+290,313,109,4,3.5,3.632,no,Applied Science,Accepted,3.52
+291,307,105,2.5,3,3.092,no,Humanities and Soc Science,Rejected,NA
+292,300,102,1.5,2,3.18,no,Humanities and Soc Science,Rejected,NA
+293,302,99,1,2,3.22,no,Humanities and Soc Science,Rejected,NA
+294,312,98,3.5,3,3.304,yes,Humanities and Soc Science,Rejected,NA
+295,316,101,2.5,2,3.3600000000000003,yes,Humanities and Soc Science,Rejected,NA
+296,317,100,3,2.5,3.46,no,Humanities and Soc Science,Accepted,3.174
+297,310,107,3.5,3.5,3.5,no,Applied Science,Accepted,3.34
+298,320,120,4,4.5,3.676,no,Applied Science,Accepted,3.554
+299,330,114,4.5,4.5,3.728,yes,Applied Science,Accepted,3.405
+300,305,112,3,3.5,3.492,no,Applied Science,Accepted,3.118
+301,309,106,2.5,2.5,3.232,no,Humanities and Soc Science,Rejected,NA
+302,319,108,2.5,3,3.536,no,Humanities and Soc Science,Accepted,3.013
+303,322,105,3,3,3.412,yes,Humanities and Soc Science,Accepted,3.493
+304,323,107,3.5,3.5,3.4520000000000004,yes,Applied Science,Accepted,3.062
+305,313,106,2.5,2,3.404,no,Humanities and Soc Science,Rejected,NA
+306,321,109,3.5,3.5,3.5520000000000005,yes,Applied Science,Accepted,3.541
+307,323,110,4,3.5,3.672,yes,Applied Science,Accepted,3.375
+308,325,112,4,4,3.632,yes,Science & Eng,Accepted,3.432
+309,312,108,3.5,3,3.444,no,Applied Science,Accepted,2.926
+310,308,110,3.5,3,3.472,no,Science & Eng,Accepted,3.223
+311,320,104,3,3.5,3.528,yes,Applied Science,Accepted,3.423
+312,328,108,4.5,4,3.704,yes,Science & Eng,Accepted,3.41
+313,311,107,4.5,4.5,3.632,yes,Science & Eng,Accepted,3.228
+314,301,100,3.5,3,3.248,no,Applied Science,Accepted,2.804
+315,305,105,3,4,3.2840000000000003,no,Humanities and Soc Science,Accepted,2.963
+316,308,104,2.5,3,3.26,no,Humanities and Soc Science,Accepted,3.161
+317,298,101,1.5,2,3.176,no,Humanities and Soc Science,Rejected,NA
+318,300,99,1,2.5,3.236,no,Humanities and Soc Science,Rejected,NA
+319,324,111,2.5,2,3.5520000000000005,yes,Applied Science,Accepted,2.98
+320,327,113,3.5,3,3.508,yes,Science & Eng,Accepted,3.294
+321,317,106,4,3.5,3.432,yes,Applied Science,Accepted,3.38
+322,323,104,4,4,3.408,yes,Applied Science,Accepted,3.394
+323,314,107,2.5,4,3.34,no,Humanities and Soc Science,Accepted,3.19
+324,305,102,2,2.5,3.304,no,Humanities and Soc Science,Rejected,NA
+325,315,104,3,2.5,3.364,no,Applied Science,Accepted,3.147
+326,326,116,3.5,4,3.688,yes,Applied Science,Accepted,3.466
+327,299,100,2,2,3.24,no,Applied Science,Rejected,NA
+328,295,101,2.5,2,3.176,no,Humanities and Soc Science,Accepted,2.897
+329,324,112,4,3.5,3.54,yes,Science & Eng,Accepted,3.054
+330,297,96,2.5,1.5,3.1879999999999997,no,Humanities and Soc Science,Rejected,NA
+331,327,113,3.5,3,3.496,yes,Applied Science,Accepted,3.117
+332,311,105,3,2,3.28,yes,Humanities and Soc Science,Accepted,2.653
+333,308,106,3.5,2.5,3.3160000000000003,yes,Applied Science,Accepted,2.929
+334,319,108,3,3.5,3.4479999999999995,yes,Applied Science,Accepted,3.408
+335,312,107,4.5,4,3.492,yes,Science & Eng,Accepted,3.112
+336,325,111,4,4.5,3.676,yes,Science & Eng,Accepted,3.509
+337,319,110,3,2.5,3.5479999999999996,no,Applied Science,Accepted,3.424
+338,332,118,5,5,3.82,yes,Science & Eng,Accepted,3.508
+339,323,108,4,4,3.528,yes,Science & Eng,Accepted,3.144
+340,324,107,3.5,4,3.496,yes,Science & Eng,Accepted,3.077
+341,312,107,3,3,3.4160000000000004,yes,Applied Science,Accepted,3.251
+342,326,110,3.5,3.5,3.536,yes,Applied Science,Accepted,3.01
+343,308,106,3,3,3.3280000000000003,no,Applied Science,Rejected,NA
+344,305,103,2.5,3.5,3.2840000000000003,no,Humanities and Soc Science,Rejected,NA
+345,295,96,1.5,2,2.968,no,Humanities and Soc Science,Rejected,NA
+346,316,98,1.5,2,3.004,no,Humanities and Soc Science,Rejected,NA
+347,304,97,1.5,2,3.088,no,Humanities and Soc Science,Rejected,NA
+348,299,94,1,1,2.968,no,Humanities and Soc Science,Rejected,NA
+349,302,99,2,2,2.932,no,Humanities and Soc Science,Rejected,NA
+350,313,101,2.5,3,3.248,no,Applied Science,Rejected,NA
+351,318,107,3,3.5,3.34,yes,Applied Science,Accepted,3.321
+352,325,110,3.5,4,3.5,yes,Science & Eng,Accepted,3.322
+353,303,100,3,3.5,3.256,yes,Humanities and Soc Science,Rejected,NA
+354,300,102,3.5,2.5,3.3,no,Applied Science,Rejected,NA
+355,297,98,2.5,3,3.1,no,Humanities and Soc Science,Rejected,NA
+356,317,106,2,3.5,3.28,no,Humanities and Soc Science,Accepted,3.086
+357,327,109,3.5,4,3.54,yes,Applied Science,Accepted,2.992
+358,301,104,3.5,3.5,3.1879999999999997,yes,Humanities and Soc Science,Accepted,2.844
+359,314,105,2.5,2,3.088,no,Humanities and Soc Science,Accepted,2.391
+360,321,107,2,1.5,3.408,no,Humanities and Soc Science,Accepted,3.056
+361,322,110,4,5,3.4880000000000004,yes,Applied Science,Accepted,2.656
+362,334,116,4,3.5,3.848,yes,Science & Eng,Accepted,3.797
+363,338,115,4.5,5,3.724,yes,Science & Eng,Accepted,3.284
+364,306,103,2.5,3,3.376,no,Humanities and Soc Science,Accepted,2.977
+365,313,102,3.5,4,3.592,yes,Applied Science,Accepted,3.245
+366,330,114,4.5,3,3.7,yes,Science & Eng,Accepted,3.509
+367,320,104,3.5,4.5,3.368,yes,Applied Science,Accepted,3.19
+368,311,98,1,2.5,3.016,no,Humanities and Soc Science,Rejected,NA
+369,298,92,2,2,3.184,no,Humanities and Soc Science,Rejected,NA
+370,301,98,2,3,3.244,yes,Humanities and Soc Science,Accepted,2.658
+371,310,103,2.5,2.5,3.3280000000000003,no,Humanities and Soc Science,Accepted,2.937
+372,324,110,3.5,3,3.72,yes,Applied Science,Accepted,3.462
+373,336,119,4.5,4,3.88,yes,Science & Eng,Accepted,3.402
+374,321,109,3,3,3.4479999999999995,yes,Applied Science,Accepted,3.121
+375,315,105,2,2.5,3.092,no,Humanities and Soc Science,Rejected,NA
+376,304,101,2,2.5,3.096,no,Humanities and Soc Science,Rejected,NA
+377,297,96,2.5,2,3.004,no,Humanities and Soc Science,Rejected,NA
+378,290,100,1.5,2,3.056,no,Humanities and Soc Science,Rejected,NA
+379,303,98,2,2.5,3.092,no,Humanities and Soc Science,Rejected,NA
+380,311,99,2.5,3,3.404,yes,Humanities and Soc Science,Accepted,3.443
+381,322,104,3.5,4,3.568,yes,Applied Science,Accepted,3.407
+382,319,105,3,3.5,3.5,yes,Applied Science,Accepted,3.409
+383,324,110,4.5,4,3.692,yes,Science & Eng,Accepted,3.194
+384,300,100,3,3.5,3.336,no,Applied Science,Rejected,NA
+385,340,113,5,5,3.928,yes,Science & Eng,Accepted,3.846
+386,335,117,5,5,3.96,yes,Science & Eng,Accepted,3.635
+387,302,101,2.5,3.5,3.2159999999999997,no,Humanities and Soc Science,Rejected,NA
+388,307,105,2,3.5,3.272,no,Humanities and Soc Science,Rejected,NA
+389,296,97,1.5,2,3.152,no,Humanities and Soc Science,Rejected,NA
+390,320,108,3.5,4,3.408,yes,Applied Science,Accepted,2.932
+391,314,102,2,2.5,3.3280000000000003,no,Humanities and Soc Science,Rejected,NA
+392,318,106,2,3,3.492,no,Applied Science,Accepted,3.302
+393,326,112,4,3.5,3.68,yes,Science & Eng,Accepted,3.585
+394,317,104,3,3,3.536,no,Humanities and Soc Science,Accepted,3.284
+395,329,111,4.5,4,3.724,yes,Science & Eng,Accepted,3.389
+396,324,110,3.5,3.5,3.648,yes,Applied Science,Accepted,3.15
+397,325,107,3,3.5,3.676,yes,Applied Science,Accepted,3.681
+398,330,116,5,4.5,3.812,yes,Science & Eng,Accepted,3.508
+399,312,103,3.5,4,3.5439999999999996,no,Applied Science,Accepted,3.088
+400,333,117,5,4,3.896,yes,Science & Eng,Accepted,3.756

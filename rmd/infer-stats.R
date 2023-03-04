@@ -33,6 +33,7 @@ knitr::opts_knit$set(root.dir = '../')
 adm_df <- readRDS("data/interim/adm_df.RDS")
 
 head(adm_df)
+str(adm_df)
 
 #' ## Tests on assumptions
 #' 

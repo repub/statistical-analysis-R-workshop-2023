@@ -52,9 +52,9 @@ head(adm_df)
 #+ str
 str(adm_df)
 
-#' We can see that there are 400 total observations across 9 variables. Three of the variables were read in as `int`, meaning *integer*, which is specific numeric data type that does not allow decimal points. Other variables are coded as either `num` for *numeric*, which can include decimal points, and `chr` for *character* which is the same as *string*.
+#' We can see that there are 400 total observations across 11 variables. Four of the variables were read in as `int`, meaning *integer*, which is specific numeric data type that does not allow decimal points. Other variables are coded as either `num` for *numeric*, which can include decimal points, and `chr` for *character* which is the same as *string*.
 #' 
-#' For our analysis we will want to re-code this variables as factors, which we can easily do with the `factor()` function. After assigning the variables to factors we can use the `summary()` function again to see how those variables are distributed.
+#' For our analysis we will want to re-code these variables as factors, which we can easily do with the `factor()` function. After assigning the variables to factors we can use the `summary()` function again to see how those variables are distributed.
 
 #+ code-factors
 adm_df$Research <- factor(adm_df$Research)
@@ -71,13 +71,22 @@ summary(adm_df)
 #+ any-na
 sum(is.na(adm_df))
 
+#' We can further use an apply function to get the total number of missing values in each variable (column).
+
+#+ sapply-na
 sapply(adm_df, function(x) sum(is.na(x)))
 
+#' The output above shows us that all of the missing values are within the *GPA1* variable. Using some filtering and the `head()` function we can print a few rows that have missing values.
+
+#+ head-na
 head(adm_df[is.na(adm_df$GPA1), ])
 
-summary(adm_df[is.na(adm_df$GPA1), ])
+#' It appears that when *Admit* is "Rejected" then there is a missing value for *GPA1*. This would make sense as students who were not admitted to the school would not have a GPA for their first year in the program. We can check this further by filtering for missing values in *GPA1* then getting the summary statistics for *Admit* and *GPA1* with `summary()`.
 
-#' We see that there are no missing values in our dataset. However, if we were to find missing values we have a few options available to handle them:
+#+ summary-na
+summary(adm_df[is.na(adm_df$GPA1), c("Admit", "GPA1")])
+
+#' We can confirm that all of the missing values in *GPA1* are when an applicant was "Rejected", and it would make sense to leave the missing values as they are. However, if we did need to resolve missing values we have a few options available to handle them:
 #'
 #' 1. **Remove observations** - This involves removing any observations that have missing values. This can be a viable option if the missing values are relatively few and scattered throughout the dataset. However, if a large proportion of the dataset is missing, this approach may result in losing important information.
 #' 2. **Use a flag variable** - This involves creating a new variable that indicates whether a value is missing or not. This allows the model to take into account the missing data, but it requires the model to be able to handle missing data.
@@ -96,8 +105,13 @@ summary(adm_df[is.na(adm_df$GPA1), ])
 #+ any-duplicated
 sum(duplicated(adm_df))
 
-#' This dataset also lacks any duplicated observations. If you were to have duplicates that would be problematic for your analysis, you can use the `unique()` function, which returns a data frame or matrix with only the unique rows.
-#' 
+#' This dataset also lacks any duplicated observations. If you were to have duplicates that would be problematic for your analysis, you can use the `unique()` function, which returns a data frame or matrix with only the unique rows. If you use the `unique()` function on a dataset that does not have any duplicates, it will just return the original dataset.
+
+#+ unique
+adm_df <- unique(adm_df)
+
+str(adm_df)
+
 #' Alternatively, if you decide to keep the duplicate rows, it is important to be aware that they may introduce bias, noise, and variability in the data, so it is essential to validate the results and check the assumptions of the model. If the duplicates represent a small proportion of the data and not having them would affect the analysis, it is a good practice to keep them and note their presence in the analysis.
 #' 
 #' 
@@ -115,13 +129,18 @@ ints <- 1:nrow(adm_df)
 plot(ints, adm_df$GRE, type = 'l')
 
 #' Plotting each variable will be quite tedious, so instead we can use a loop function to quickly generate each plot. We will give these plots titles so that when we view them we are sure which variable we are observing.
+#' 
+#' Because there are 10 variables we will be making 10 plots. So, it would make sense to plot some of them together in the same graphic. We will use `par(mfrow = c(2, 2))` to tell `R` to plot on a 2 x 2 grid, so that we can fit 4 plots in a single graphical space. After the loop we will reset to the default of a 1 x 1 space with `par(mfrow = c(1, 1))`.
+#' 
+#' In the `for` loop, we will loop through a sequence of numbers from 1 to the total number of columns, 10. At each iteration, the loop will plot a line plot of the observed values against the number of the observation, which we defined in `ints` above. We will also add a title to the plot by indexes the column name at each iteration so that it is clear which plots belong to which variables.
 
 #+ pattern-loop
+par(mfrow = c(2, 2))
 for (ii in 1:ncol(adm_df)) {
-  print(ii)
   plot(ints, adm_df[, ii], type = 'l')
   title(colnames(adm_df)[ii])
 }
+par(mfrow = c(1, 1))
 
 #' Except for *UniqueID*, where a trend would be expected, we do not notice any obvious trends in the variables.
 #' 
@@ -157,7 +176,7 @@ summary(adm_df)
 library(dplyr)
 
 adm_df %>%
-  group_by(Admit) %>%
+  group_by(Admit, Year) %>%
   summarize(mean_GRE = mean(GRE),
             sd_GRE = sd(GRE))
 

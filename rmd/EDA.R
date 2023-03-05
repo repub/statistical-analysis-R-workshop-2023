@@ -310,7 +310,7 @@ corrplot(adm_cor, method = 'square')
 #' 
 #' As we observe the other variables in the dataset we do see a lot of correlations between the variables. Positive (blue) correlations between *GRE*, *TOEFL*, *SOP*, *LOR*, and *CGPA* indicate that they follow similar increasing trends. For *Discipline*, while we see a moderately positive correlation on the plot, because the data is unordered we should not necessarily make any inferences just yet. Alternatively, the *Admit* variable is strongly (and negatively) correlated with a lot of the scoring variables as well as *Research*. The reason for this negative relationship is that when we changed the *Admit* variable to the numeric type it was recoded so that *Accepted* is 1 and *Rejected* is 2. When recoding, it is always important to understand how the variables are being recoded.
 #' 
-#' ### Pairs plots
+#' #### Pairs plots
 #' 
 #' We can also plot the data points against each other into one plot to visualize relationships. One simple method for doing this is using the `pairs()` function, which will plot all of the variables against one another after automatically converting them to the numeric type.
 #' 
@@ -331,6 +331,23 @@ adm_df %>%
   ggpairs()
 
 #' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
+
+
+#' ### Principal component analysis
+#' 
+#' 
+
+adm_pca <- prcomp(adm_df %>%
+                    select(!c(UniqueID, GPA1)) %>%
+                    mutate(across(everything(), as.numeric)), center = TRUE, scale. = TRUE)
+
+biplot(adm_pca,
+       xlabs = rep('.', 400))
+
+
+library(ggbiplot)
+
+
 
 #+ save
 saveRDS(adm_df, 'data/interim/adm_df.RDS')

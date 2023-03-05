@@ -295,7 +295,7 @@ shapiro.test(adm_df$GRE)
 
 #' #### Correlations
 
-#' First mutate all of the variables into the numeric type, then use the cor() function to get the Spearman-rank correlations between each variable.
+#' First, we will mutate all of the variables into the numeric type so that correlations can be calculated on them. Then, we will pipe the transformed data into the `cor()` function to calculate the Spearman-rank correlations between each variable. We will use the `corrplot()` function from the `corrplot` library to visualize the resulting Spearman-rank correlations.
 
 #+ cor
 adm_cor <- adm_df %>%
@@ -306,23 +306,29 @@ library(corrplot)
 
 corrplot(adm_cor, method = 'square')
 
-
-#' Why do so many variables have negative relationships with admittance? Because when we changed
-#' the Admit variable to numeric it was recoded so that Accepted is 1 and Rejected is 2.
-
+#' Notably there are some `?` values on the plot. These originate from having missing values in the *GPA1* variable, which the `cor()` function is not able to handle. To look at relationships with the *GPA1* variable, we would need to subset our data to only include observations without missing values.
+#' 
+#' As we observe the other variables in the dataset we do see a lot of correlations between the variables. Positive (blue) correlations between *GRE*, *TOEFL*, *SOP*, *LOR*, and *CGPA* indicate that they follow similar increasing trends. For *Discipline*, while we see a moderately positive correlation on the plot, because the data is unordered we should not necessarily make any inferences just yet. Alternatively, the *Admit* variable is strongly (and negatively) correlated with a lot of the scoring variables as well as *Research*. The reason for this negative relationship is that when we changed the *Admit* variable to the numeric type it was recoded so that *Accepted* is 1 and *Rejected* is 2. When recoding, it is always important to understand how the variables are being recoded.
+#' 
+#' ### Pairs plots
+#' 
+#' We can also plot the data points against each other into one plot to visualize relationships. One simple method for doing this is using the `pairs()` function, which will plot all of the variables against one another after automatically converting them to the numeric type.
+#' 
+#' As a warning: as the number of variables and observations increase the time it takes to plot all of the data points also increases. Make sure you have a good understanding of your data before trying to plot a large number of data points.
 
 #+ pairs
 pairs(adm_df)
+
+#' The `GGally` package extends the utility of this type of plotting with the `ggpairs()` function, by printing a `ggplot`-style pairs plot which can identify different types of variables and select the appropriate style of plot rather than only producing scatterplots. `ggpairs()` also has the utility of plotting density distributions of each variable and giving some basic statistical information such as correlation coefficients and their significance.
+#' 
+#' This also increases the complexity of plotting the data compared to the `pairs()` plot above, so we will only plot a select group of variables against one another as an example.
 
 #+ gg-pairs
 library(GGally)
 
 adm_df %>%
-  select(c(CGPA, GRE, TOEFL)) %>%
+  select(c(CGPA, GRE, SOP, LOR, Research, Discipline)) %>%
   ggpairs()
-
-
-
 
 #' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
 

@@ -135,6 +135,19 @@ t.test(CGPA ~ Research, data = adm_df)
 #' 
 #' A paired t-test is a statistical significance test used to compare the means of two related groups of data. It is commonly used to test whether there is a significant difference between the means of two measurements taken on the same individuals or objects, such as before and after a treatment. This test assumes that the differences between the pairs are normally distributed.
 
+adm_df %>%
+  filter(!is.na(GPA1))
+
+t.test(GPA1 ~ CGPA,
+       data = adm_df,
+       paired = TRUE)
+
+
+t.test(x = adm_df$CGPA,
+       y = adm_df$GPA1,
+       paired = TRUE)
+
+
 
 
 #' ## Non-parametric tests

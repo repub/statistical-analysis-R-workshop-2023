@@ -12,9 +12,9 @@
 <meta name="author" content="Tyler B. Garner, tbg5023@psu.edu" />
 <meta name="author" content="Jennifer Valcin, jpv5319@psu.edu" />
 
-<meta name="date" content="2023-03-02" />
+<meta name="date" content="2023-03-08" />
 
-<title>Inferential Statistics</title>
+<title>Basic Inferential Statistics</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1563,29 +1563,59 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Inferential Statistics</h1>
+<h1 class="title toc-ignore">Basic Inferential Statistics</h1>
 <h4 class="author">Tyler B. Garner, <a href="mailto:tbg5023@psu.edu" class="email">tbg5023@psu.edu</a></h4>
 <h4 class="author">Jennifer Valcin, <a href="mailto:jpv5319@psu.edu" class="email">jpv5319@psu.edu</a></h4>
-<h4 class="date">2023-03-02</h4>
+<h4 class="date">2023-03-08</h4>
 
 </div>
 
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
+<p>When analyzing data, it is important to ensure that the data meets
+certain assumptions before applying statistical tests. Failure to do so
+can lead to incorrect conclusions and misleading results. In this
+section, we will provide an overview of tests for assumptions, such as
+normality and homogeneity of variance, and how to assess whether these
+assumptions have been met. We will then cover the use of t-tests for
+comparing means, as well as non-parametric tests for situations where
+the assumptions of t-tests are not met. By the end of this section, you
+will have a solid understanding of these important concepts and be able
+to apply them to your own data analysis tasks.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>adm_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/interim/adm_df.RDS&quot;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(adm_df)</span></code></pre></div>
-<pre><code>##   UniqueID GRE TOEFL SOP LOR  CGPA Research                 Discipline    Admit
-## 1        1 337   118 4.5 4.5 3.892      yes              Science &amp; Eng Accepted
-## 2        2 324   107 4.0 4.5 3.580      yes              Science &amp; Eng Accepted
-## 3        3 316   104 3.0 3.5 3.232      yes            Applied Science Accepted
-## 4        4 322   110 3.5 2.5 3.500      yes            Applied Science Accepted
-## 5        5 314   103 2.0 3.0 3.316       no Humanities and Soc Science Accepted
-## 6        6 330   115 4.5 3.0 3.768      yes              Science &amp; Eng Accepted</code></pre>
+<pre><code>##   UniqueID GRE TOEFL SOP LOR  CGPA Research                 Discipline    Admit  GPA1 Year
+## 1        1 337   118 4.5 4.5 3.892      yes              Science &amp; Eng Accepted 3.453 2018
+## 2        2 324   107 4.0 4.5 3.580      yes              Science &amp; Eng Accepted 3.303 2018
+## 3        3 316   104 3.0 3.5 3.232      yes            Applied Science Accepted 2.752 2018
+## 4        4 322   110 3.5 2.5 3.500      yes            Applied Science Accepted 3.506 2018
+## 5        5 314   103 2.0 3.0 3.316       no Humanities and Soc Science Accepted 3.069 2018
+## 6        6 330   115 4.5 3.0 3.768      yes              Science &amp; Eng Accepted 3.291 2018</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(adm_df)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    400 obs. of  11 variables:
+##  $ UniqueID  : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ GRE       : int  337 324 316 322 314 330 321 308 302 323 ...
+##  $ TOEFL     : int  118 107 104 110 103 115 109 101 102 108 ...
+##  $ SOP       : num  4.5 4 3 3.5 2 4.5 3 3 2 3.5 ...
+##  $ LOR       : num  4.5 4.5 3.5 2.5 3 3 4 4 1.5 3 ...
+##  $ CGPA      : num  3.89 3.58 3.23 3.5 3.32 ...
+##  $ Research  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 1 2 2 1 1 1 ...
+##  $ Discipline: Factor w/ 3 levels &quot;Applied Science&quot;,..: 3 3 1 1 2 3 1 2 2 1 ...
+##  $ Admit     : Factor w/ 2 levels &quot;Accepted&quot;,&quot;Rejected&quot;: 1 1 1 1 1 1 1 1 2 2 ...
+##  $ GPA1      : num  3.45 3.3 2.75 3.51 3.07 ...
+##  $ Year      : int  2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 ...</code></pre>
 </div>
 <div id="tests-on-assumptions" class="section level2">
 <h2>Tests on assumptions</h2>
+<p>Statistical tests on assumptions are used to assess whether the data
+meets certain assumptions required for statistical tests, such as
+normality and homogeneity of variance. These tests are important to
+ensure that the results of the statistical tests are valid and reliable.
+Some common tests for assumptions include the Shapiro-Wilk test for
+normality, the Levene’s test for homogeneity of variance, and the
+Kolmogorov-Smirnov test for distributional differences.</p>
 <div id="shapiro-wilk-test" class="section level3">
 <h3>Shapiro-Wilk test</h3>
 <p>The Shapiro-Wilk test is a statistical test used to determine whether
@@ -1603,19 +1633,19 @@ of outliers.</p>
 <p>The Shapiro-Wilk test can be performed in <code>R</code> with the
 <code>shapiro.test()</code> function, which takes a single variable as
 an argument.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(adm_df<span class="sc">$</span>GRE)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(adm_df<span class="sc">$</span>GRE)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  adm_df$GRE
 ## W = 0.98572, p-value = 0.0005625</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(adm_df<span class="sc">$</span>TOEFL)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(adm_df<span class="sc">$</span>TOEFL)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  adm_df$TOEFL
 ## W = 0.98732, p-value = 0.001467</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(adm_df<span class="sc">$</span>CGPA)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(adm_df<span class="sc">$</span>CGPA)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -1624,7 +1654,39 @@ an argument.</p>
 <p>The p-values for the <em>GRE</em> and <em>TOEFL</em> variables
 suggest that both variables are not approximately normally distributed.
 However, a non-significant result for <em>CGPA</em> suggests that it is
-approximately normally distributed. ### Levene’s test</p>
+approximately normally distributed.</p>
+<p>When we are performing analyses with continuous and categorical
+variables, such as with t-tests and ANOVA analyses, we would also want
+to see if the continuous variables are approximately normal within each
+subgroup. For example, if we were to compare if there are differences in
+<em>GRE</em> scores between <em>Accepted</em> and <em>Rejected</em>
+applicants we should see if the distribution of those scores is
+approximately normal in both cases.</p>
+<p>To do so we can employ an apply function, <code>tapply()</code>, to
+gather each level in the <em>Admit</em> variable and perform a
+Shipero-Wilk test using the <code>shapiro.test()</code> function on the
+subsets of <em>GRE</em> scores.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(adm_df<span class="sc">$</span>GRE, adm_df<span class="sc">$</span>Admit, shapiro.test)</span></code></pre></div>
+<pre><code>## $Accepted
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  X[[i]]
+## W = 0.98977, p-value = 0.04165
+## 
+## 
+## $Rejected
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  X[[i]]
+## W = 0.96907, p-value = 0.01011</code></pre>
+<p>From the results we could conclude that the <em>GRE</em> scores for
+both <em>Accepted</em> and <em>Rejected</em> applicants are not normally
+distributed.</p>
+</div>
+<div id="levenes-test" class="section level3">
+<h3>Levene’s test</h3>
 <p>Levene’s test can be used to determine if there is a significant
 difference in variances between two or more groups. It is a robust test,
 meaning it is not affected by outliers or non-normality of the data. The
@@ -1638,43 +1700,135 @@ assumes equal variances.</p>
 function takes a formula and a data frame as its arguments. The formula
 should specify the variable of interest and the group variable,
 separated by a <code>~</code> symbol.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <pre><code>## Loading required package: carData</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;car&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     recode</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(GRE <span class="sc">~</span> Admit, adm_df)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(GRE <span class="sc">~</span> Admit, adm_df)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(&gt;F)
 ## group   1  2.0424 0.1538
 ##       398</code></pre>
 <p>We see from the results that the Levene test was not significant for
-GRE scores (p = 0.15), and we can therefore conclude that the variances
-are equal. ## Fisher’s exact test ## Chi-square Test</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does undergraduate research experience influence grad school admittance?</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, are undergraduate research experience and graduate school admittance independent?</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(adm_df<span class="sc">$</span>Research, adm_df<span class="sc">$</span>Admit)</span></code></pre></div>
+GRE scores (p = 0.154), and we can therefore conclude that the variances
+are equal.</p>
+</div>
+</div>
+<div id="comparing-two-categorical-variables" class="section level2">
+<h2>Comparing two categorical variables</h2>
+<div id="χ2-test" class="section level3">
+<h3>χ<sup>2</sup> Test</h3>
+<p>The χ<sup>2</sup> (chi-squared) test is a statistical significance
+test used to determine the association between two categorical variables
+in a contingency table. It compares the observed frequencies of each
+combination of the two variables with the frequencies that would be
+expected under the assumption of independence between the variables. If
+the difference between the observed and expected frequencies is large
+enough, we reject the null hypothesis of independence and conclude that
+there is an association between the two variables.</p>
+<p>For example, we may want to test whether undergraduate research
+experience influences grad school admittance. We could alternatively ask
+whether undergraduate research experience and graduate school admittance
+are independent.</p>
+<p>In the following code block will will use the <code>table()</code>
+function to create a contingency table with the total number of
+observations within each group crossed by <em>Research</em> and
+<em>Admit</em>. Then, we will use the <code>chisq.test()</code> function
+to perform the χ<sup>2</sup> test.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(adm_df<span class="sc">$</span>Research, adm_df<span class="sc">$</span>Admit)</span></code></pre></div>
+<pre><code>##      
+##       Accepted Rejected
+##   no        93       88
+##   yes      194       25</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(adm_df<span class="sc">$</span>Research, adm_df<span class="sc">$</span>Admit)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
 ## data:  adm_df$Research and adm_df$Admit
 ## X-squared = 65.845, df = 1, p-value = 4.878e-16</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># T-test</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># * One-sample</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># * Unpaired</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Assumtion for t-test = equal variances</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># * Paired</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Is the mean CGPA different between students who did and did not do undergraduate research?</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(CGPA <span class="sc">~</span> Research, <span class="at">data =</span> adm_df)</span></code></pre></div>
+</div>
+<div id="fishers-exact-test" class="section level3">
+<h3>Fisher’s exact test</h3>
+<p>Fisher’s exact test is a statistical significance test used to
+determine the association between two categorical variables in a
+contingency table. It is often used when sample sizes are small or when
+the assumptions of the χ<sup>2</sup> test, another commonly used test
+for categorical data, are not met. Fisher’s exact test calculates the
+probability of observing the data or more extreme data if the null
+hypothesis (that there is no association between the variables) is true.
+If this probability is small enough, we reject the null hypothesis in
+favor of the alternative hypothesis (that there is an association
+between the variables).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(adm_df<span class="sc">$</span>Research, adm_df<span class="sc">$</span>Admit)</span></code></pre></div>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  adm_df$Research and adm_df$Admit
+## p-value &lt; 2.2e-16
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.0785981 0.2319627
+## sample estimates:
+## odds ratio 
+##  0.1369417</code></pre>
+</div>
+</div>
+<div id="comparing-distributions" class="section level2">
+<h2>Comparing distributions</h2>
+</div>
+<div id="parametric-tests" class="section level2">
+<h2>Parametric tests</h2>
+<p>T-tests are a family of statistical significance tests used to
+compare the means of one or two groups of data. There are two main types
+of t-tests: the independent samples t-test, which compares the means of
+one or two independent groups of data, and the paired samples t-test,
+which compares the means of two related groups of data. The t-test
+calculates a t-value and corresponding p-value, which can be used to
+determine whether the difference between the means is statistically
+significant.</p>
+<div id="one-sample-t-test" class="section level3">
+<h3>One-sample t-test</h3>
+<p>A one-sample t-test is a statistical significance test used to
+determine whether the mean of a single sample is significantly different
+from a known or hypothesized value. It is commonly used to test whether
+a sample is drawn from a population with a specific mean.</p>
+<p>For example, we may want to know wither the <em>CGPA</em> of the
+<em>Applied Science</em> students is less than 3.5. We can answer this
+question using a one-sample t-test by filtering the <em>Discipline</em>
+variable for only <em>Applied Science</em> students, and passing the
+vector of their <em>CGPA</em> scores to the <code>t.test()</code>
+function. We also set the <code>mu</code> argument to <code>3.5</code>
+and <code>alternative</code> to <code>&#39;less&#39;</code> to test whether the
+mean <em>CGPA</em> scores are less than 3.5.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(adm_df[adm_df<span class="sc">$</span>Discipline <span class="sc">==</span> <span class="st">&quot;Applied Science&quot;</span>, <span class="st">&quot;CGPA&quot;</span>],</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="fl">3.5</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">&#39;less&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  adm_df[adm_df$Discipline == &quot;Applied Science&quot;, &quot;CGPA&quot;]
+## t = -3.6987, df = 132, p-value = 0.0001584
+## alternative hypothesis: true mean is less than 3.5
+## 95 percent confidence interval:
+##      -Inf 3.473995
+## sample estimates:
+## mean of x 
+##  3.452902</code></pre>
+<p>From the results of the t-test, we can conclude with statistical
+evidence that the mean <em>CGPA</em> is less than 3.5.</p>
+</div>
+<div id="unpaired-two-sample-t-test" class="section level3">
+<h3>Unpaired, two-sample t-test</h3>
+<p>An unpaired two-sample t-test is a statistical significance test used
+to compare the means of two independent groups of data. It is commonly
+used to test whether there is a significant difference between the means
+of two groups, such as a treatment group and a control group. This test
+assumes that the two groups have equal variances and are normally
+distributed.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(CGPA <span class="sc">~</span> Research, <span class="at">data =</span> adm_df)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -1686,16 +1840,152 @@ are equal. ## Fisher’s exact test ## Chi-square Test</p>
 ## sample estimates:
 ##  mean in group no mean in group yes 
 ##          3.334873          3.584548</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Non-parametric test</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># * Wilcox-test</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># * Mann-Whitney U-test</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ?</span></span></code></pre></div>
+<p>The <code>t.test()</code> function is set by default to assume
+unequal variances. ### Paired t-test</p>
+<p>A paired t-test is a statistical significance test used to compare
+the means of two related groups of data. It is commonly used to test
+whether there is a significant difference between the means of two
+measurements taken on the same individuals or objects, such as before
+and after a treatment. This test assumes that the differences between
+the pairs are normally distributed. ## Non-parametric tests</p>
+<p>Non-parametric tests are statistical significance tests that do not
+make assumptions about the distribution of the data being tested. They
+are often used when the data is not normally distributed or when the
+assumptions of parametric tests, such as t-tests, are not met.
+Non-parametric tests for one or two groups of data include the Wilcoxon
+test and the Mann-Whitney U test. These tests are based on ranks or
+other non-parametric measures of the data, and are often less powerful
+than their parametric counterparts, but they are more robust and can
+provide reliable results in a wider range of data scenarios.</p>
 </div>
+<div id="wilcoxon-tests" class="section level3">
+<h3>Wilcoxon tests</h3>
+<p>The Wilcoxon test is a non-parametric statistical significance test
+used to compare two independent samples of data. It is commonly used
+when the assumptions of the t-test cannot be met, such as when the data
+is not normally distributed or the sample size is small. The test
+compares the median values of the two groups and calculates a p-value,
+which can be used to determine whether the difference between the
+medians is statistically significant.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(adm_df[adm_df<span class="sc">$</span>Discipline <span class="sc">==</span> <span class="st">&quot;Science &amp; Eng&quot;</span>, <span class="st">&quot;LOR&quot;</span>],</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mu =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  adm_df[adm_df$Discipline == &quot;Science &amp; Eng&quot;, &quot;LOR&quot;]
+## V = 3147, p-value = 0.002185
+## alternative hypothesis: true location is greater than 4</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(SOP <span class="sc">~</span> Admit,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> adm_df)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  SOP by Admit
+## W = 26190, p-value &lt; 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+<div id="mann-whitney-u-test" class="section level3">
+<h3>Mann-Whitney U test</h3>
+<p>The Mann-Whitney U test is a non-parametric statistical significance
+test used to compare the medians of two independent groups of data. It
+is commonly used when the assumptions of the t-test cannot be met, such
+as when the data is not normally distributed or the sample size is
+small. The test ranks the values in the two groups and calculates a
+U-value, which can be used to determine whether the difference between
+the medians is statistically significant. The Mann-Whitney U test is
+often used as an alternative to the t-test when the data does not meet
+the assumptions of parametric tests. ## Comparing two non-categorical
+variables</p>
+<p>Simple linear regression and correlations are statistical methods
+used to describe the relationship between two variables. Simple linear
+regression is used when one variable is used to predict another, and is
+characterized by a linear equation that represents the relationship
+between the variables. Correlation, on the other hand, measures the
+strength and direction of the relationship between two variables without
+making any assumptions about causality. Pearson’s correlation is used
+when both variables are continuous and normally distributed, while
+Kendall and Spearman correlations are non-parametric measures used when
+the variables are ordinal or not normally distributed. Each measure
+provides a correlation coefficient, which ranges from -1 to 1 and
+indicates the strength and direction of the relationship between the
+variables.</p>
+</div>
+<div id="simple-linear-regression" class="section level3">
+<h3>Simple linear regression</h3>
+<p>Simple linear regression is a type of linear regression where there
+is only one independent variable that is used to predict the value of
+the dependent variable. It is a commonly used technique in statistical
+analysis and can be used to model and predict the relationship between
+variables in a simple and interpretable way.</p>
+<p>Here, we will fit a simple linear regression model predicting GRE
+scores from cumulative GPA. We will supply the <code>lm()</code>
+function with two arguments, first a model formula and second our
+dataset.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>adm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(GRE <span class="sc">~</span> CGPA, adm_df)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adm_fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = GRE ~ CGPA, data = adm_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -18.1453  -4.2984   0.5042   3.7769  26.7925 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  177.695      4.641   38.29   &lt;2e-16 ***
+## CGPA          40.072      1.334   30.04   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.355 on 398 degrees of freedom
+## Multiple R-squared:  0.694,  Adjusted R-squared:  0.6932 
+## F-statistic: 902.6 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="pearsons-correlation" class="section level3">
+<h3>Pearson’s correlation</h3>
+<p>Pearson correlation is a measure of the strength and direction of the
+linear relationship between two continuous variables. It calculates the
+correlation coefficient, which ranges from -1 to 1, and indicates the
+strength and direction of the relationship between the two variables.
+Pearson correlation assumes that the data is normally distributed and
+that there is a linear relationship between the two variables.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(adm_df<span class="sc">$</span>GRE, adm_df<span class="sc">$</span>CGPA)</span></code></pre></div>
+<pre><code>## [1] 0.8330605</code></pre>
+</div>
+<div id="spearman-and-kendall-correlations" class="section level3">
+<h3>Spearman and Kendall correlations</h3>
+<p>Kendall and Spearman correlations are non-parametric measures of
+correlation used to describe the relationship between two variables.
+Unlike Pearson correlation, which assumes that the variables are
+continuous and normally distributed, Kendall and Spearman correlations
+do not make any assumptions about the distribution of the data. Kendall
+correlation measures the strength and direction of the relationship
+between two variables that are ordinal or ranked, while Spearman
+correlation measures the strength and direction of the relationship
+between two variables that are measured on an interval or ratio
+scale.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(adm_df<span class="sc">$</span>SOP,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    adm_df<span class="sc">$</span>LOR,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6007866</code></pre>
+</div>
+</div>
+<div id="concluding-remarks" class="section level2">
+<h2>Concluding remarks</h2>
+<p>Understanding and testing assumptions is a critical step in any data
+analysis task. By checking for normality, homogeneity of variance, and
+other assumptions, you can ensure that your statistical tests are valid
+and reliable. Additionally, having a strong grasp of t-tests and
+non-parametric tests allows you to choose the appropriate statistical
+tests for your data and draw accurate conclusions. By mastering these
+fundamental concepts, you will be better equipped to analyze and
+interpret data, and make informed decisions based on evidence.</p>
+<p>The next sections will build upon these tools, where instead of one
+and two groups we will learn to use tools to to assess multiple groups
+in a single test.</p>
 </div>
 
 

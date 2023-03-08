@@ -247,7 +247,7 @@ while (i <= 5) {
 
 #' ### Apply functions
 #' 
-#' `R` also has a set of apply functions, which can apply functions on data and return a set of values. For example, the `lapply` function will iterate through a given list and apply some function to it.
+#' `R` also has a set of apply functions, which use loops to perform a specific function on data and return a set of values. For example, the `lapply()` function will iterate through a given list and apply some function to it.
 
 #+ lapply
 l <- list(c(1, 2, 3), c(4, 5, 6))
@@ -263,7 +263,7 @@ lapply(l, mean)
 #' 
 #' A package in `R` is a collection of functions, data sets, and documentation that extend the capabilities of base `R`. Packages are typically created by other users and developers in the `R` community, and can be installed and loaded into your `R` session to provide additional functionality for specific tasks. 
 #' 
-#' `R` packages can be installed from a variety of sources, including the Comprehensive `R` Archive Network (CRAN), Bioconductor, GitHub, and others. The most common way to install a package is using the `install.packages()` function, which takes the name of the package (as a string) as an argument.  Once a package is installed, you can load it into your `R` session using the `library()` function.
+#' `R` packages can be installed from a variety of sources, including the Comprehensive `R` Archive Network (CRAN), Bioconductor, GitHub, and others. Most commonly you will be installing packages from CRAN, where you can easily install a package using the `install.packages()` function, which takes the name of the package (as a string) as an argument.  Once a package is installed, you can load it into your `R` session using the `library()` function.
 #' 
 #' For example, `dplyr` is a package for data manipulation and cleaning, which we will install and load in the following code.
 

@@ -180,6 +180,8 @@ adm_df %>%
   summarize(mean_GRE = mean(GRE),
             sd_GRE = sd(GRE))
 
+#' From the summary statistics, we might hypothesize that GRE scores are higher for accepted students, and that the scores have been decreasing over the four years.
+
 
 #' ### Distributions
 #' 
@@ -221,7 +223,6 @@ ggplot(adm_df,
 #' Here, we will simultaneously plot histograms for *CGPA*, *GRE*, and *TOEFL* with each separated by *Research*. We will first pipe the dataset into the `pivot_longer()` function, which creates two new variables based on a list of other variables, one with the *name* of the variables and the second with their *value*. We will then pipe the modified dataset into `ggplot()`.
 
 #+ gg-hist-facet
-library(dplyr)
 library(tidyr)
 
 adm_df %>%
@@ -229,7 +230,7 @@ adm_df %>%
   ggplot(aes(x = value,
              fill = Research)) +
   geom_histogram(position = 'identity') +
-  facet_wrap(~ name * Research,
+  facet_wrap(~ Research * name,
              # Let each panel have independently scaled x- and y-axis
              scales = 'free')
 

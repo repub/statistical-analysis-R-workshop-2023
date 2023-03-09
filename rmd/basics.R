@@ -106,7 +106,7 @@ y
 #' 
 #' - **Numeric** - numbers with or without decimal places, such as 1, 2.5, or -3.14.
 #' - **Character** - sequences of characters, such as "Hello, world!" or "R is fun".
-#' - **Factor** - categorical data.
+#' - **Factor** - categorical data that can be ordered or unordered.
 #' - **Logical**- values that represent truth or falsehood, such as TRUE or FALSE.
 #' - **Integer**- whole numbers, such as 1, 2, or -3.
 #' - **Complex**- numbers with real and imaginary components, such as 1 + 2i.
@@ -172,7 +172,7 @@ df[df$age > 30, ]
 
 #' ## Functions
 #' 
-#' A function in `R` is a block of code that performs a specific task. Functions take input values, called arguments, and return output values.  `R` provides a large number of built-in functions for performing operations on data. For example, the `mean()` function computes the mean of a vector, and the `sum()` function computes the sum of a vector. To use a function, you simply call it by name and pass in the required arguments.
+#' A function in `R` is a block of code that performs a specific task. Functions take input values, called arguments, and return output values.  `R` provides a large number of built-in functions for performing operations on data. For example, the `mean()` function computes the mean of a vector, and likewise the `sum()` function the sum. To use a function, you simply call it by name and pass in the required arguments.
 
 #+ mean-sum
 v <- c(1, 2, 3, 4, 5)
@@ -289,14 +289,20 @@ df %>%
 
 #' By using piping, we are able to perform data manipulation tasks in a more concise and readable way, without having to nest multiple function calls or create intermediate variables. Piping can be a powerful tool for working with complex data manipulation tasks in `R`, and is commonly used in conjunction with other packages like `tidyr` and `ggplot2`.
 #' 
-#' 
+#' For example, we can use a series of pipes to first filter for people who are at least 30 years old and select only the column with their names.
+
+df %>%
+  filter(age >= 30) %>%
+  select(name)
+
+ 
 #' ## Scripts
 #' 
 #' In `R`, a script is a file containing a sequence of `R` commands that can be executed together. Scripts are used to automate repetitive tasks, document procedures, and allow others to reproduce the analysis. For example, we can write a script which defines functions that we can then use across different projects without having to recode those functions for each project.
 #' 
 #' As an example, we have provided an `R` script called "get_libs.R" that has a function of the same name which takes a vector of strings with the names of libraries. The function first checks if the packages are already installed, and if they are not they will install the missing packages. Then, the function will load all of the listed packages into the environment.
 #' 
-#' In the next code block, we will use the `source()` function to read the script. Then, we will define a vector of libraries and give them to the `get_libs()` function to install and load them.
+#' In the next code block, we will use the `source()` function to read the script. Then, we will define a vector of libraries and give them to the `get_libs()` function to install and load them. You can open the `R` script located in the "src/scripts/get_libs.R" folder to see how it works.
 
 #+ script
 source("src/scripts/get_libs.R")

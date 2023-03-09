@@ -340,6 +340,7 @@ adm_df %>%
   select(c(CGPA, GRE, SOP, LOR, Research, Discipline)) %>%
   ggpairs()
 
+
 #' ### Principal component analysis
 #' 
 #' Principal component analysis (PCA) is a statistical technique used to reduce the dimensionality of a dataset by transforming the original variables into a smaller number of uncorrelated variables, called principal components. The principal components are ordered by the amount of variance they explain in the original data, with the first component explaining the most variance. PCA can be useful for visualizing complex relationships between variables, identifying underlying patterns in the data, and reducing noise and redundancy in the data. It is commonly used in many fields, including biology, finance, and image processing.
@@ -353,6 +354,7 @@ adm_pca <- prcomp(adm_df %>%
 
 biplot(adm_pca,
        xlabs = rep('.', 400))
+
 
 
 

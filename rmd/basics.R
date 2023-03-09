@@ -192,6 +192,17 @@ squared_sums <- function(x) {
 squared_sums(v)
 
 
+#' ## Plotting
+#' 
+#' One of the major advantages of `R` over other coding languages is its inherent plotting functions. For instance, we can use the `plot()` function with two vectors to plot a scatterplot. In the next example, we will use another one of `R`'s advantages, functions for random number generation, to create two vectors and plot them.
+
+#+ plot
+v1 <- rnorm(100)
+v2 <- rnorm(100)
+
+plot(v1, v2)
+
+
 #' ## Control structures
 #' 
 #' Control structures are statements that allow you to control the flow of your code. They allow you to perform different actions depending on whether a condition is true or false, or to repeat a block of code multiple times. The main control structures in R are:

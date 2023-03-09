@@ -152,22 +152,9 @@ par(mfrow = c(1, 1))
 #' Univariate analysis typically involves calculating summary statistics such as the mean, median, and standard deviation, and creating visualizations such as histograms, box plots, and frequency tables to understand the distribution of the variable.
 #' 
 #' 
-#' ### Summary statistics
+#' ### Printing specific summary statistics
 #' 
-#' To get some basic descriptive statistics on the variables we can call the `summary()` function on our data set.
-
-#+ summary-stats
-summary(adm_df)
-
-#' In the output we can see the values on the centrality and distribution of the numeric variables, while for the *Research*, *Discipline*, and *Admit* variables we are told that they are of the character type.
-#' ___________FIX__________
-#' 
-#' The output now gives us the total number of instances for category in the factor variables. Notably, the *Discipline* variable has a nearly balanced split between the three disciplines while in the *Admit* variable most of the students are *Accepted*.
-#' 
-#' 
-#' #### Printing specific summary statistics
-#' 
-#' The `summarise()` function in `dplyr` is a powerful tool that, when combined with other functions, provide details about the data set.  For example, we can print the means and standard deviations of GRE scores separately for accepted and rejected applicants.
+#' As we saw above we can use the `summary()` function to get general summary statistics on our dataset, however what if we want to know some more specific statistics? For example, maybe we want to know the group means and errors between the *GRE* scores of applicants who did or did not do undergraduate research for each year in our dataset. The `summarise()` function in `dplyr` is a powerful tool that, when combined with other functions, provide details about the data set.  For example, we can print the means and standard deviations of GRE scores separately for accepted and rejected applicants.
 #' 
 #' * `group_by()` groups each unique level in the Admit column (Accepted or Rejected).
 #' * `summarize()` creates two new columns that will will name mean_GRE and sd_GRE with the means   and standard deviations of GRE scores as given by the `mean()` and `sd()` functions.
@@ -176,13 +163,13 @@ summary(adm_df)
 library(dplyr)
 
 adm_df %>%
-  group_by(Admit, Year) %>%
+  group_by(Research, Year) %>%
   summarize(mean_GRE = mean(GRE),
             sd_GRE = sd(GRE))
 
-#' From the summary statistics, we might hypothesize that GRE scores are higher for accepted students, and that the scores have been decreasing over the four years.
-
-
+#' From the summary statistics, we might hypothesize that GRE scores are higher for students who did undergraduate research, and that the scores generally may be decreasing over the four years for those applicants who did not do research during their undergraduate program.
+#' 
+#' 
 #' ### Distributions
 #' 
 #' Understanding the distribution of variables is crucial for building accurate and effective models. The distribution of a variable refers to the way in which the values of that variable are spread across the data set.
@@ -284,18 +271,34 @@ ggplot(adm_df,
 
 #' ### Statistical methods to assess distributions
 #' 
-#' _----------------------------
 #' 
-#' #### Shapiro-wilk's normality test
+#' 
+#' #### Shapiro-Wilk normality test
+#' 
+#' The Shapiro-Wilk test is a statistical test used to assess whether a given dataset follows a normal distribution. It is based on the comparison between the observed distribution of the data and the expected distribution under a normal distribution assumption. The test produces a test statistic and a p-value, with a p-value below a specified threshold indicating evidence against the null hypothesis of normality. The Shapiro-Wilk test is commonly used in many fields, including psychology, biology, and economics, to determine whether data should be analyzed using parametric statistical methods that assume normality.
 
 #+ shapiro
 shapiro.test(adm_df$CGPA)
-shapiro.test(adm_df$GRE)
 
+#' From the results of the Shapiro-Wilk test we can conclude that the *CGPA* variable is approximately normally distributed.
+#' 
+#' 
+#' #### &chi;^2^ test
+#' 
+#' The &chi;^2^ test is a statistical test used to determine whether there is a significant association between two categorical variables. The test compares the observed frequencies of each category to the expected frequencies, assuming that there is no association between the variables. The test produces a test statistic and a p-value, with a p-value below a specified threshold indicating evidence against the null hypothesis of no association.
+
+#+ chisq
+table(adm_df$Discipline,
+      adm_df$Research)
+
+chisq.test(adm_df$Discipline,
+           adm_df$Research)
 
 
 #' #### Correlations
-
+#' 
+#' Correlation is a statistical technique used to measure the strength and direction of the relationship between two variables. Correlation coefficients range from -1 to 1, with 0 indicating no correlation, -1 indicating a perfect negative correlation (i.e., as one variable increases, the other decreases), and 1 indicating a perfect positive correlation (i.e., as one variable increases, the other increases). Correlations can be used to identify patterns in data and to make predictions about future behavior. However, it is important to remember that correlation does not imply causation and that other factors may be influencing the relationship between the variables.
+#' 
 #' First, we will mutate all of the variables into the numeric type so that correlations can be calculated on them. Then, we will pipe the transformed data into the `cor()` function to calculate the Spearman-rank correlations between each variable. We will use the `corrplot()` function from the `corrplot` library to visualize the resulting Spearman-rank correlations.
 
 #+ cor
@@ -311,7 +314,13 @@ corrplot(adm_cor, method = 'square')
 #' 
 #' As we observe the other variables in the dataset we do see a lot of correlations between the variables. Positive (blue) correlations between *GRE*, *TOEFL*, *SOP*, *LOR*, and *CGPA* indicate that they follow similar increasing trends. For *Discipline*, while we see a moderately positive correlation on the plot, because the data is unordered we should not necessarily make any inferences just yet. Alternatively, the *Admit* variable is strongly (and negatively) correlated with a lot of the scoring variables as well as *Research*. The reason for this negative relationship is that when we changed the *Admit* variable to the numeric type it was recoded so that *Accepted* is 1 and *Rejected* is 2. When recoding, it is always important to understand how the variables are being recoded.
 #' 
-#' #### Pairs plots
+#' 
+#' ## Multivariate comparisons
+#' 
+#' Multivariate comparisons involve analyzing relationships between multiple variables simultaneously. These comparisons can be useful for identifying complex patterns of association and for understanding the joint effects of different variables on an outcome of interest. There are several methods for conducting multivariate comparisons, including multiple regression analysis, principal component analysis, factor analysis, and cluster analysis. Each of these methods has its own strengths and weaknesses and should be chosen based on the research question and the type of data being analyzed. Overall, multivariate comparisons can provide a more comprehensive understanding of complex relationships between variables and can help to improve the accuracy and precision of statistical analyses.
+#' 
+#' 
+#' ### Pairs plots
 #' 
 #' We can also plot the data points against each other into one plot to visualize relationships. One simple method for doing this is using the `pairs()` function, which will plot all of the variables against one another after automatically converting them to the numeric type.
 #' 
@@ -331,24 +340,51 @@ adm_df %>%
   select(c(CGPA, GRE, SOP, LOR, Research, Discipline)) %>%
   ggpairs()
 
-#' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
-
-
 #' ### Principal component analysis
 #' 
-#' 
+#' Principal component analysis (PCA) is a statistical technique used to reduce the dimensionality of a dataset by transforming the original variables into a smaller number of uncorrelated variables, called principal components. The principal components are ordered by the amount of variance they explain in the original data, with the first component explaining the most variance. PCA can be useful for visualizing complex relationships between variables, identifying underlying patterns in the data, and reducing noise and redundancy in the data. It is commonly used in many fields, including biology, finance, and image processing.
 
 adm_pca <- prcomp(adm_df %>%
                     select(!c(UniqueID, GPA1)) %>%
-                    mutate(across(everything(), as.numeric)), center = TRUE, scale. = TRUE)
+                    mutate(across(everything(),
+                                  as.numeric)),
+                  center = TRUE,
+                  scale. = TRUE)
 
 biplot(adm_pca,
        xlabs = rep('.', 400))
 
 
-library(ggbiplot)
+
+
+
+adm_clust <- adm_df %>%
+  select(!c(UniqueID, Admit, GPA1)) %>%
+  mutate(across(everything(), as.numeric)) %>%
+  dist() %>%
+  hclust()
+
+plot(adm_clust)
+
+table(cluster = cutree(adm_clust, 5),
+      actual = adm_df$Admit)
+
+
+#' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
+
+
+
 
 
 
 #+ save
 saveRDS(adm_df, 'data/interim/adm_df.RDS')
+
+
+#' ## Concluding remarks
+#' 
+#' EDA is an essential step in the statistical analysis of any dataset. By examining the distribution, variability, and relationships between variables, researchers can gain a deeper understanding of the data and make informed decisions about appropriate statistical methods. In this tutorial, we have discussed several techniques for EDA, including histograms, box plots, correlation analysis, and PCA. By using these techniques, researchers can identify patterns, outliers, and potential sources of bias or confounding, ultimately leading to more accurate and reliable statistical analyses.
+
+
+
+

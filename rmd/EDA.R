@@ -55,12 +55,27 @@ knitr::opts_knit$set(root.dir = '../')
 #' 
 #' ## Data import and cleaning
 #'
+#' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. These packages are:
+#' 
+#' - `dplyr` and `tidyr` - tools for data manipulation.
+#' - `ggplot2` - a graphical package for creating elegant data visualizations.
+#' - `corrplot` - allows easy visualizations of correlation matrices.
+#' - `GGally` - an extension of `ggplot2` for drawing pairs plots.
+
+#+ get-libs
+source("src/scripts/get_libs.R")
+
+libs <- c('dplyr', 'tidyr', 'ggplot2', 'corrplot', 'GGally')
+
+get_libs(libs)
+
 #' First we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
 
 #+ load-data
 adm_df <- read.csv("data/raw/adm_data.csv")
 
 head(adm_df)
+
 
 #' ### Data structure
 #' 
@@ -147,7 +162,7 @@ plot(ints, adm_df$GRE, type = 'l')
 
 #' Plotting each variable will be quite tedious, so instead we can use a loop function to quickly generate each plot. We will give these plots titles so that when we view them we are sure which variable we are observing.
 #' 
-#' Because there are 10 variables we will be making 10 plots. So, it would make sense to plot some of them together in the same graphic. We will use `par(mfrow = c(2, 2))` to tell `R` to plot on a 2 x 2 grid, so that we can fit 4 plots in a single graphical space. After the loop we will reset to the default of a 1 x 1 space with `par(mfrow = c(1, 1))`.
+#' Because there are 11 variables we will be making 11 plots. So, it would make sense to plot some of them together in the same graphic. We will use `par(mfrow = c(2, 2))` to tell `R` to plot on a 2 x 2 grid, so that we can fit 4 plots in a single graphical space. After the loop we will reset to the default of a 1 x 1 space with `par(mfrow = c(1, 1))`.
 #' 
 #' In the `for` loop, we will loop through a sequence of numbers from 1 to the total number of columns, 10. At each iteration, the loop will plot a line plot of the observed values against the number of the observation, which we defined in `ints` above. We will also add a title to the plot by indexes the column name at each iteration so that it is clear which plots belong to which variables.
 
@@ -159,7 +174,7 @@ for (ii in 1:ncol(adm_df)) {
 }
 par(mfrow = c(1, 1))
 
-#' Except for *UniqueID*, where a trend would be expected, we do not notice any obvious trends in the variables.
+#' Except for *UniqueID* and *Year*, where a trend would be expected sa they are sorted, we do not notice any obvious trends in the variables.
 #' 
 #' 
 #' ## Univariate analysis
@@ -173,18 +188,15 @@ par(mfrow = c(1, 1))
 #' 
 #' As we saw above we can use the `summary()` function to get general summary statistics on our dataset, however what if we want to know some more specific statistics? For example, maybe we want to know the group means and errors between the *GRE* scores of applicants who did or did not do undergraduate research for each year in our dataset. The `summarise()` function in `dplyr` is a powerful tool that, when combined with other functions, provide details about the data set.  For example, we can print the means and standard deviations of GRE scores separately for accepted and rejected applicants.
 #' 
-#' * `group_by()` groups each unique level in the Admit column (Accepted or Rejected).
-#' * `summarize()` creates two new columns that will will name mean_GRE and sd_GRE with the means   and standard deviations of GRE scores as given by the `mean()` and `sd()` functions.
+#' First, we will pipe (`%>%`) the data frame into the `group_by()` function to group the observations on the *Research* and *Year* variables. Then, we will pipe the grouped data to `summarize()` and calculate the mean, `mean()`, and standard deviation, `sd()`, of the GRE scores within each group.
 
 #+ dplyr-summ
-library(dplyr)
-
 adm_df %>%
   group_by(Research, Year) %>%
   summarize(mean_GRE = mean(GRE),
             sd_GRE = sd(GRE))
 
-#' From the summary statistics, we might hypothesize that GRE scores are higher for students who did undergraduate research, and that the scores generally may be decreasing over the four years for those applicants who did not do research during their undergraduate program.
+#' From the summary statistics, we might hypothesize that GRE scores are higher for students who have undergraduate research experience, and that the scores generally may be decreasing over the four years for those applicants who did not do research during their undergraduate program.
 #' 
 #' 
 #' ### Distributions
@@ -214,8 +226,6 @@ hist(adm_df$GRE)
 #' Here, we will plot the histograms of *GRE* for each level of *Research*. The first argument in `ggplot()` takes our dataset, then we will out the `aes()` (aesthetics) argument, where we define which variables to plot on the axis, to use for coloring, etc. Next, we add `geom_histogram()` following a `+` to tell `ggplot()` to use a histogram geometry for plotting. Finally, we add `facet_wrap()` to define how we want to wrap a set of panels, which we do with `~ Research` to indicate wrapping by the values of the *Research* variable.
 
 #+ gg-hist
-library(ggplot2)
-
 ggplot(adm_df,
        aes(x = GRE,
            fill = Research)) +
@@ -227,8 +237,6 @@ ggplot(adm_df,
 #' Here, we will simultaneously plot histograms for *CGPA*, *GRE*, and *TOEFL* with each separated by *Research*. We will first pipe the dataset into the `pivot_longer()` function, which creates two new variables based on a list of other variables, one with the *name* of the variables and the second with their *value*. We will then pipe the modified dataset into `ggplot()`.
 
 #+ gg-hist-facet
-library(tidyr)
-
 adm_df %>%
   pivot_longer(c(CGPA, GRE, TOEFL)) %>%
   ggplot(aes(x = value,
@@ -238,14 +246,14 @@ adm_df %>%
              # Let each panel have independently scaled x- and y-axis
              scales = 'free')
 
-#' From the histograms, it appears students who have undergraduate research experience tend to have higher cumulative GPAs and score higher on the GRE and TOEFL exams.
+#' From the histograms, it appears students who have undergraduate research experience tend to have higher cumulative GPAs in addition to scoring higher on the GRE and TOEFL exams on average.
 #' 
 #' 
 #' #### Density plots
 #' 
 #' Density plots are a type of graph used to display the probability distribution of a continuous variable. They estimate the underlying probability density function of the data and display it as a smooth curve. The area under the curve represents the probability of observing a value within a particular range of the variable. Density plots are useful for understanding the shape, central tendency, and variability of the distribution of a variable, and they can be particularly helpful when comparing the distributions of multiple variables or groups.
 #' 
-#' 
+#' To create a density plot with `ggplot()` we can simply replace `geom_histogram()` in the code above with `geom_density()`. We will also set `alpha = 0.5` to add some transparency to best see both groups in the *Research* variable.
 
 #+ gg-density
 ggplot(adm_df,
@@ -260,15 +268,18 @@ ggplot(adm_df,
 #' 
 #' Boxplots are a type of graph used to visualize the distribution of a variable. They display the five-number summary (minimum, maximum, median, and first and third quartiles) of the variable, as well as any outliers. Boxplots are useful for comparing the distribution of one or more variables across different groups or categories.
 #' 
-#' Here, we will plot the distributions of *SOP* for the three disciplines. While we can do so with the `boxplot()` function in base `R`, `ggplot()` makes it much easier for us.
+#' Here, we will plot the distributions of *SOP* for the three disciplines. We will do this with both the `boxplot()` function in base `R` and using `ggplot()`.
 
 #+ gg-boxpl
+boxplot(SOP ~ Discipline,
+        adm_df)
+
 ggplot(adm_df,
        aes(x = Discipline,
            y = SOP)) +
   geom_boxplot()
 
-#' From the plots, it appears that students in *Science & Eng* have higher scores on *SOP* while those in *Humanities and Soc Science* score the lowest overall.
+#' From the boxplot, it appears that students in *Science & Eng* have higher scores on *SOP* while those in *Humanities and Soc Science* score the lowest overall.
 #' 
 #' Because boxplots summarize the data into quantiles it is very useful for non-normal data, in addition to normalized data. Just note that if using a statistical test based on the assumption of normality, boxplots may not be the most appropriate type of plot to visualize your results. Instead, pointranges, lineranges, and errorbars around the means may be more appropriate.
 #' 
@@ -288,11 +299,14 @@ ggplot(adm_df,
 
 #' ### Statistical methods to assess distributions
 #' 
+#' EDA often involves assessing the distribution of data using statistical methods. This can include measures such as mean and standard deviation, tests or normality or independence, and correlations. These techniques can provide insight into the shape, spread, and relationships within the data, allowing for a better understanding of its characteristics and potential relationships.
 #' 
 #' 
 #' #### Shapiro-Wilk normality test
 #' 
 #' The Shapiro-Wilk test is a statistical test used to assess whether a given dataset follows a normal distribution. It is based on the comparison between the observed distribution of the data and the expected distribution under a normal distribution assumption. The test produces a test statistic and a p-value, with a p-value below a specified threshold indicating evidence against the null hypothesis of normality. The Shapiro-Wilk test is commonly used in many fields, including psychology, biology, and economics, to determine whether data should be analyzed using parametric statistical methods that assume normality.
+#' 
+#' For example, we can use the `shapiro.test()` function on the *CGPA* variable to test whether it has an approximately normal distribution.
 
 #+ shapiro
 shapiro.test(adm_df$CGPA)
@@ -303,6 +317,8 @@ shapiro.test(adm_df$CGPA)
 #' #### &chi;^2^ test
 #' 
 #' The &chi;^2^ test is a statistical test used to determine whether there is a significant association between two categorical variables. The test compares the observed frequencies of each category to the expected frequencies, assuming that there is no association between the variables. The test produces a test statistic and a p-value, with a p-value below a specified threshold indicating evidence against the null hypothesis of no association.
+#' 
+#' For example, we may be interested in whether applicants vary in undergraduate research experience by their discipline. We can then use the `chisq.test()` function to test whether *Discipline* and *Research* are independent (null hypothesis) or dependent. We will also use the `table()` function to print a contingency table of the two variables.
 
 #+ chisq
 table(adm_df$Discipline,
@@ -311,7 +327,9 @@ table(adm_df$Discipline,
 chisq.test(adm_df$Discipline,
            adm_df$Research)
 
-
+#' The results of the &chi;^2^ test suggests that the two variables are not independent, or that applicants do vary in having undergraduate experience by their chosen discipline.
+#' 
+#' 
 #' #### Correlations
 #' 
 #' Correlation is a statistical technique used to measure the strength and direction of the relationship between two variables. Correlation coefficients range from -1 to 1, with 0 indicating no correlation, -1 indicating a perfect negative correlation (i.e., as one variable increases, the other decreases), and 1 indicating a perfect positive correlation (i.e., as one variable increases, the other increases). Correlations can be used to identify patterns in data and to make predictions about future behavior. However, it is important to remember that correlation does not imply causation and that other factors may be influencing the relationship between the variables.
@@ -322,8 +340,6 @@ chisq.test(adm_df$Discipline,
 adm_cor <- adm_df %>%
   mutate(across(everything(), as.numeric)) %>%
   cor(method = 'spearman')
-
-library(corrplot)
 
 corrplot(adm_cor, method = 'square')
 
@@ -351,8 +367,6 @@ pairs(adm_df)
 #' This also increases the complexity of plotting the data compared to the `pairs()` plot above, so we will only plot a select group of variables against one another as an example.
 
 #+ gg-pairs
-library(GGally)
-
 adm_df %>%
   select(c(CGPA, GRE, SOP, LOR, Research, Discipline)) %>%
   ggpairs()
@@ -360,7 +374,9 @@ adm_df %>%
 
 #' ### Principal component analysis
 #' 
-#' Principal component analysis (PCA) is a statistical technique used to reduce the dimensionality of a dataset by transforming the original variables into a smaller number of uncorrelated variables, called principal components. The principal components are ordered by the amount of variance they explain in the original data, with the first component explaining the most variance. PCA can be useful for visualizing complex relationships between variables, identifying underlying patterns in the data, and reducing noise and redundancy in the data. It is commonly used in many fields, including biology, finance, and image processing.
+#' Principal component analysis (PCA) is a statistical technique used to reduce the dimensionality of a dataset by transforming the original variables into a smaller number of uncorrelated variables, called principal components. The principal components are ordered by the amount of variance they explain in the original data, with the first component explaining the most variance. PCA can be useful for visualizing complex relationships between variables, identifying underlying patterns in the data, and reducing noise and redundancy in the data.
+#' 
+#' 
 
 adm_pca <- prcomp(adm_df %>%
                     select(!c(UniqueID, GPA1)) %>%
@@ -372,7 +388,9 @@ adm_pca <- prcomp(adm_df %>%
 biplot(adm_pca,
        xlabs = rep('.', 400))
 
-
+#' 
+#' 
+#' 
 #' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
 
 #+ save

@@ -18,7 +18,8 @@ knitr::opts_knit$set(root.dir = '../')
 #' ## Introduction
 #' 
 #' Regression analysis is one of the most fundamental and widely used statistical methods for modeling the relationship between variables. It involves identifying patterns and strengths of the relationship between one or more independent variables and a dependent variable. Regression models are extensively used in various fields, including finance, economics, social sciences, and engineering, to name a few. In this tutorial, we will start by introducing the basic concepts of regression analysis and gradually move on to more advanced techniques, such as multiple regression and logistic regression. By the end of this tutorial, you will have a solid understanding of the various regression methods in `R` and how to apply them to real-world problems.
-
+#' 
+#' 
 #' ### Data and libraries
 #'
 #' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. In this section we will be using:
@@ -40,6 +41,7 @@ get_libs(libs)
 adm_df <- read.csv("data/raw/adm_data.csv")
 
 head(adm_df)
+str(adm_df)
 
 
 #' ## Linear regression
@@ -63,7 +65,14 @@ summary(adm_fit)
 
 #' #### Model diagnostics
 #' 
-#' Residuals plots are a commonly used method for model diagnostics in linear regression. These plots show the difference between the observed values and the predicted values of the dependent variable. If the residuals are randomly distributed around zero with no discernible patterns, this suggests that the model is a good fit for the data. However, if there are patterns in the residuals plot, this may indicate that the model is not capturing all the important features of the data, and further investigation is needed. Other model diagnostics for linear models can include examining leverage and influence points, multicollinearity, and heteroscedasticity.
+#' Diagnostic plots are a visual tool used to assess the validity of a linear regression model and identify any potential problems or violations of assumptions. There are several types of diagnostic plots, including:
+#'  
+#' - **Residuals vs. fitted** - used to check for linearity and homoscedasticity, as well as the presence of outliers. A pattern in the plot may indicate that the relationship between the dependent and independent variables is not linear or that the variance of the errors is not constant across the range of the data.
+#' - **Q-Q** - used to check for normality of the residuals. A straight line in the plot indicates that the residuals are normally distributed, while deviations from the line indicate non-normality.
+#' - **Scale-location** - used to check for homoscedasticity. A pattern in the plot may indicate that the variance of the residuals is not constant across the range of the data.
+#' - **Residuals vs. leverage** - used to identify influential observations, which can have a large impact on the regression line. Observations with high leverage and high residuals are known as outliers and may need to be removed or further investigated.
+#' 
+#' When making inferences from linear models it is important to check the fit of the model, as violations of the model assumptions can lead to misleading results. The following code chunk creates a 2 x 2 graphical space to plot all four plots for our fitted model.
 
 #+ simple-diag
 par(mfrow = c(2, 2))
@@ -82,16 +91,10 @@ adm_fit2 <- lm(GRE ~ CGPA + TOEFL, data = adm_df)
 
 summary(adm_fit2)
 
+
 #' #### Model diagnostics
 #' 
-#' Diagnostic plots are a visual tool used to assess the validity of a linear regression model and identify any potential problems or violations of assumptions. There are several types of diagnostic plots, including:
-#'  
-#' - **Residuals vs. fitted** - used to check for linearity and homoscedasticity, as well as the presence of outliers. A pattern in the plot may indicate that the relationship between the dependent and independent variables is not linear or that the variance of the errors is not constant across the range of the data.
-#' - **Q-Q** - used to check for normality of the residuals. A straight line in the plot indicates that the residuals are normally distributed, while deviations from the line indicate non-normality.
-#' - **Scale-location** - used to check for homoscedasticity. A pattern in the plot may indicate that the variance of the residuals is not constant across the range of the data.
-#' - **Residuals vs. leverage** - used to identify influential observations, which can have a large impact on the regression line. Observations with high leverage and high residuals are known as outliers and may need to be removed or further investigated.
-#' 
-#' When making inferences from linear models it is important to check the fit of the model, as violations of the model assumptions can lead to misleading results. The following code chunk creates a 2 x 2 graphical space to plot all four plots for our fitted model.
+#' Just like with simple linear regression, we should check the fit of the model prior to making inferences from it. We can similarly plot diagnotics of the residuals using the `plot()` function on the model.
 
 #+ multiple-diag
 par(mfrow = c(2, 2))
@@ -199,6 +202,7 @@ adm_lmer_df <- adm_df[adm_df$Admit == "Accepted", ]
 adm_lmer <- lmer(GPA1 ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Discipline + (1 | Year),
                  data = adm_lmer_df)
 
+
 #' ### Model diagnostics
 #' 
 #' While the `plot()` function provides 4 different diagnostic plots on models fit using `lm()`, we only get the Residuals vs. Fitted plot with `lmer()` models. Therefore, we will also use two other functions, `qqnorm()` and `qqlint()` to generate a QQ-plot of the residuals, which we will get with `resid()`.
@@ -223,4 +227,4 @@ summary(adm_lmer)
 #' 
 #' ## Concluding remarks
 #' 
-#' 
+#' In conclusion, regression methods are powerful tools for analyzing relationships between variables and making predictions based on available data. Linear regression is a widely used technique for modeling linear relationships, and can be extended through the use multiple regression to capture more complex relationships. Generalized Linear Models (GLMs) are a class of regression models that extend the linear regression framework to handle non-normally distributed response variables, such as binary or count data. Mixed effect models can account for both fixed and random effects in the data, allowing for the modeling of individual differences and repeated measures over time. However, it is important to remember that regression analysis cannot prove causation and should be used in conjunction with other analytical tools and domain knowledge to support decision making.

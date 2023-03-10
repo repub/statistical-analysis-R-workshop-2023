@@ -29,8 +29,8 @@ knitr::opts_knit$set(root.dir = '../')
 #' ## Introduction
 #' 
 #' When analyzing data, it is important to ensure that the data meets certain assumptions before applying statistical tests. Failure to do so can lead to incorrect conclusions and misleading results. In this section, we will provide an overview of tests for assumptions, such as normality and homogeneity of variance, and how to assess whether these assumptions have been met. We will then cover the use of t-tests for comparing means, as well as non-parametric tests for situations where the assumptions of t-tests are not met. By the end of this section, you will have a solid understanding of these important concepts and be able to apply them to your own data analysis tasks.
-
-
+#' 
+#' 
 #' ### Data and libraries
 #' 
 #' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. For this section, most of the tools we will be using are already included in base `R` so will only be loading the `car` package, which provides additional statistical functions.

@@ -20,9 +20,23 @@ knitr::opts_knit$set(root.dir = '../')
 #' Multiple group comparison tests are statistical tests used to analyze the differences between three or more groups on a continuous or categorical dependent variable. These tests are essential in experimental and observational studies, as they can provide insights into the relationships between multiple factors and an outcome variable. There are several tests available for multiple group comparison, including parametric tests such as ANOVA and MANOVA, non-parametric tests such as Kruskal-Wallis, and post-hoc tests that allow for pairwise comparisons between groups. Understanding the assumptions, advantages, and limitations of each test is crucial for choosing the appropriate test for a specific analysis.
 #' 
 #' This section will provide a comprehensive overview of multiple group comparison tests, including their types, assumptions, and procedures, and will guide you in choosing the best test for your data analysis.
+#' 
+#' 
+#' ### Data and libraries
+#'
+#' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. We will be using two packages in this section, `car` and `FSA`, which each provide additional statistical functions.
+
+#+ get-libs
+source("src/scripts/get_libs.R")
+
+libs <- c('car', 'FSA')
+
+get_libs(libs)
+
+#' Next, we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
 
 #+ load-data
-adm_df <- readRDS("data/interim/adm_df.RDS")
+adm_df <- read.csv("data/raw/adm_data.csv")
 
 head(adm_df)
 
@@ -48,6 +62,7 @@ summary(adm_aov)
 
 #' From the results, we know there is a statistically significant difference in the means of at least one of the disciplines.  However, an ANOVA does not provide information on which of those means are different, which must be determined using a post-hoc pairwise comparisons test. Commonly used post-hoc tests for ANOVA models are Tukey Honest Significant Difference (HSD) test and pairwise t-tests.
 #' 
+#' 
 #' #### Tukey HSD post-hoc test
 #' 
 #' Tukey's HSD test is a post-hoc test used to determine which specific pairs of groups differ significantly from each other after a significant effect has been found using ANOVA. It is a conservative test that controls the family-wise error rate and compares the difference between the means of each pair of groups to a critical value based on the number of groups and the total number of observations. Tukey's HSD is widely used in scientific research and is considered a reliable method for post-hoc testing.
@@ -58,8 +73,8 @@ summary(adm_aov)
 TukeyHSD(adm_aov)
 
 #' From the results of the Tukey HSD pairwise comparisons, we can conclude that the mean **CGPA** of each of the *Discipline* groups is statistically different from one another, specifically with **Science & Eng** having the highest mean **CGPA** and **Humanities and Soc Science** having the lowest mean **CGPA**.
-
-
+#' 
+#' 
 #' #### two-way ANOVA
 #' 
 #' A two-way ANOVA (ANOVA^2^) is an extension of the one-way ANOVA used to analyze the effects of two independent variables on a continuous dependent variable. The ANOVA^2^ is commonly used in experimental and observational studies to examine the effects of two factors on an outcome variable, and it can provide valuable insights into the relationships between these factors and the outcome.
@@ -71,7 +86,7 @@ adm_aov2 <- aov(CGPA ~ Research * Discipline, data = adm_df)
 
 summary(adm_aov2)
 
-#' Sums of squares
+#' **Sums of squares**
 #' 
 #' Type I, Type II, and Type III sums of squares are methods for partitioning the total sum of squares in a linear regression model. The main difference between the three types of sums of squares is the order in which the variables are entered into the model and the way in which they are tested for significance.
 #' 
@@ -80,8 +95,6 @@ summary(adm_aov2)
 #' Typically, when we are testing interaction terms we first use Type III sum of squares to determine whether those interaction terms are statistically significant. However, base `R` returns the Type II sums of squares when using interaction terms, so we can empoy the `Anova()` function from the `car` package to calculate the Type III sum of squares table.
 
 #+ type3
-library(car)
-
 Anova(adm_aov2, type = "3")
 
 #' Notably, the interaction term between *Research* and *Discipline* is statistically significant, and therefore we should not assess their independent terms.
@@ -90,11 +103,11 @@ Anova(adm_aov2, type = "3")
 #' #' $$(k_1 \* k_2)((k_1 \* k_2) - 1) / 2$$
 #' 
 #' Which in this case will be (2 \* 3)((2 \* 3) - 1) / 2 = 15 comparisons. 
-
-
+#' 
+#' 
 #' #### Tukey post-hoc test
 #' 
-#' By default, the `TukeyHSD()` function performs pairwise comparisons for every term in the ANOVA model. Since we had a significant interaction term, we will only print out the pairwise comparisons of that interaction.
+#' By default, the `TukeyHSD()` function performs pairwise comparisons for every term in the ANOVA model. Since we had a significant interaction term, we will only print out the pairwise comparisons of that interaction by using the `$` operator.
 
 #+ tukey2
 adm_aov2_Tukey <- TukeyHSD(adm_aov2)
@@ -141,8 +154,8 @@ anova(lm(CGPA ~ Discipline, data = adm_df))
 #' From our calculation, we would now only accept a statistical result as significant if its p-value falls below 0.01667.
 #' 
 #' The Bonferroni adjustment is very simple to use and significantly reduces the number of false positives (Type I errors) by adjusting the significance level for each comparison as more comparisons are added. However, the adjustment is considered to be very conservative by reducing statistical power and thus increasing the likelihood of false negatives (Type II errors). Therefore, other methods such as Benjamini-Hochberg or Holm-Bonferroni may be more appropriate if increasing the Type II error rate is an issue.
-
-
+#' 
+#' 
 #' ## Non-parameteric multiple-group tests
 #' 
 #' Non-parametric tests are statistical tests that do not require assumptions about the distribution of the data being analyzed. They are used when the data do not meet the assumptions of traditional parametric tests, such as normality or equal variances. Non-parametric tests are typically less powerful than parametric tests but are more robust to violations of assumptions and can be used with a wider range of data types.
@@ -169,8 +182,6 @@ kruskal.test(GRE ~ Discipline, data = adm_df[adm_df$Admit == 'Accepted', ])
 #' To perform a Dunn's test in `R` we can employ the `dunnTest()` function from the `FSA` library and pass the same model formula and data arguments as we did in the `kruskal.test()` function above.
 
 #+ dunn
-library(FSA)
-
 dunnTest(GRE ~ Discipline, data = adm_df[adm_df$Admit == 'Accepted', ])
 
 #' From the tests we can conclude that each of the three *Discipline* groups have significantly different *GRE* distributions.
@@ -184,3 +195,5 @@ dunnTest(GRE ~ Discipline, data = adm_df[adm_df$Admit == 'Accepted', ])
 #' ## Concluding remarks
 #' 
 #' Multiple group tests are important in analyzing differences between three or more independent groups. In this section, we have covered parametric tests including ANOVA, ANCOVA, and MANOVA, the non-parametric Kruskal-Wallis test, and post-hoc tests. Understanding the assumptions, advantages, and limitations of each test is crucial for choosing the appropriate test for the specific analysis. By using these tests and post-hoc methods effectively, you can gain valuable insights into the differences between multiple groups in your data.
+#' 
+#' The next section will explore regression models to identify relationships between variables.

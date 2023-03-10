@@ -19,8 +19,21 @@ knitr::opts_knit$set(root.dir = '../')
 #' 
 #' Regression analysis is one of the most fundamental and widely used statistical methods for modeling the relationship between variables. It involves identifying patterns and strengths of the relationship between one or more independent variables and a dependent variable. Regression models are extensively used in various fields, including finance, economics, social sciences, and engineering, to name a few. In this tutorial, we will start by introducing the basic concepts of regression analysis and gradually move on to more advanced techniques, such as multiple regression and logistic regression. By the end of this tutorial, you will have a solid understanding of the various regression methods in `R` and how to apply them to real-world problems.
 
+#' ### Data and libraries
+#'
+#' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. We will be using two packages in this section, `lme4` and `lmerTest`, which provide functions for fitting and analyzing mixed effect models.
+
+#+ get-libs
+source("src/scripts/get_libs.R")
+
+libs <- c('lme4', 'lmerTest')
+
+get_libs(libs)
+
+#' Next, we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
+
 #+ load-data
-adm_df <- readRDS("data/interim/adm_df.RDS")
+adm_df <- read.csv("data/raw/adm_data.csv")
 
 head(adm_df)
 
@@ -45,6 +58,8 @@ summary(adm_fit)
 
 
 #' #### Model diagnostics
+#' 
+#' Residuals plots are a commonly used method for model diagnostics in linear regression. These plots show the difference between the observed values and the predicted values of the dependent variable. If the residuals are randomly distributed around zero with no discernible patterns, this suggests that the model is a good fit for the data. However, if there are patterns in the residuals plot, this may indicate that the model is not capturing all the important features of the data, and further investigation is needed. Other model diagnostics for linear models can include examining leverage and influence points, multicollinearity, and heteroscedasticity.
 
 #+ simple-diag
 par(mfrow = c(2, 2))
@@ -80,8 +95,20 @@ plot(adm_fit2)
 par(mfrow = c(1, 1))
 
 #' The residuals vs. fitted shows random variation along the horizontal 0 line, the points of the Q-Q plot closely follow the theoretical line, the points of the scale-location plot also are randomly distributed, and there are no significant points in the residuals vs leverage plot, although one observation (53) may be a slight outlier. Together, the diagnostic plots suggest a good model fit.
+#' 
+#' In multiple linear regression we may also want to assess multicollinearity, which occurs when two or more independent variables in a linear regression model are highly correlated with each other. This can lead to problems in the estimation of the model's coefficients, as the presence of multicollinearity can cause the coefficients to be unstable or even have the opposite sign from what would be expected, making it difficult to interpret the relationship between each independent variable and the dependent variable, and can reduce the model's predictive power.
+#' 
+#' We can compute variance inflation factors (VIFs), which are a measure of the degree of multicollinearity between independent variables in a linear regression model, to assess multicollinearity. VIFs represent how much the variance of the estimated coefficient is inflated due to multicollinearity. A high VIF value (>10) is often considered indicative of significant multicollinearity and suggests that the variable may need to be dropped from the model or further investigated.
+#' 
+#' We can use the `vif()` function from the `car` package to compute VIFs from our model.
 
+library(car)
 
+vif(adm_fit2)
+
+#' The VIFs for *CGPA* and *TOEFL* are both relatively low, and therefore we can assume that multicollinearity is not an issue in this model.
+#' 
+#' 
 #' #### Multiple regression with categorical predictors
 #' 
 #' Linear regression with all categorical variables is equivalent to ANOVA models, while regression with a mix of categorical and continuous variables is equivalent to ANCOVA models.

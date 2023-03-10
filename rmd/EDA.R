@@ -376,20 +376,25 @@ adm_df %>%
 #' 
 #' Principal component analysis (PCA) is a statistical technique used to reduce the dimensionality of a dataset by transforming the original variables into a smaller number of uncorrelated variables, called principal components. The principal components are ordered by the amount of variance they explain in the original data, with the first component explaining the most variance. PCA can be useful for visualizing complex relationships between variables, identifying underlying patterns in the data, and reducing noise and redundancy in the data.
 #' 
-#' 
+#' To perform PCA on our dataset we can use the `prcomp()` function to compute the principal components. However, we will need to first select the variables we are interested in and convert them all to the numeric type. We will use the `select()` function to get all of the variables except for *UniqueID* and *GPA1*, then combine `mutate()`, `across()`, and `everything()` to change all the remaining variables to numeric. We then use the `prcomp()` function on the modified dataset and set both `center` and `scale.` to `TRUE`. Finally, we will use the `biplot()` function to plot the first two principal components and the vectors of the variables, setting `xlabs` to `rep('.', 400)` so that each individual observation is plotted as a point.
 
-adm_pca <- prcomp(adm_df %>%
-                    select(!c(UniqueID, GPA1)) %>%
-                    mutate(across(everything(),
-                                  as.numeric)),
+#+ pca
+adm_pca_df <- adm_df %>%
+  select(!c(UniqueID, GPA1)) %>%
+  mutate(across(everything(),
+                as.numeric))
+
+adm_pca <- prcomp(adm_pca_df,
                   center = TRUE,
                   scale. = TRUE)
 
 biplot(adm_pca,
        xlabs = rep('.', 400))
 
+#' Each of *CGPA*, *Research*, *GRE*, *TOEFL*, *SOP*, and *LOR* point generally in the same direction with similar magnitudes, suggesting that there is some correlation between these variables (which we also saw in the correlogram above). Alternatively, *Year* is orthogonal to those variables, suggesting that they may not be changing over the 4 year period studied.
 #' 
 #' 
+#' ## Save modified dataset
 #' 
 #' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
 
@@ -400,6 +405,8 @@ saveRDS(adm_df, 'data/interim/adm_df.RDS')
 #' ## Concluding remarks
 #' 
 #' EDA is an essential step in the statistical analysis of any dataset. By examining the distribution, variability, and relationships between variables, researchers can gain a deeper understanding of the data and make informed decisions about appropriate statistical methods. In this tutorial, we have discussed several techniques for EDA, including histograms, box plots, correlation analysis, and PCA. By using these techniques, researchers can identify patterns, outliers, and potential sources of bias or confounding, ultimately leading to more accurate and reliable statistical analyses.
+#' 
+#' In the next section we will use basic statistical tools to make inferences on the data.
 
 
 

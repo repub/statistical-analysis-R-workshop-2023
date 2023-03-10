@@ -69,7 +69,7 @@ libs <- c('dplyr', 'tidyr', 'ggplot2', 'corrplot', 'GGally')
 
 get_libs(libs)
 
-#' First we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
+#' Next, we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
 
 #+ load-data
 adm_df <- read.csv("data/raw/adm_data.csv")

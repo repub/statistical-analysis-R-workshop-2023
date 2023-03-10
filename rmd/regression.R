@@ -64,13 +64,15 @@ adm_fit <- lm(GRE ~ CGPA, adm_df)
 #' #### Model diagnostics
 #' 
 #' Diagnostic plots are a visual tool used to assess the validity of a linear regression model and identify any potential problems or violations of assumptions. There are several types of diagnostic plots, including:
-#'  
-#' - **Residuals vs. fitted** - used to check for linearity and homoscedasticity, as well as the presence of outliers. A pattern in the plot may indicate that the relationship between the dependent and independent variables is not linear or that the variance of the errors is not constant across the range of the data.
-#' - **Q-Q** - used to check for normality of the residuals. A straight line in the plot indicates that the residuals are normally distributed, while deviations from the line indicate non-normality.
-#' - **Scale-location** - used to check for homoscedasticity. A pattern in the plot may indicate that the variance of the residuals is not constant across the range of the data.
-#' - **Residuals vs. leverage** - used to identify influential observations, which can have a large impact on the regression line. Observations with high leverage and high residuals are known as outliers and may need to be removed or further investigated.
+#'
+#' - **Residuals vs Fitted** - used to check for linearity and homoscedasticity, as well as the presence of outliers. A pattern in the plot may indicate that the relationship between the dependent and independent variables is not linear or that the variance of the errors is not constant across the range of the data.
+#' - **Normal Q-Q** - used to check for normality of the residuals. A straight line in the plot indicates that the residuals are normally distributed, while deviations from the line indicate non-normality.
+#' - **Scale-Location** - used to check for homoscedasticity. A pattern in the plot may indicate that the variance of the residuals is not constant across the range of the data.
+#' - **Residuals vs Leverage** - used to identify influential observations, which can have a large impact on the regression line. Observations with high leverage and high residuals are known as outliers and may need to be removed or further investigated.
 #' 
-#' When making inferences from linear models it is important to check the fit of the model, as violations of the model assumptions can lead to misleading results. The following code chunk creates a 2 x 2 graphical space to plot all four plots for our fitted model.
+#' When making inferences from linear models it is important to check the fit of the model, as violations of the model assumptions can lead to misleading results.
+#' 
+#' The following code chunk creates a 2 x 2 graphical space with `par(mfrow = c(2, 2))` to plot all four plots for our fitted model. The `plot()` function is then used to plot all four plots and the graphical space is reset to 1 x 1.
 
 #+ simple-diag
 par(mfrow = c(2, 2))
@@ -187,14 +189,14 @@ g2 = deviance(adm_logit)
 df = df.residual(adm_logit)
 1 - pchisq(g2, df)
 
-#' With a p-value of approximately 1, we can conclude that the logistic regression model does not have a lack of fit. Next, we will use the `summary()` function to make inferences from the model.
+#' With a p-value of approximately 1, we can conclude that the logistic regression model does not have a lack of fit. There are also other measures to assess goodness-of-fit for logistic regression models, such as the Pearson deviance test and psuedo-R^2^. However, diagnosing models does not need to be overly complex, only sufficient enough to trust that the model fits well enough to make accurate inferences from.
 #' 
 #' As with linear models we should assess whether there are any issues with multicollinearity. We will again use the `vif()` function from the `car` package to do so.
 
 #+ logit-vif
 vif(adm_logit)
 
-#' All of the VIFs (labeled GVIF here as they are an approximation for a generalized linear model) are low, and we can assume that there are no issues of multicollinearity. Next, we will use the `summary()` functoin to print summary statistics from the model to make inferences.
+#' All of the VIFs (labeled GVIF here as they are an approximation for a generalized linear model) are low, and we can assume that there are no issues of multicollinearity. Next, we will use the `summary()` function to print summary statistics from the model to make inferences.
 
 #+ logit-summ
 summary(adm_logit)
@@ -213,9 +215,6 @@ summary(adm_logit)
 #' For example, we may want to identify what factors predict an accepted student's GPA in their first year of their program, but have reason to believe that the year the student applied does not have a fixed effect. Therefore, we will use the `lmer()` function to fit a fixed model with *GRE*, *TOEFL*, *SOP*, *LOR*, *CGPA*, *Research* and *Discipline* as fixed effects and *Year* as a random effect. While `lmer()` will automatically ignore rows with missing values, it is good practice to pre-filter them which we will do by creating a new data frame with only "Accepted" applicants.
 
 #+ lmer
-library(lme4)
-library(lmerTest)
-
 adm_lmer_df <- adm_df[adm_df$Admit == "Accepted", ]
 
 adm_lmer <- lmer(GPA1 ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Discipline + (1 | Year),
@@ -226,7 +225,7 @@ adm_lmer <- lmer(GPA1 ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Discipline +
 #' 
 #' ### Model diagnostics
 #' 
-#' While the `plot()` function provides 4 different diagnostic plots on models fit using `lm()`, we only get the Residuals vs. Fitted plot with `lmer()` models. Therefore, we will also use two other functions, `qqnorm()` and `qqlint()` to generate a QQ-plot of the residuals, which we will get with `resid()`.
+#' While the `plot()` function provides 4 different diagnostic plots on models fit using `lm()`, we only get the Residuals vs. Fitted plot with `lmer()` models. Therefore, we will also use two other functions, `qqnorm()` and `qqline()` to generate a QQ-plot of the residuals, which we will get with `resid()`.
 
 #+ lmer-diagnostic
 plot(adm_lmer)

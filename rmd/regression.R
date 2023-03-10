@@ -154,15 +154,13 @@ adm_logit <- glm(Admit_logit ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Disci
                  family = 'binomial',
                  data = adm_df)
 
-summary(adm_logit)
-
 #+ logit-diag
-logit_null <- glm(Admit_logit ~ 1, family = "binomial", data = adm_df)
+logit_null <- update(adm_logit, . ~ 1)
 
 library(lmtest)
 lrtest(logit_null, adm_logit)
 
-
+summary(adm_logit)
 
 #' ## Mixed-effect linear models
 #' 
@@ -171,11 +169,40 @@ lrtest(logit_null, adm_logit)
 #' There are a few packages that can fit mixed effect models, with `lme4` being one of the more commonly used. An additional package, `lmerTest` expands the toolset and improves some of the output of the `lme4` package.
 #' 
 #' Mixed effect models have the model formula format of "response ~ fixed_variables + (random_effects)". The random effect term will depend on the data, but will typically follow the formula "(intercept | grouping_factor)".
+#' 
+#' For example, we may want to identify what factors predict an accepted student's GPA in their first year of their program, but have reason to believe that the year the student applied does not have a fixed effect. Therefore, we will use the `lmer()` function to fit a fixed model with *GRE*, *TOEFL*, *SOP*, *LOR*, *CGPA*, *Research* and *Discipline* as fixed effects and *Year* as a random effect. While `lmer()` will automatically ignore rows with missing values, it is good practice to pre-filter them which we will do by creating a new data frame with only "Accepted" applicants.
 
 #+ lmer
 library(lme4)
 library(lmerTest)
 
-adm_lmer <- lmer(GRE ~ TOEFL + (1 | Discipline), data = adm_df)
+adm_lmer_df <- adm_df[adm_df$Admit == "Accepted", ]
 
+adm_lmer <- lmer(GPA1 ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Discipline + (1 | Year),
+                 data = adm_lmer_df)
+
+#' ### Model diagnostics
+#' 
+#' While the `plot()` function provides 4 different diagnostic plots on models fit using `lm()`, we only get the Residuals vs. Fitted plot with `lmer()` models. Therefore, we will also use two other functions, `qqnorm()` and `qqlint()` to generate a QQ-plot of the residuals, which we will get with `resid()`.
+
+#+ lmer-diagnostic
+plot(adm_lmer)
+qqnorm(resid(adm_lmer))
+qqline(resid(adm_lmer))
+
+#' Both plots suggest that the model is a good fit. However, knowing that there is some correlation among these variables we will also want to compute VIFs using the `vif()` function from the `car` package.
+
+#+ lmer-vif
+vif(adm_lmer)
+
+#' All of the VIFs are low enough to not indicate problematic multicollinearity in the model, so we will conclude that the model is a good fit and print summary statistics.
+
+#+
 summary(adm_lmer)
+
+#' From the results we can conclude that of the variables in the model only *CGPA* is predictive of a student's first-year GPA in their program.
+#' 
+#' 
+#' ## Concluding remarks
+#' 
+#' 

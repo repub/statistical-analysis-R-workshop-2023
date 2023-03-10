@@ -21,12 +21,16 @@ knitr::opts_knit$set(root.dir = '../')
 
 #' ### Data and libraries
 #'
-#' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. We will be using two packages in this section, `lme4` and `lmerTest`, which provide functions for fitting and analyzing mixed effect models.
+#' First, we are going to call an `R` script which contains a function, `get_libs()`, that we will use to install and load all of the libraries for this guide. In this section we will be using:
+#' 
+#' - `car` - includes additional statistical functions.
+#' - `lmtest` - tools to assess model fit.
+#' - `lme4` and `lmerTest` - provide functions for fitting and analyzing mixed effect models.
 
 #+ get-libs
 source("src/scripts/get_libs.R")
 
-libs <- c('lme4', 'lmerTest')
+libs <- c('car', 'lme4', 'lmerTest')
 
 get_libs(libs)
 
@@ -153,9 +157,11 @@ adm_logit <- glm(Admit_logit ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Disci
 summary(adm_logit)
 
 #+ logit-diag
-logit_null <- glm(Admit ~ 1, family = "binomial", data = adm_df)
+logit_null <- glm(Admit_logit ~ 1, family = "binomial", data = adm_df)
 
-logLik(adm_logit) - logLik(logit_null)
+library(lmtest)
+lrtest(logit_null, adm_logit)
+
 
 
 #' ## Mixed-effect linear models

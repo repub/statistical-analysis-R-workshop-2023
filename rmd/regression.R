@@ -30,7 +30,7 @@ knitr::opts_knit$set(root.dir = '../')
 #+ get-libs
 source("src/scripts/get_libs.R")
 
-libs <- c('car', 'lme4', 'lmerTest')
+libs <- c('car', 'lmtest', 'lme4', 'lmerTest')
 
 get_libs(libs)
 
@@ -154,14 +154,32 @@ adm_logit <- glm(Admit_logit ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Disci
                  family = 'binomial',
                  data = adm_df)
 
+#' ### Model diagnostics
+#' 
+#' While we can use the `plot()` function to assess the residuals, they are much more difficult to interpret for logistic regression models compared to linear models. Instead, we can use a likelihood ratio test to determine if the model has a better fit over its null model, which is the model where the only independent variable is the intercept. Rather than re-writing everything above, we can use the `update()` function to "update" our previous model, using the formula `. ~ 1` to indicate that we will keep the dependent variable (with `.`) while keeping only the intercept (with `1`). Then, we will perform a likelihood ratio test on the null and full models to determine if the full model has a better fit on the data compared to random chance using the `lrtest()` function from the `lmtest` library.
+
 #+ logit-diag
 logit_null <- update(adm_logit, . ~ 1)
 
-library(lmtest)
 lrtest(logit_null, adm_logit)
 
+#' The results of the likelihood ratio test indicate that the model does have a significantly better fit to the data than random chance.
+#' 
+#' We can also use a deviance test to determine if the model has a lack of it. To do so, we calculate the deviance and residual degrees-of-freedom of the model using `deviance()` and `df.residual()`, respectively. We then use the `pchisq()` function to calculate a probability value from a &chi;^2^ distribution using the deviance and residual degrees of freedom. Subtracting this value from 1 will give us a p-value for this deviance test.
+
+#+ logit-deviance
+g2 = deviance(adm_logit)
+df = df.residual(adm_logit)
+1 - pchisq(g2, df)
+
+#' With a p-value of approximately 1, we can conclude that the logistic regression model does not have a lack of fit. Next, we will use the `summary()` function to make inferences from the model.
+
+#+ logit-summ
 summary(adm_logit)
 
+#' The results of the logistic regression model suggest that *GRE*, *LOR*, and *CGPA* are all significant predictors of applicant admittance. The coefficients for each of these variables are positive to indicate that the log-odds of being accepted into the school increase when any of those variables increases.
+#' 
+#' 
 #' ## Mixed-effect linear models
 #' 
 #' Mixed effect models, also known as multilevel models or hierarchical models, are a type of regression model used to analyze data that has a nested structure or repeated measures. They account for both fixed and random effects in the data and allow for the estimation of parameters at both the individual and group levels. Mixed effect models are commonly used when observations are not independent or where individual variability needs to be taken into account.

@@ -38,7 +38,7 @@ get_libs(libs)
 #' Next, we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
 
 #+ load-data
-adm_df <- read.csv("data/raw/adm_data.csv")
+adm_df <- readRDS("data/interim/adm_df.RDS")
 
 head(adm_df)
 str(adm_df)
@@ -60,8 +60,6 @@ str(adm_df)
 #+ simple
 adm_fit <- lm(GRE ~ CGPA, adm_df)
 
-summary(adm_fit)
-
 
 #' #### Model diagnostics
 #' 
@@ -79,7 +77,21 @@ par(mfrow = c(2, 2))
 plot(adm_fit)
 par(mfrow = c(1, 1))
 
+#' From the plots we can determine that:
+#' 
+#' - **Residuals vs Fitted** - the residuals are randomly scattered across the horizontal line to suggest constant variance and no patterns. 
+#' - **Normal Q-Q** - the points fit tightly along the theoretical line, except for some tailing on the right side.
+#' - **Scale_Location** - The root of the residuals are also randomly scattered horizontally.
+#' - **Residuals vs Leverage** - Although one point clearly has higher leverage than the others (59), there are no points with significant leverage (which would be seen as existing outside of a significance line).
+#' 
+#' Overall, the diagnostics suggest that the model has a good fit, so we can continue by using the `summary()` function to print out a set of model statistics.
 
+#+ simple-summ
+summary(adm_fit)
+
+#' The p-value for the model is statistically significant and the model has a high R^2^ value of 0.694, both suggesting a good fit. We can then interpret the coefficient for *CGPA*, which with a significant p-value can conclude that *CGPA* is significantly related to *GRE* scores, and that with a 1 unit increase in *CGPA* the expected *GRE* score increases by 40.
+#' 
+#' 
 #' ### Multiple linear regression
 #'
 #' Multiple linear regression is a type of linear regression where there are two or more independent variables that are used to predict the value of the dependent variable. As multiple linear regression can be used to model the relationship between multiple predictors and the dependent variable, enabling more accurate predictions and more comprehensive analysis of the data, including potential interactions between variables.
@@ -88,8 +100,6 @@ par(mfrow = c(1, 1))
 
 #+ multiple
 adm_fit2 <- lm(GRE ~ CGPA + TOEFL, data = adm_df)
-
-summary(adm_fit2)
 
 
 #' #### Model diagnostics
@@ -101,7 +111,7 @@ par(mfrow = c(2, 2))
 plot(adm_fit2)
 par(mfrow = c(1, 1))
 
-#' The residuals vs. fitted shows random variation along the horizontal 0 line, the points of the Q-Q plot closely follow the theoretical line, the points of the scale-location plot also are randomly distributed, and there are no significant points in the residuals vs leverage plot, although one observation (53) may be a slight outlier. Together, the diagnostic plots suggest a good model fit.
+#' Similar to the simple linear model, the diagnostic plots here suggest a good fit as there are no extreme deviations from normality, equal variance, or outliers or leverage points.
 #' 
 #' In multiple linear regression we may also want to assess multicollinearity, which occurs when two or more independent variables in a linear regression model are highly correlated with each other. This can lead to problems in the estimation of the model's coefficients, as the presence of multicollinearity can cause the coefficients to be unstable or even have the opposite sign from what would be expected, making it difficult to interpret the relationship between each independent variable and the dependent variable, and can reduce the model's predictive power.
 #' 
@@ -109,6 +119,7 @@ par(mfrow = c(1, 1))
 #' 
 #' We can use the `vif()` function from the `car` package to compute VIFs from our model.
 
+#+ multiple-vif
 library(car)
 
 vif(adm_fit2)
@@ -120,6 +131,7 @@ vif(adm_fit2)
 #' 
 #' Linear regression with all categorical variables is equivalent to ANOVA models, while regression with a mix of categorical and continuous variables is equivalent to ANCOVA models.
 
+#+ multiple2-fit
 adm_fit3 <- lm(GRE ~ CGPA + TOEFL + Discipline, data = adm_df)
 summary(adm_fit3)
 
@@ -176,6 +188,13 @@ df = df.residual(adm_logit)
 1 - pchisq(g2, df)
 
 #' With a p-value of approximately 1, we can conclude that the logistic regression model does not have a lack of fit. Next, we will use the `summary()` function to make inferences from the model.
+#' 
+#' As with linear models we should assess whether there are any issues with multicollinearity. We will again use the `vif()` function from the `car` package to do so.
+
+#+ logit-vif
+vif(adm_logit)
+
+#' All of the VIFs (labeled GVIF here as they are an approximation for a generalized linear model) are low, and we can assume that there are no issues of multicollinearity. Next, we will use the `summary()` functoin to print summary statistics from the model to make inferences.
 
 #+ logit-summ
 summary(adm_logit)
@@ -202,7 +221,9 @@ adm_lmer_df <- adm_df[adm_df$Admit == "Accepted", ]
 adm_lmer <- lmer(GPA1 ~ GRE + TOEFL + SOP + LOR + CGPA + Research + Discipline + (1 | Year),
                  data = adm_lmer_df)
 
-
+#' Note that we receive a message: `boundary (singular) fit: see help('isSingular')`. While this is not necessarily an issue, it can be indicative that there is some underlying problem, such as overfitting or not coding the random effect properly. Here, it is not an issue, however if you run into this with your own dataset you may want to consult the documentation to learn more by typing `?isSingular` in your `R` console.
+#' 
+#' 
 #' ### Model diagnostics
 #' 
 #' While the `plot()` function provides 4 different diagnostic plots on models fit using `lm()`, we only get the Residuals vs. Fitted plot with `lmer()` models. Therefore, we will also use two other functions, `qqnorm()` and `qqlint()` to generate a QQ-plot of the residuals, which we will get with `resid()`.
@@ -212,7 +233,7 @@ plot(adm_lmer)
 qqnorm(resid(adm_lmer))
 qqline(resid(adm_lmer))
 
-#' Both plots suggest that the model is a good fit. However, knowing that there is some correlation among these variables we will also want to compute VIFs using the `vif()` function from the `car` package.
+#' Both plots suggest that the model is a good fit as there is no extreme deviation from normality, constant variance, or high leverage points or outliers. However, knowing that there is some correlation among these variables we will also want to compute VIFs using the `vif()` function from the `car` package.
 
 #+ lmer-vif
 vif(adm_lmer)

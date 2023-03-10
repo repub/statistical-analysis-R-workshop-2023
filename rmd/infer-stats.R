@@ -205,25 +205,39 @@ adm_fit <- lm(GRE ~ CGPA, adm_df)
 
 summary(adm_fit)
 
-
+#' From the results we can make a few inferences:
+#' 
+#' 1. The very small p-value allows us to conclude that the model has a statistically significant fit.
+#' 2. A `R^2^` value of `0.694` indicates that 69.4% of the variance in *GRE* is explained by *CGPA*.
+#' 3. The coefficient for *CGPA* is statistically significant, and as *CGPA* increases by 1 unit the expected value of *GRE* increases by 40.
+#' 
+#' 
 #' ### Pearson's correlation
 #' 
 #' Pearson correlation is a measure of the strength and direction of the linear relationship between two continuous variables. It calculates the correlation coefficient, which ranges from -1 to 1, and indicates the strength and direction of the relationship between the two variables. Pearson correlation assumes that the data is normally distributed and that there is a linear relationship between the two variables.
+#' 
+#' While we were introduced to correlations to observe general relationships between variables during EDA, to make inferences on these correlations we would also want to perform a statistical test. Here, we will use the `cor.test()` function to calculate the Pearson correlation coefficient and perform a Pearson's product-moment correlation test on *GRE* and *CGPA*.
 
 #+ cor
-cor(adm_df$GRE, adm_df$CGPA)
+cor.test(adm_df$GRE, adm_df$CGPA)
 
-
+#' The results of the test give a very small p-value to indicate that *GRE* and *CGPA* are significantly correlated, and the Pearson coefficient of that correlation, *r*, is 0.833, further suggesting a strong, positive relationship. Note that this coefficient is the square of the coefficient given in the linear regression model above!
+#' 
+#' 
 #' ### Spearman and Kendall correlations
 #' 
 #' Kendall and Spearman correlations are non-parametric measures of correlation used to describe the relationship between two variables. Unlike Pearson correlation, which assumes that the variables are continuous and normally distributed, Kendall and Spearman correlations do not make any assumptions about the distribution of the data. Kendall correlation measures the strength and direction of the relationship between two variables that are ordinal or ranked, while Spearman correlation measures the strength and direction of the relationship between two variables that are measured on an interval or ratio scale. 
+#' 
+#' Here we will again use the `cor.test()` function to compute the Kendall correlation and perform a Kendall's rank correlation *&tau;* test on *SOP* and *LOR*, which are on an ordinal scale. The `cor.test()` function defaults to using Pearson statistics, so we will set `method = "kendall"` to specify using Kendall statistics.
 
 #+ kendall
-cor(adm_df$SOP,
-    adm_df$LOR,
-    method = "kendall")
+cor.test(adm_df$SOP,
+         adm_df$LOR,
+         method = "kendall")
 
-
+#' From the results of the Kendall rank test we can conclude that there is a significant relationship between *SOP* and *LOR*, where the Kendall correlation coefficient, *&tau;*, is 0.601 to suggest a moderately strong, positive relationship.
+#'
+#'
 #' ## Concluding remarks
 #' 
 #' Understanding and testing assumptions is a critical step in any data analysis task. By checking for normality, homogeneity of variance, and other assumptions, you can ensure that your statistical tests are valid and reliable. Additionally, having a strong grasp of t-tests and non-parametric tests allows you to choose the appropriate statistical tests for your data and draw accurate conclusions. By mastering these fundamental concepts, you will be better equipped to analyze and interpret data, and make informed decisions based on evidence.

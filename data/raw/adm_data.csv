@@ -100,6 +100,7 @@ UniqueID,GRE,TOEFL,SOP,LOR,CGPA,Research,Discipline,Admit,GPA1,Year
 99,332,119,5,4.5,3.728,yes,Science & Eng,Accepted,3.17,2018
 100,323,113,4,4,3.5840000000000005,yes,Applied Science,Accepted,3.176,2018
 101,322,107,3.5,3.5,3.4160000000000004,yes,Applied Science,Accepted,2.979,2019
+101,322,107,3.5,3.5,3.4160000000000004,yes,Applied Science,Accepted,2.979,2019
 102,312,105,2.5,3,3.28,no,Humanities and Soc Science,Rejected,NA,2019
 103,314,106,4,3.5,3.332,no,Humanities and Soc Science,Rejected,NA,2019
 104,317,104,4.5,4,3.4200000000000004,no,Humanities and Soc Science,Rejected,NA,2019
@@ -254,6 +255,7 @@ UniqueID,GRE,TOEFL,SOP,LOR,CGPA,Research,Discipline,Admit,GPA1,Year
 253,318,100,2.5,3.5,3.4479999999999995,yes,Humanities and Soc Science,Accepted,3.121,2020
 254,335,115,4.5,4.5,3.904,yes,Science & Eng,Accepted,3.541,2020
 255,321,114,4,5,3.68,no,Science & Eng,Accepted,3.506,2020
+256,307,110,4,4.5,3.38,no,Science & Eng,Accepted,3.296,2020
 256,307,110,4,4.5,3.38,no,Science & Eng,Accepted,3.296,2020
 257,309,99,4,4,3.4560000000000004,no,Applied Science,Accepted,2.662,2020
 258,324,100,4,5,3.4880000000000004,yes,Applied Science,Accepted,3.289,2020

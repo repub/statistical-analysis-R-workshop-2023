@@ -36,6 +36,23 @@ knitr::opts_knit$set(root.dir = '../')
 #' Note that EDA is an iterative process and not all techniques will be applied depending on the data set and question(s).  Additionally, you may need to go back and repeat steps or apply different techniques as you gain a deeper understanding of the data.
 #' 
 #' 
+#' ### Data
+#' 
+#' Before working with the dataset you should get an idea of how it was collected and what it (should) contain. The dataset we will be using was collected by a university to determine what factors influence acceptance and the success of foreign students in their graduate programs. The data was collected for 400 applicants over a 4 year period, some of who were accepted and the rest rejected into the school. The variables include:
+#' 
+#' - *UniqueID* - a unique identifier for each applicant.
+#' - *GRE* - the Graduate Record Examination score.
+#' - *TOEFL* - the Test of English as a Foreign Language score.
+#' - *SOP* - a scoring of their Statement of Purpose.
+#' - *LOR* - a scoring for their Letters of Recommendation.
+#' - *CGPA* - their standardized, Cumulative Grade Point Average.
+#' - *Research* - whether the applicant has undergraduate research experience.
+#' - *Discipline* - the general discipline that the applicant is applying to.
+#' - *Admit* - if the applicant was accepted.
+#' - *GPA1* - the first year Grade Point Average for accepted students.
+#' - *Year* - the year that the applicant applied to the school.
+#' 
+#' 
 #' ## Data import and cleaning
 #'
 #' First we will need to import our data set into `R`. The data is stored in a .csv file, which we can read in using the `read.csv()` function by passing a string that gives the relative file path. When loading in data we should assign it to an object so that we can call functions on it. We should also get a glance at our data to get a sense for what it looks like, which we can do using the `head()` function to see the first few rows.
@@ -52,7 +69,7 @@ head(adm_df)
 #+ str
 str(adm_df)
 
-#' We can see that there are 400 total observations across 11 variables. Four of the variables were read in as `int`, meaning *integer*, which is specific numeric data type that does not allow decimal points. Other variables are coded as either `num` for *numeric*, which can include decimal points, and `chr` for *character* which is the same as *string*.
+#' We can see that there are 402 total observations across 11 variables. Four of the variables were read in as `int`, meaning *integer*, which is specific numeric data type that does not allow decimal points. Other variables are coded as either `num` for *numeric*, which can include decimal points, and `chr` for *character* which is the same as *string*.
 #' 
 #' For our analysis we will want to re-code these variables as factors, which we can easily do with the `factor()` function. After assigning the variables to factors we can use the `summary()` function again to see how those variables are distributed.
 
@@ -105,14 +122,14 @@ summary(adm_df[is.na(adm_df$GPA1), c("Admit", "GPA1")])
 #+ any-duplicated
 sum(duplicated(adm_df))
 
-#' This dataset also lacks any duplicated observations. If you were to have duplicates that would be problematic for your analysis, you can use the `unique()` function, which returns a data frame or matrix with only the unique rows. If you use the `unique()` function on a dataset that does not have any duplicates, it will just return the original dataset.
+#' This dataset has 2 duplicated observations, which makes sense as we expected there to be 400 observations in total but saw that there are actually 402. Since we also know that each observation has a unique identifier, these duplicates are likely an error and can be removed. To do so, we can wrap the data frame in the `unique()` function to return only unique rows.
 
 #+ unique
 adm_df <- unique(adm_df)
 
 str(adm_df)
 
-#' Alternatively, if you decide to keep the duplicate rows, it is important to be aware that they may introduce bias, noise, and variability in the data, so it is essential to validate the results and check the assumptions of the model. If the duplicates represent a small proportion of the data and not having them would affect the analysis, it is a good practice to keep them and note their presence in the analysis.
+#' Alternatively, if you were to decide to keep the duplicate rows, it is important to be aware that they may introduce bias, noise, and variability in the data, so it is essential to validate the results and check the assumptions of the model. If the duplicates represent a small proportion of the data and not having them would affect the analysis, it is a good practice to keep them and note their presence in the analysis.
 #' 
 #' 
 #' ### Check for patterns
@@ -356,28 +373,7 @@ biplot(adm_pca,
        xlabs = rep('.', 400))
 
 
-
-
-
-
-adm_clust <- adm_df %>%
-  select(!c(UniqueID, Admit, GPA1)) %>%
-  mutate(across(everything(), as.numeric)) %>%
-  dist() %>%
-  hclust()
-
-plot(adm_clust)
-
-table(cluster = cutree(adm_clust, 5),
-      actual = adm_df$Admit)
-
-
 #' Before wrapping up, we should save our dataset that we modified so that we do not have to go through the same process again every time we come back to it. By saving the dataset as a `.RDS` file using the `saveRDS()` function. Then, when we load the `.RDS` file later the modified dataset and its metadata (things like variable types) will be restored.
-
-
-
-
-
 
 #+ save
 saveRDS(adm_df, 'data/interim/adm_df.RDS')
